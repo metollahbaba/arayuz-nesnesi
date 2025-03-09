@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Fingerprint, X } from 'lucide-react';
@@ -109,8 +108,8 @@ const PinEntry = () => {
           />
         </div>
         
-        {/* Name */}
-        <h2 className="mt-6 text-xl font-medium">Aynura Nəhmədova</h2>
+        {/* Name - updated from Aynura Nəhmədova to Xəlil Rəhimov */}
+        <h2 className="mt-6 text-xl font-medium">Xəlil Rəhimov</h2>
         
         {/* PIN indicators */}
         {renderPinIndicators()}
