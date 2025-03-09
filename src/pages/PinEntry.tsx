@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Fingerprint, X } from 'lucide-react';
@@ -99,10 +100,10 @@ const PinEntry = () => {
       <MobileStatusBar />
       
       <div className="flex-1 flex flex-col items-center pt-16">
-        {/* Logo - using the updated image from Imgur */}
+        {/* Logo - using the direct image link from Imgur */}
         <div className="w-24 h-24 rounded-full flex items-center justify-center border border-gray-200 bg-white p-2">
           <img 
-            src="https://imgur.com/eqBuyi5.png" 
+            src="https://i.imgur.com/eqBuyi5.png" 
             alt="Logo" 
             className="w-full h-full object-contain"
           />
