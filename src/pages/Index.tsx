@@ -1,12 +1,26 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import MobileStatusBar from '../components/MobileStatusBar';
+import PaymentHeader from '../components/PaymentHeader';
+import PaymentOptions from '../components/PaymentOptions';
+import CardForm from '../components/CardForm';
+import MobileNavBar from '../components/MobileNavBar';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="max-w-md mx-auto bg-white h-screen flex flex-col overflow-hidden">
+      {/* Mobile phone simulation */}
+      <MobileStatusBar />
+      
+      {/* Main content */}
+      <div className="flex-1 overflow-y-auto">
+        <PaymentHeader />
+        <PaymentOptions />
+        <CardForm />
       </div>
+      
+      {/* Bottom navigation */}
+      <MobileNavBar />
     </div>
   );
 };
