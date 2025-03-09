@@ -100,9 +100,13 @@ const PinEntry = () => {
       <MobileStatusBar />
       
       <div className="flex-1 flex flex-col items-center pt-16">
-        {/* Logo - updated to match the provided image */}
-        <div className="w-24 h-24 rounded-full flex items-center justify-center border border-gray-200 bg-white">
-          <div className="w-8 h-16 bg-[#ff0044] transform skew-y-12 rounded-sm"></div>
+        {/* Logo - using the uploaded image from Imgur */}
+        <div className="w-24 h-24 rounded-full flex items-center justify-center border border-gray-200 bg-white p-2">
+          <img 
+            src="https://i.imgur.com/xCfLR4C.png" 
+            alt="Logo" 
+            className="w-full h-full object-contain"
+          />
         </div>
         
         {/* Name */}
