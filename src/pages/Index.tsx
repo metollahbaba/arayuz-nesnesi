@@ -1,26 +1,18 @@
 
-import React from 'react';
-import MobileStatusBar from '../components/MobileStatusBar';
-import PaymentHeader from '../components/PaymentHeader';
-import PaymentOptions from '../components/PaymentOptions';
-import CardForm from '../components/CardForm';
-import MobileNavBar from '../components/MobileNavBar';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Redirect to PIN entry page
+    navigate('/pin');
+  }, [navigate]);
+  
   return (
-    <div className="max-w-md mx-auto bg-white h-screen flex flex-col overflow-hidden">
-      {/* Mobile phone simulation */}
-      <MobileStatusBar />
-      
-      {/* Main content */}
-      <div className="flex-1 overflow-y-auto">
-        <PaymentHeader />
-        <PaymentOptions />
-        <CardForm />
-      </div>
-      
-      {/* Bottom navigation */}
-      <MobileNavBar />
+    <div className="max-w-md mx-auto bg-white h-screen flex flex-col overflow-hidden items-center justify-center">
+      <p>Yönləndirilir...</p>
     </div>
   );
 };
