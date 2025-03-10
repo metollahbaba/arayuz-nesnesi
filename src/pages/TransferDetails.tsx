@@ -3,7 +3,6 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Check } from 'lucide-react';
 import MobileStatusBar from '../components/MobileStatusBar';
-import signatureImage from '../assets/signature.png';
 
 const TransferDetails = () => {
   const navigate = useNavigate();
@@ -119,15 +118,8 @@ const TransferDetails = () => {
       </div>
       
       <div className="flex flex-col items-end mb-8 px-6">
-        <div className="flex justify-center mb-3 animate-pulse">
-          <img 
-            src="/lovable-uploads/58f0fb8d-526b-4126-b6f7-0d668ae55548.png" 
-            alt="Bank logo" 
-            className="h-16 w-16 opacity-30"
-          />
-        </div>
         <img 
-          src={signatureImage} 
+          src="https://i.imgur.com/a/4fIoshv.png" 
           alt="Signature" 
           className="h-12 w-24 opacity-70 self-end animate-fade-in"
         />
