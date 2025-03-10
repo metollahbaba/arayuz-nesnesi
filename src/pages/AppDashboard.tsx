@@ -4,7 +4,6 @@ import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Cloc
 import visaCardLogo from '../assets/card-visa.jpeg';
 import NewProductModal from '@/components/NewProductModal';
 import BankCard from '@/components/BankCard';
-import MobileStatusBar from '@/components/MobileStatusBar';
 import { getCardsWithBalances, resetBalances, toggleBalanceVisibility, loadBalanceVisibility } from '@/lib/balanceManager';
 import { useToast } from '@/hooks/use-toast';
 
@@ -51,8 +50,6 @@ const AppDashboard = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col overflow-hidden">
-      <MobileStatusBar time="11:00" batteryLevel="31" />
-      
       <div className="flex items-center justify-between px-4 py-2">
         <div className="flex items-center space-x-4">
           <div className="w-12 h-12 rounded-full flex items-center justify-center border border-gray-200 bg-white p-1">

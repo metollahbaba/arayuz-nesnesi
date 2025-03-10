@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, QrCode } from 'lucide-react';
-import MobileStatusBar from '../components/MobileStatusBar';
 import { formatUserName } from '../lib/utils';
 import CardSelectionModal from '../components/CardSelectionModal';
 import { getCardsWithBalances, updateCardBalance } from '../lib/balanceManager';
