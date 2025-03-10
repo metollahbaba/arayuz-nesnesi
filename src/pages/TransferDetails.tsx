@@ -2,7 +2,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Check } from 'lucide-react';
-import MobileStatusBar from '../components/MobileStatusBar';
 
 const TransferDetails = () => {
   const navigate = useNavigate();
@@ -33,8 +32,6 @@ const TransferDetails = () => {
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
-      <MobileStatusBar time="14:16" backgroundColor="bg-gray-50" batteryLevel="70" />
-      
       <div className="flex justify-between items-center px-6 py-4">
         <button onClick={goBack} className="text-black">
           <ChevronLeft size={24} />
@@ -132,10 +129,6 @@ const TransferDetails = () => {
         >
           Bağla
         </button>
-      </div>
-      
-      <div className="bg-black h-10 flex items-center justify-center">
-        <div className="w-1/3 h-1 bg-gray-500 rounded-full"></div>
       </div>
     </div>
   );

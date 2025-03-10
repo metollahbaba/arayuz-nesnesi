@@ -1,8 +1,7 @@
 
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Check, Info, ChevronLeft } from 'lucide-react';
-import MobileStatusBar from '../components/MobileStatusBar';
+import { Check, Info } from 'lucide-react';
 
 const TransferSuccess = () => {
   const navigate = useNavigate();
@@ -35,9 +34,6 @@ const TransferSuccess = () => {
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
-      {/* Mobile Status Bar */}
-      <MobileStatusBar time="14:15" backgroundColor="bg-gray-50" batteryLevel="71" />
-      
       {/* Header */}
       <div className="flex justify-between items-center px-6 py-4">
         <div className="w-8"></div> {/* Empty div for spacing */}
@@ -86,11 +82,6 @@ const TransferSuccess = () => {
         >
           Bağla
         </button>
-      </div>
-      
-      {/* iPhone Home Indicator */}
-      <div className="bg-black h-10 flex items-center justify-center">
-        <div className="w-1/3 h-1 bg-gray-500 rounded-full"></div>
       </div>
     </div>
   );
