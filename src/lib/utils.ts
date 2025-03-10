@@ -37,23 +37,25 @@ export function getCardType(cardNumber: string): string {
 }
 
 /**
- * Format name with first name and first letter of last name followed by asterisks
+ * Format name with first 2 letters followed by 5 asterisks for names up to 3 letters
+ * If only one letter is entered, it will be followed by 5 asterisks
  */
 export function formatUserName(input: string): string {
   if (!input || input.trim() === '') return '';
   
   const formattedInput = input.trim().toUpperCase();
-  const parts = formattedInput.split(' ');
   
-  if (parts.length === 1) {
-    // Only first name provided
-    return `${parts[0]} ${'*'.repeat(5)}`;
+  if (formattedInput.length === 1) {
+    // Only one letter provided
+    return `${formattedInput}${'*'.repeat(5)}`;
+  } else if (formattedInput.length === 2) {
+    // Two letters provided
+    return `${formattedInput}${'*'.repeat(5)}`;
   } else {
-    // First name and last name provided
-    const firstName = parts[0];
-    const lastName = parts.slice(1).join(' ');
-    const firstLetterOfLastName = lastName.charAt(0);
+    // Three or more letters provided (we'll only use the first 3)
+    const firstTwoLetters = formattedInput.substring(0, 2);
+    const thirdLetter = formattedInput.charAt(2);
     
-    return `${firstName} ${firstLetterOfLastName}${'*'.repeat(5)}`;
+    return `${firstTwoLetters}${'*'.repeat(5)} ${thirdLetter}${'*'.repeat(4)}`;
   }
 }

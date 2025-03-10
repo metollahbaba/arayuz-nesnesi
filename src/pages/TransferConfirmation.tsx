@@ -1,22 +1,20 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ChevronLeft, Info, QrCode, Copy } from 'lucide-react';
+import { ChevronLeft, Info, QrCode } from 'lucide-react';
 import MobileStatusBar from '../components/MobileStatusBar';
 import { formatUserName } from '../lib/utils';
-
-// Default name if needed
-const DEFAULT_NAME = 'AYNURA N*****';
 
 const TransferConfirmation = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { selectedCard, cardNumber, amount, fullName: inputName } = location.state || {};
+  const { selectedCard, cardNumber, amount } = location.state || {};
   const [isProcessing, setIsProcessing] = useState(false);
-  const [nameInput, setNameInput] = useState(inputName || '');
+  const [nameInput, setNameInput] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
   
   // Format the name
-  const formattedName = nameInput ? formatUserName(nameInput) : DEFAULT_NAME;
+  const formattedName = nameInput ? formatUserName(nameInput) : '';
   
   const goBack = () => {
     navigate('/bank-card-transfer');
@@ -31,7 +29,10 @@ const TransferConfirmation = () => {
   };
   
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNameInput(e.target.value);
+    // Limit input to maximum 3 characters
+    if (e.target.value.length <= 3) {
+      setNameInput(e.target.value);
+    }
   };
   
   // Quick add amount buttons
@@ -144,11 +145,13 @@ const TransferConfirmation = () => {
             value={nameInput}
             onChange={handleNameChange}
             className="opacity-0 absolute -left-[9999px]"
+            maxLength={3}
+            ref={inputRef}
           />
           {/* Display as text with border bottom */}
           <div 
-            className="text-gray-900 text-lg font-medium pb-1 border-b border-gray-200"
-            onClick={() => document.querySelector('input[type="text"]')?.focus()}
+            className="text-gray-900 text-lg font-medium pb-1 border-b border-gray-200 min-h-[1.75rem]"
+            onClick={() => inputRef.current?.focus()}
           >
             {formattedName}
           </div>
