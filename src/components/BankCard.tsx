@@ -23,9 +23,10 @@ const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance }) =>
             <div className="text-white text-xs font-bold self-center mb-0.5">{cardNumber.substring(cardNumber.length - 4)}</div>
           </div>
           <div>
-            <div className="text-gray-600">{bankName}</div>
-            <div className="text-[10px] text-gray-500 mb-1">{cardNumber}</div>
-            <div className="font-medium">{balance}</div>
+            <div className="flex justify-between">
+              <span className="font-bold">{balance}</span>
+            </div>
+            <span className="text-gray-400 text-sm">{bankName}</span>
           </div>
         </div>
         <ChevronDown size={20} className="text-gray-400" />
