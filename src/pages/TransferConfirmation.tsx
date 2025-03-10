@@ -4,14 +4,44 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, QrCode } from 'lucide-react';
 import MobileStatusBar from '../components/MobileStatusBar';
 import { formatUserName } from '../lib/utils';
+import CardSelectionModal from '../components/CardSelectionModal';
 
 const TransferConfirmation = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { selectedCard, cardNumber, amount } = location.state || {};
+  const { selectedCard: initialCard, cardNumber, amount } = location.state || {};
   const [isProcessing, setIsProcessing] = useState(false);
   const [nameInput, setNameInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isCardSelectionOpen, setIsCardSelectionOpen] = useState(false);
+  
+  // Define all available cards
+  const cards = [
+    {
+      bankName: 'Kapital Bank ASC',
+      cardNumber: '5113',
+      balance: '85 ₼',
+      minAmount: 0.01,
+      maxAmount: 85
+    },
+    {
+      bankName: 'Kapital Bank ASC',
+      cardNumber: '4444',
+      balance: '34.59 ₼',
+      minAmount: 0.01,
+      maxAmount: 34.59
+    },
+    {
+      bankName: 'Kapital Bank ASC',
+      cardNumber: '3303',
+      balance: '173 ₼',
+      minAmount: 0.01,
+      maxAmount: 173
+    }
+  ];
+  
+  // Set selected card state
+  const [selectedCard, setSelectedCard] = useState(initialCard || cards.find(card => card.cardNumber === '3303') || cards[0]);
   
   // Check if card ends with 0730 and set default name
   useEffect(() => {
@@ -42,6 +72,15 @@ const TransferConfirmation = () => {
     }
   };
   
+  const openCardSelection = () => {
+    setIsCardSelectionOpen(true);
+  };
+
+  const handleSelectCard = (card: { bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number }) => {
+    setSelectedCard(card);
+    setIsCardSelectionOpen(false);
+  };
+  
   // Quick add amount buttons
   const quickAddAmounts = [10, 20, 50];
   
@@ -65,20 +104,20 @@ const TransferConfirmation = () => {
         <h1 className="text-3xl font-semibold text-gray-900">İstənilən bank kartına</h1>
       </div>
       
-      {/* From Card */}
+      {/* From Card - Now clickable to open card selection */}
       <div className="px-6 mb-6">
         <h2 className="text-gray-600 text-base mb-2">Ödəmək</h2>
-        <div className="bg-white rounded-xl p-4 shadow-sm flex items-center">
+        <div className="bg-white rounded-xl p-4 shadow-sm flex items-center" onClick={openCardSelection}>
           <div className="flex-shrink-0 mr-4">
             <div className="bg-navy-700 w-14 h-10 rounded-md flex items-center justify-center">
               <div className="text-white text-xs">VISA</div>
             </div>
           </div>
           <div className="flex-grow">
-            <div className="text-gray-500">Kapital Bank ASC</div>
+            <div className="text-gray-500">{selectedCard.bankName}</div>
             <div className="flex justify-between">
-              <div className="font-medium">{selectedCard?.balance || '0.27'} AZN</div>
-              <div className="text-gray-500 text-sm">•{selectedCard?.cardNumber || '3303'}</div>
+              <div className="font-medium">{selectedCard.balance}</div>
+              <div className="text-gray-500 text-sm">•{selectedCard.cardNumber}</div>
             </div>
           </div>
           <div className="flex-shrink-0 ml-2">
@@ -125,7 +164,7 @@ const TransferConfirmation = () => {
             <path d="M12 16v-4" />
             <path d="M12 8h.01" />
           </svg>
-          <span>Min: 0.01AZN, Maks: 0.27AZN</span>
+          <span>Min: {selectedCard.minAmount}AZN, Maks: {selectedCard.maxAmount}AZN</span>
         </div>
         
         {/* Quick Amount Buttons */}
@@ -204,6 +243,15 @@ const TransferConfirmation = () => {
       <div className="bg-black h-10 flex items-center justify-center">
         <div className="w-1/3 h-1 bg-gray-500 rounded-full"></div>
       </div>
+      
+      {/* Card Selection Modal */}
+      <CardSelectionModal 
+        isOpen={isCardSelectionOpen}
+        onClose={() => setIsCardSelectionOpen(false)}
+        onSelectCard={handleSelectCard}
+        cards={cards}
+        selectedCardNumber={selectedCard.cardNumber}
+      />
     </div>
   );
 };
