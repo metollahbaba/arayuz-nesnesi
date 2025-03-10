@@ -119,7 +119,7 @@ const TransferDetails = () => {
       
       <div className="flex flex-col items-end mb-8 px-6">
         <img 
-          src="https://i.imgur.com/a/4fIoshv.png" 
+          src="https://i.imgur.com/4fIoshv.png" 
           alt="Signature" 
           className="h-12 w-24 opacity-70 self-end animate-fade-in"
         />
