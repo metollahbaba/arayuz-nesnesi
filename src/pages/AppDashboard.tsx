@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, Wifi, Battery } from 'lucide-react';
 import visaCardLogo from '../assets/card-visa.jpeg';
 import NewProductModal from '@/components/NewProductModal';
 
 const AppDashboard = () => {
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const navigateToPayments = () => {
+    navigate('/payments');
+  };
 
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col overflow-hidden">
@@ -332,7 +338,7 @@ const AppDashboard = () => {
           <span className="text-xs text-gray-400 mt-1">QR</span>
         </div>
         
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center cursor-pointer" onClick={navigateToPayments}>
           <div className="w-8 h-8 flex items-center justify-center">
             <CreditCard size={20} className="text-gray-400" />
           </div>
