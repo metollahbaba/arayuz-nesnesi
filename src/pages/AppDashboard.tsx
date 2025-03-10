@@ -163,7 +163,7 @@ const AppDashboard = () => {
           <img 
             src="https://i.ibb.co/DHw6HGHm/Screenshot-2025-03-10-23-52-53-796-az-kapitalbank-mbanking-removebg-preview.png" 
             alt="Cashback card" 
-            className="w-6 h-6 object-contain mr-1" 
+            className="w-8 h-8 object-contain mr-1" 
           />
           <span className="text-sm font-medium">0</span>
           <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
@@ -363,3 +363,4 @@ const AppDashboard = () => {
 };
 
 export default AppDashboard;
+
