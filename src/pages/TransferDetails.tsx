@@ -16,11 +16,9 @@ const TransferDetails = () => {
     transactionDate 
   } = location.state || {};
   
-  // Get last 4 digits of card numbers
   const senderCardLast4 = selectedCard?.cardNumber.slice(-4) || '3303';
   const receiverCardLast4 = cardNumber?.slice(-4) || '0730';
   
-  // Calculate remaining balance after transaction
   const parsedAmount = parseFloat(amount) || 15;
   const initialBalance = parseFloat(selectedCard?.balance) || 173;
   const remainingBalance = (initialBalance - parsedAmount).toFixed(2);
@@ -35,10 +33,8 @@ const TransferDetails = () => {
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
-      {/* Mobile Status Bar */}
       <MobileStatusBar time="14:16" backgroundColor="bg-gray-50" batteryLevel="70" />
       
-      {/* Header */}
       <div className="flex justify-between items-center px-6 py-4">
         <button onClick={goBack} className="text-black">
           <ChevronLeft size={24} />
@@ -51,7 +47,6 @@ const TransferDetails = () => {
         </button>
       </div>
       
-      {/* Success Icon */}
       <div className="flex justify-center mb-6 mt-4 animate-scale-in">
         <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center shadow-lg">
           <Check size={24} className="text-white" />
@@ -60,7 +55,6 @@ const TransferDetails = () => {
       
       <h2 className="text-2xl font-semibold px-6 mb-6 animate-fade-in">Detallar</h2>
       
-      {/* Transaction Details */}
       <div className="px-6 mb-6 animate-fade-in">
         <div className="flex justify-between py-3 border-b border-gray-200">
           <div className="text-gray-700">Qəbz nömrəsi</div>
@@ -123,7 +117,6 @@ const TransferDetails = () => {
         </div>
       </div>
       
-      {/* Bottom logo and signature */}
       <div className="flex flex-col items-end mb-8 px-6">
         <div className="flex justify-center mb-3 animate-pulse">
           <img 
@@ -139,7 +132,6 @@ const TransferDetails = () => {
         />
       </div>
       
-      {/* Close Button */}
       <div className="px-6 mt-auto mb-4 animate-fade-in">
         <button 
           onClick={goToHome}
@@ -149,7 +141,6 @@ const TransferDetails = () => {
         </button>
       </div>
       
-      {/* iPhone Home Indicator */}
       <div className="bg-black h-10 flex items-center justify-center">
         <div className="w-1/3 h-1 bg-gray-500 rounded-full"></div>
       </div>
