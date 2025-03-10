@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, ChevronDown, Scan } from 'lucide-react';
 import BankCard from '../components/BankCard';
@@ -8,8 +8,10 @@ import { formatCardNumber, getCardType } from '../lib/utils';
 const BankCardTransfer = () => {
   const navigate = useNavigate();
   const [amount, setAmount] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
+  const [cardNumber, setCardNumber] = useState('4169 7388 2455 3303');
   const [cardType, setCardType] = useState('');
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   
   useEffect(() => {
     if (cardNumber) {
@@ -19,6 +21,29 @@ const BankCardTransfer = () => {
     }
   }, [cardNumber]);
   
+  useEffect(() => {
+    const handleFocus = () => {
+      setIsKeyboardOpen(true);
+    };
+
+    const handleBlur = () => {
+      setIsKeyboardOpen(false);
+    };
+
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+      input.addEventListener('focus', handleFocus);
+      input.addEventListener('blur', handleBlur);
+    });
+
+    return () => {
+      inputs.forEach(input => {
+        input.removeEventListener('focus', handleFocus);
+        input.removeEventListener('blur', handleBlur);
+      });
+    };
+  }, []);
+  
   const goBack = () => {
     navigate('/payments');
   };
@@ -26,7 +51,7 @@ const BankCardTransfer = () => {
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     // Ensure amount doesn't exceed max value
-    if (!value || parseFloat(value) <= 173) {
+    if (!value || parseFloat(value) <= 0.27) {
       setAmount(value);
     }
   };
@@ -38,7 +63,7 @@ const BankCardTransfer = () => {
   
   const handlePresetAmount = (value: string) => {
     // Ensure preset amount doesn't exceed max value
-    if (parseFloat(value) <= 173) {
+    if (parseFloat(value) <= 0.27) {
       setAmount(value);
     }
   };
@@ -93,8 +118,8 @@ const BankCardTransfer = () => {
         </div>
       </div>
       
-      {/* Header */}
-      <div className="flex justify-between items-center px-6 py-4">
+      {/* Header - Adjusts position based on keyboard state */}
+      <div className={`flex justify-between items-center px-6 py-4 ${isKeyboardOpen ? 'py-1' : 'py-4'}`}>
         <button onClick={goBack} className="text-black">
           <ChevronLeft size={24} />
         </button>
@@ -103,13 +128,13 @@ const BankCardTransfer = () => {
         </button>
       </div>
       
-      {/* Page Title */}
-      <div className="px-6 mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">İstənilən bank kartına</h1>
+      {/* Page Title - Adjusts position based on keyboard state */}
+      <div className={`px-6 ${isKeyboardOpen ? 'mb-2' : 'mb-6'}`}>
+        <h1 className={`${isKeyboardOpen ? 'text-2xl' : 'text-3xl'} font-bold text-gray-900`}>İstənilən bank kartına</h1>
       </div>
       
       {/* Card Selection */}
-      <div className="px-6 mb-6">
+      <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Ödəmək</h2>
         <BankCard 
           bankName="Kapital Bank ASC"
@@ -119,17 +144,18 @@ const BankCardTransfer = () => {
       </div>
       
       {/* Card Number Input */}
-      <div className="px-6 mb-6">
+      <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Mədaxil etmək</h2>
         <div className="bg-white rounded-2xl p-4 flex items-center shadow-sm">
           <div className="flex-1">
             <div className="text-xs text-gray-400 mb-1">Kart nömrəsi</div>
             <input
               type="text"
-              value={cardNumber || "4169 7388 2455 3303"}
+              value={cardNumber}
               onChange={handleCardNumberChange}
               className="w-full outline-none text-gray-700 text-lg font-medium"
               maxLength={19}
+              ref={inputRef}
             />
           </div>
           <div className="rounded-lg bg-gray-100 p-2">
@@ -139,7 +165,7 @@ const BankCardTransfer = () => {
       </div>
       
       {/* Transfer Details */}
-      <div className="px-6 mb-8">
+      <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Köçürmənin detalları</h2>
         <div className="grid grid-cols-3 gap-4">
           <div className="col-span-2">
@@ -151,8 +177,9 @@ const BankCardTransfer = () => {
                 onChange={handleAmountChange}
                 className="w-full outline-none text-gray-700 text-lg font-medium"
                 min="0.01"
-                max="173"
+                max="0.27"
                 step="0.01"
+                placeholder="0.01"
               />
             </div>
           </div>
@@ -195,7 +222,7 @@ const BankCardTransfer = () => {
         </div>
       </div>
       
-      {/* Bank Info */}
+      {/* Bank Info and Bottom Button - Move to bottom of screen */}
       <div className="mt-auto">
         <div className="mx-6 mb-4 bg-white rounded-2xl p-4 flex items-center shadow-sm">
           <div className="flex items-center">
@@ -208,8 +235,8 @@ const BankCardTransfer = () => {
         <div className="px-6 pb-6">
           <button 
             className={`w-full py-4 rounded-2xl font-medium ${
-              cardNumber.length === 19 && parseFloat(amount || '0') >= 0.01 && parseFloat(amount || '0') <= 173
-                ? 'bg-red-200 text-red-500'
+              cardNumber.length === 19 && (!amount || parseFloat(amount) >= 0.01) && parseFloat(amount || '0') <= 0.27
+                ? 'bg-red-500 text-white'
                 : 'bg-red-200 text-red-500'
             }`}
           >
