@@ -248,13 +248,11 @@ const AppDashboard = () => {
         <div className="flex items-center mb-3">
           <div className="w-16 h-12 bg-blue-900 rounded flex flex-col items-center justify-between py-1 mr-3 relative">
             <div className="w-10 h-3 self-start ml-2">
-              <img 
-                src={visaCardLogo} 
-                alt="VISA" 
-                className="w-full h-full object-contain" 
-              />
+              <div className="bg-white text-blue-900 font-bold text-[10px] px-1 rounded">
+                VISA
+              </div>
             </div>
-            <div className="text-white text-xs self-start ml-2">3303</div>
+            <div className="text-white text-xs self-start ml-2 font-bold">3303</div>
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
