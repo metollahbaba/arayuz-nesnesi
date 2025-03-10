@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, ChevronDown, Scan } from 'lucide-react';
 import BankCard from '../components/BankCard';
+import CardSelectionModal from '../components/CardSelectionModal';
 import { formatCardNumber, getCardType } from '../lib/utils';
 
 const BankCardTransfer = () => {
@@ -11,7 +12,32 @@ const BankCardTransfer = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [cardType, setCardType] = useState('');
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  const [isCardSelectionOpen, setIsCardSelectionOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({
+    bankName: 'Kapital Bank ASC',
+    cardNumber: '3303',
+    balance: '0.27 AZN'
+  });
   const inputRef = useRef<HTMLInputElement>(null);
+  
+  // Card data with last 4 digits and balance
+  const cards = [
+    {
+      bankName: 'Kapital Bank ASC',
+      cardNumber: '3303',
+      balance: '0.27 AZN'
+    },
+    {
+      bankName: 'Azər Türk Bank',
+      cardNumber: '4586',
+      balance: '173.50 AZN'
+    },
+    {
+      bankName: 'Bank Respublika',
+      cardNumber: '7845',
+      balance: '54.20 AZN'
+    }
+  ];
   
   useEffect(() => {
     if (cardNumber) {
@@ -67,13 +93,22 @@ const BankCardTransfer = () => {
       setAmount(value);
     }
   };
+
+  const openCardSelection = () => {
+    setIsCardSelectionOpen(true);
+  };
+
+  const handleSelectCard = (card: { bankName: string; cardNumber: string; balance: string }) => {
+    setSelectedCard(card);
+    setIsCardSelectionOpen(false);
+  };
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
       {/* Mobile Status Bar with time */}
       <div className="bg-gray-50 text-black p-2 flex justify-between items-center text-xs">
         <div className="flex items-center gap-1">
-          <span className="font-semibold">12:00</span>
+          <span className="font-semibold">12:05</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" />
             <path d="M12 6v6l4 2" />
@@ -103,13 +138,13 @@ const BankCardTransfer = () => {
             <div className="w-1 h-full bg-black rounded-sm"></div>
           </div>
           <div className="flex items-center border border-black rounded-sm px-1 bg-amber-400">
-            <span className="text-[10px]">24</span>
+            <span className="text-[10px]">92</span>
           </div>
         </div>
       </div>
       
       {/* Header - Adjusts position based on keyboard state */}
-      <div className="flex justify-between items-center px-6 py-4">
+      <div className={`flex justify-between items-center px-6 py-4 ${isKeyboardOpen ? 'mb-0' : ''}`}>
         <button onClick={goBack} className="text-black">
           <ChevronLeft size={24} />
         </button>
@@ -119,27 +154,27 @@ const BankCardTransfer = () => {
       </div>
       
       {/* Page Title - Adjusts position based on keyboard state */}
-      <div className="px-6 mb-6">
+      <div className={`px-6 mb-6 ${isKeyboardOpen ? 'hidden' : ''}`}>
         <h1 className="text-3xl font-semibold text-gray-900">İstənilən bank kartına</h1>
       </div>
       
       {/* Card Selection */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Ödəmək</h2>
-        <div className="bg-white rounded-2xl p-4 shadow-sm">
+        <div className="bg-white rounded-2xl p-4 shadow-sm" onClick={openCardSelection}>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <div className="w-14 h-10 bg-[#0e1a48] rounded-lg flex flex-col justify-between p-1 mr-3 relative overflow-hidden">
                 <div className="flex justify-between items-center">
                   <div className="text-white text-[8px] font-bold ml-1">VISA</div>
                 </div>
-                <div className="text-white text-[10px] font-medium self-center mb-0.5">•3303</div>
+                <div className="text-white text-[10px] font-medium self-center mb-0.5">•{selectedCard.cardNumber}</div>
               </div>
               <div>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">0.27 AZN</span>
+                  <span className="text-gray-700">{selectedCard.balance}</span>
                 </div>
-                <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
+                <span className="text-gray-400 text-sm">{selectedCard.bankName}</span>
               </div>
             </div>
             <ChevronDown size={20} className="text-gray-400" />
@@ -247,6 +282,15 @@ const BankCardTransfer = () => {
       <div className="bg-black h-10 flex items-center justify-center">
         <div className="w-1/3 h-1 bg-gray-500 rounded-full"></div>
       </div>
+
+      {/* Card Selection Modal */}
+      <CardSelectionModal 
+        isOpen={isCardSelectionOpen}
+        onClose={() => setIsCardSelectionOpen(false)}
+        onSelectCard={handleSelectCard}
+        cards={cards}
+        selectedCardNumber={selectedCard.cardNumber}
+      />
     </div>
   );
 };

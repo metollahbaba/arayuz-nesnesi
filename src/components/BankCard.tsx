@@ -6,11 +6,12 @@ interface BankCardProps {
   bankName: string;
   cardNumber: string;
   balance: string;
+  showArrow?: boolean;
 }
 
-const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance }) => {
+const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance, showArrow = true }) => {
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm mb-3">
+    <div className="bg-white rounded-2xl p-4 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className="w-14 h-10 bg-[#0e1a48] rounded-lg flex flex-col justify-between p-1 mr-3 relative overflow-hidden">
@@ -26,7 +27,7 @@ const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance }) =>
             <span className="text-gray-400 text-sm">{bankName}</span>
           </div>
         </div>
-        <ChevronDown size={20} className="text-gray-400" />
+        {showArrow && <ChevronDown size={20} className="text-gray-400" />}
       </div>
     </div>
   );
