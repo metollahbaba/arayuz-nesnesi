@@ -44,11 +44,11 @@ const BankCardTransfer = () => {
   };
   
   return (
-    <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col">
+    <div className="max-w-md mx-auto bg-gray-100 min-h-screen flex flex-col">
       {/* Mobile Status Bar with time */}
-      <div className="bg-white text-black p-2 flex justify-between items-center text-xs">
+      <div className="bg-gray-100 text-black p-2 flex justify-between items-center text-xs">
         <div className="flex items-center gap-1">
-          <span className="font-semibold">11:40</span>
+          <span className="font-semibold">11:53</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" />
             <path d="M12 6v6l4 2" />
@@ -87,26 +87,25 @@ const BankCardTransfer = () => {
             <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
             <line x1="12" y1="20" x2="12" y2="20" />
           </svg>
-          <div className="flex items-center border border-black rounded-sm px-1">
-            <div className="w-2 h-2 bg-yellow-500 rounded-sm mr-0.5"></div>
-            <span>50</span>
+          <div className="flex items-center border border-black rounded-sm px-1 bg-amber-400">
+            <span className="text-[10px]">26</span>
           </div>
         </div>
       </div>
       
       {/* Header */}
       <div className="flex justify-between items-center px-6 py-4">
-        <button onClick={goBack} className="p-2">
+        <button onClick={goBack} className="text-black">
           <ChevronLeft size={24} />
         </button>
-        <button className="p-2">
+        <button className="text-black">
           <Info size={24} />
         </button>
       </div>
       
       {/* Page Title */}
       <div className="px-6 mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">İstənilən bank kartına</h1>
+        <h1 className="text-3xl font-bold text-gray-900">İstənilən bank kartına</h1>
       </div>
       
       {/* Card Selection */}
@@ -114,105 +113,113 @@ const BankCardTransfer = () => {
         <h2 className="text-gray-700 mb-2">Ödəmək</h2>
         <BankCard 
           bankName="Kapital Bank ASC"
-          cardNumber="•••• 4444"
-          balance="173 ₼"
+          cardNumber="3303"
+          balance="0.27 AZN"
         />
       </div>
       
       {/* Card Number Input */}
       <div className="px-6 mb-6">
         <h2 className="text-gray-700 mb-2">Mədaxil etmək</h2>
-        <div className="border border-gray-200 rounded-xl p-4 flex items-center">
+        <div className="bg-white rounded-2xl p-4 flex items-center shadow-sm">
           <div className="flex-1">
+            <div className="text-xs text-gray-400 mb-1">Kart nömrəsi</div>
             <input
               type="text"
-              value={cardNumber}
+              value={cardNumber || "4169 7388 2455 3303"}
               onChange={handleCardNumberChange}
-              placeholder="Kart nömrəsi"
-              className="w-full outline-none text-gray-700"
-              maxLength={19} // 16 digits + 3 spaces
+              className="w-full outline-none text-gray-700 text-lg font-medium"
+              maxLength={19}
             />
-            {cardType && (
-              <div className="text-xs text-gray-500 mt-1">
-                {cardType}
-              </div>
-            )}
           </div>
-          <Scan size={20} className="text-gray-400" />
+          <div className="rounded-lg bg-gray-100 p-2">
+            <Scan size={20} className="text-gray-500" />
+          </div>
         </div>
       </div>
       
       {/* Transfer Details */}
-      <div className="px-6 mb-6">
+      <div className="px-6 mb-8">
         <h2 className="text-gray-700 mb-2">Köçürmənin detalları</h2>
         <div className="grid grid-cols-3 gap-4">
           <div className="col-span-2">
-            <div className="border border-gray-200 rounded-xl p-4">
+            <div className="bg-white rounded-2xl p-4 shadow-sm">
+              <div className="text-xs text-gray-400 mb-1">Məbləğ</div>
               <input
                 type="number"
                 value={amount}
                 onChange={handleAmountChange}
-                placeholder="Məbləğ"
-                className="w-full outline-none text-gray-700"
+                className="w-full outline-none text-gray-700 text-lg font-medium"
                 min="0.01"
                 max="173"
                 step="0.01"
               />
             </div>
-            <div className="mt-1 text-gray-500 text-xs flex items-center">
-              <span className="mr-1">ⓘ</span>
-              <span>Min: 0.01AZN, Maks: 173AZN</span>
-            </div>
           </div>
           <div>
-            <div className="border border-gray-200 rounded-xl p-4 flex items-center justify-between">
-              <span className="text-gray-700">AZN</span>
+            <div className="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm">
+              <span className="text-gray-700 font-medium">AZN</span>
               <ChevronDown size={20} className="text-gray-400" />
             </div>
           </div>
         </div>
         
+        <div className="flex items-center mt-2 mb-4 text-gray-500 text-xs">
+          <span className="mr-1">ⓘ</span>
+          <span>Min: 0.01AZN, Maks: 0.27AZN</span>
+        </div>
+        
         {/* Quick Amount Buttons */}
-        <div className="grid grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-3 gap-4">
           <button 
             onClick={() => handlePresetAmount('10')}
-            className="border border-gray-200 rounded-xl py-3 flex items-center justify-center"
+            className="bg-white rounded-2xl py-3 flex items-center justify-center shadow-sm"
           >
-            <span className="mr-1">+</span>
-            <span>10</span>
+            <span className="text-gray-500 mr-1">+</span>
+            <span className="text-gray-700 font-medium">10</span>
           </button>
           <button 
             onClick={() => handlePresetAmount('20')}
-            className="border border-gray-200 rounded-xl py-3 flex items-center justify-center"
+            className="bg-white rounded-2xl py-3 flex items-center justify-center shadow-sm"
           >
-            <span className="mr-1">+</span>
-            <span>20</span>
+            <span className="text-gray-500 mr-1">+</span>
+            <span className="text-gray-700 font-medium">20</span>
           </button>
           <button 
             onClick={() => handlePresetAmount('50')}
-            className="border border-gray-200 rounded-xl py-3 flex items-center justify-center"
+            className="bg-white rounded-2xl py-3 flex items-center justify-center shadow-sm"
           >
-            <span className="mr-1">+</span>
-            <span>50</span>
+            <span className="text-gray-500 mr-1">+</span>
+            <span className="text-gray-700 font-medium">50</span>
           </button>
         </div>
       </div>
       
-      {/* Bottom Button */}
-      <div className="mt-auto px-6 py-6">
-        <button 
-          className={`w-full py-4 rounded-xl font-medium ${
-            cardNumber.length === 19 && parseFloat(amount || '0') >= 0.01 && parseFloat(amount || '0') <= 173
-              ? 'bg-red-500 text-white'
-              : 'bg-red-100 text-red-500'
-          }`}
-        >
-          Davam etmək
-        </button>
+      {/* Bank Info */}
+      <div className="mt-auto">
+        <div className="mx-6 mb-4 bg-white rounded-2xl p-4 flex items-center shadow-sm">
+          <div className="flex items-center">
+            <span className="mr-2">🇦🇿</span>
+            <span className="text-gray-700 font-medium">AZERBAIJAN, KapitalBank</span>
+          </div>
+        </div>
+        
+        {/* Bottom Button */}
+        <div className="px-6 pb-6">
+          <button 
+            className={`w-full py-4 rounded-2xl font-medium ${
+              cardNumber.length === 19 && parseFloat(amount || '0') >= 0.01 && parseFloat(amount || '0') <= 173
+                ? 'bg-red-200 text-red-500'
+                : 'bg-red-200 text-red-500'
+            }`}
+          >
+            Davam etmək
+          </button>
+        </div>
       </div>
       
       {/* iPhone Home Indicator */}
-      <div className="bg-black h-8 flex items-center justify-center space-x-16">
+      <div className="bg-black h-10 flex items-center justify-center">
         <div className="w-1/3 h-1 bg-gray-500 rounded-full"></div>
       </div>
     </div>
