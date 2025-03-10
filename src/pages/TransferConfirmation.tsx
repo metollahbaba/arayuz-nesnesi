@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, QrCode } from 'lucide-react';
@@ -49,16 +48,32 @@ const TransferConfirmation = () => {
     // Update the card balance
     updateCardBalance(selectedCard.cardNumber, transferAmount);
     
+    // Generate receipt number (11 random digits)
+    const receiptNumber = Array.from({ length: 11 }, () => Math.floor(Math.random() * 10)).join('');
+    
+    // Get current date and time
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, '0')}.${String(now.getMonth() + 1).padStart(2, '0')}.${now.getFullYear()}, ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    
     // Show success toast
     toast({
       title: "Transfer successful",
       description: `${transferAmount} ₼ has been sent to ${cardNumber}`,
     });
     
-    // Simulate processing and then go to dashboard
+    // Navigate to success page
     setTimeout(() => {
-      navigate('/app');
-    }, 2000);
+      navigate('/transfer-success', {
+        state: {
+          amount: transferAmount,
+          cardNumber,
+          selectedCard,
+          formattedName,
+          receiptNumber,
+          transactionDate: formattedDate
+        }
+      });
+    }, 1000);
   };
   
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
