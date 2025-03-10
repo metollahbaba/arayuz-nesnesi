@@ -1,7 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Fingerprint, X, Loader2 } from 'lucide-react';
-import MobileStatusBar from '../components/MobileStatusBar';
 
 const PinEntry = () => {
   const [pin, setPin] = useState<string>('');
@@ -114,7 +114,6 @@ const PinEntry = () => {
     <div className={`max-w-md mx-auto bg-white h-screen flex flex-col overflow-hidden relative
       ${errorAnimation ? 'animate-[wiggle_0.3s_ease-in-out]' : ''}`}>
       {renderLoadingOverlay()}
-      <MobileStatusBar />
       
       <div className="flex-1 flex flex-col items-center pt-16">
         {/* Logo - using the direct image link from Imgur */}
@@ -148,13 +147,6 @@ const PinEntry = () => {
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* Mobile navigation */}
-      <div className="bg-black h-14 flex items-center justify-center space-x-16">
-        <div className="w-5 h-5 bg-gray-400 rounded"></div>
-        <div className="w-8 h-8 border-2 border-gray-400 rounded-full"></div>
-        <div className="w-0 h-0 border-l-8 border-l-transparent border-t-10 border-t-gray-400 border-r-8 border-r-transparent"></div>
       </div>
     </div>
   );
