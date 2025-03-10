@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { ArrowLeft } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowLeft, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from "@/hooks/use-toast";
 import MobileStatusBar from '@/components/MobileStatusBar';
@@ -8,17 +8,19 @@ import MobileStatusBar from '@/components/MobileStatusBar';
 const UmicoPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [showRestriction, setShowRestriction] = useState(false);
 
   const handleConnect = () => {
-    toast({
-      title: "Uğurla bağlandı",
-      description: "UMICO hesabınız Birbanka bağlandı",
-    });
+    setShowRestriction(true);
+  };
+
+  const handleCloseRestriction = () => {
+    setShowRestriction(false);
     navigate('/app');
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col">
+    <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col relative">
       <MobileStatusBar />
       
       <div className="flex items-center px-4 py-2">
@@ -54,6 +56,7 @@ const UmicoPage = () => {
         </button>
       </div>
 
+      {/* Bottom navigation */}
       <div className="flex justify-between items-center px-8 py-4">
         <div className="flex flex-col items-center">
           <div className="w-6 h-6 text-red-500">
@@ -104,6 +107,36 @@ const UmicoPage = () => {
           <span className="text-xs mt-1 text-gray-400">Daha çox</span>
         </div>
       </div>
+
+      {/* Restriction Modal */}
+      {showRestriction && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div 
+            className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
+            onClick={handleCloseRestriction}
+          ></div>
+          <div className="bg-white rounded-xl p-6 w-11/12 max-w-sm z-10 animate-fade-in">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">Bildiriş</h3>
+              <button 
+                onClick={handleCloseRestriction}
+                className="p-1 rounded-full hover:bg-gray-100"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="mb-6">
+              <p className="text-gray-700">Bu xidmətə məhdudiyyət qoyulub.</p>
+            </div>
+            <button
+              onClick={handleCloseRestriction}
+              className="w-full bg-red-500 text-white rounded-xl py-3 text-md font-medium"
+            >
+              Bağla
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
