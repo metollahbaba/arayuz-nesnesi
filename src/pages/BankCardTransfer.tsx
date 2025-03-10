@@ -1,27 +1,46 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, ChevronDown, Scan } from 'lucide-react';
 import BankCard from '../components/BankCard';
+import { formatCardNumber, getCardType } from '../lib/utils';
 
 const BankCardTransfer = () => {
   const navigate = useNavigate();
   const [amount, setAmount] = useState('');
   const [cardNumber, setCardNumber] = useState('');
+  const [cardType, setCardType] = useState('');
+  
+  useEffect(() => {
+    if (cardNumber) {
+      setCardType(getCardType(cardNumber.replace(/\s/g, '')));
+    } else {
+      setCardType('');
+    }
+  }, [cardNumber]);
   
   const goBack = () => {
     navigate('/payments');
   };
   
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(e.target.value);
+    const value = e.target.value;
+    // Ensure amount doesn't exceed max value
+    if (!value || parseFloat(value) <= 173) {
+      setAmount(value);
+    }
   };
   
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardNumber(e.target.value);
+    const value = e.target.value.replace(/\D/g, '');
+    setCardNumber(formatCardNumber(value));
   };
   
   const handlePresetAmount = (value: string) => {
-    setAmount(value);
+    // Ensure preset amount doesn't exceed max value
+    if (parseFloat(value) <= 173) {
+      setAmount(value);
+    }
   };
   
   return (
@@ -96,7 +115,7 @@ const BankCardTransfer = () => {
         <BankCard 
           bankName="Kapital Bank ASC"
           cardNumber="•••• 4444"
-          balance="0.27 ₼"
+          balance="173 ₼"
         />
       </div>
       
@@ -104,13 +123,21 @@ const BankCardTransfer = () => {
       <div className="px-6 mb-6">
         <h2 className="text-gray-700 mb-2">Mədaxil etmək</h2>
         <div className="border border-gray-200 rounded-xl p-4 flex items-center">
-          <input
-            type="text"
-            value={cardNumber}
-            onChange={handleCardNumberChange}
-            placeholder="Kart nömrəsi"
-            className="flex-1 outline-none text-gray-700"
-          />
+          <div className="flex-1">
+            <input
+              type="text"
+              value={cardNumber}
+              onChange={handleCardNumberChange}
+              placeholder="Kart nömrəsi"
+              className="w-full outline-none text-gray-700"
+              maxLength={19} // 16 digits + 3 spaces
+            />
+            {cardType && (
+              <div className="text-xs text-gray-500 mt-1">
+                {cardType}
+              </div>
+            )}
+          </div>
           <Scan size={20} className="text-gray-400" />
         </div>
       </div>
@@ -127,11 +154,14 @@ const BankCardTransfer = () => {
                 onChange={handleAmountChange}
                 placeholder="Məbləğ"
                 className="w-full outline-none text-gray-700"
+                min="0.01"
+                max="173"
+                step="0.01"
               />
             </div>
             <div className="mt-1 text-gray-500 text-xs flex items-center">
               <span className="mr-1">ⓘ</span>
-              <span>Min: 0.01AZN, Maks: 0.27AZN</span>
+              <span>Min: 0.01AZN, Maks: 173AZN</span>
             </div>
           </div>
           <div>
@@ -170,7 +200,13 @@ const BankCardTransfer = () => {
       
       {/* Bottom Button */}
       <div className="mt-auto px-6 py-6">
-        <button className="w-full bg-red-100 text-red-500 py-4 rounded-xl font-medium">
+        <button 
+          className={`w-full py-4 rounded-xl font-medium ${
+            cardNumber.length === 19 && parseFloat(amount || '0') >= 0.01 && parseFloat(amount || '0') <= 173
+              ? 'bg-red-500 text-white'
+              : 'bg-red-100 text-red-500'
+          }`}
+        >
           Davam etmək
         </button>
       </div>
