@@ -8,7 +8,7 @@ import { formatCardNumber, getCardType } from '../lib/utils';
 const BankCardTransfer = () => {
   const navigate = useNavigate();
   const [amount, setAmount] = useState('');
-  const [cardNumber, setCardNumber] = useState('4169 7388 2455 3303');
+  const [cardNumber, setCardNumber] = useState('');
   const [cardType, setCardType] = useState('');
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -69,11 +69,11 @@ const BankCardTransfer = () => {
   };
   
   return (
-    <div className="max-w-md mx-auto bg-gray-100 min-h-screen flex flex-col">
+    <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
       {/* Mobile Status Bar with time */}
-      <div className="bg-gray-100 text-black p-2 flex justify-between items-center text-xs">
+      <div className="bg-gray-50 text-black p-2 flex justify-between items-center text-xs">
         <div className="flex items-center gap-1">
-          <span className="font-semibold">11:53</span>
+          <span className="font-semibold">12:00</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10" />
             <path d="M12 6v6l4 2" />
@@ -93,10 +93,6 @@ const BankCardTransfer = () => {
             <rect width="18" height="18" x="3" y="4" rx="2" />
             <path d="M3 10h18" />
           </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 7a5 5 0 1 0 5 5" />
-            <path d="M17 12h-5" />
-          </svg>
         </div>
         <div className="flex items-center gap-1">
           <span className="text-xs">4G</span>
@@ -106,20 +102,14 @@ const BankCardTransfer = () => {
             <div className="w-1 h-3 bg-black rounded-sm"></div>
             <div className="w-1 h-full bg-black rounded-sm"></div>
           </div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12.55a11 11 0 0 1 14.08 0" />
-            <path d="M1.42 9a16 16 0 0 1 21.16 0" />
-            <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
-            <line x1="12" y1="20" x2="12" y2="20" />
-          </svg>
           <div className="flex items-center border border-black rounded-sm px-1 bg-amber-400">
-            <span className="text-[10px]">26</span>
+            <span className="text-[10px]">24</span>
           </div>
         </div>
       </div>
       
       {/* Header - Adjusts position based on keyboard state */}
-      <div className={`flex justify-between items-center px-6 py-4 ${isKeyboardOpen ? 'py-1' : 'py-4'}`}>
+      <div className="flex justify-between items-center px-6 py-4">
         <button onClick={goBack} className="text-black">
           <ChevronLeft size={24} />
         </button>
@@ -129,18 +119,32 @@ const BankCardTransfer = () => {
       </div>
       
       {/* Page Title - Adjusts position based on keyboard state */}
-      <div className={`px-6 ${isKeyboardOpen ? 'mb-2' : 'mb-6'}`}>
-        <h1 className={`${isKeyboardOpen ? 'text-2xl' : 'text-3xl'} font-bold text-gray-900`}>İstənilən bank kartına</h1>
+      <div className="px-6 mb-6">
+        <h1 className="text-3xl font-semibold text-gray-900">İstənilən bank kartına</h1>
       </div>
       
       {/* Card Selection */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Ödəmək</h2>
-        <BankCard 
-          bankName="Kapital Bank ASC"
-          cardNumber="3303"
-          balance="0.27 AZN"
-        />
+        <div className="bg-white rounded-2xl p-4 shadow-sm">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <div className="w-14 h-10 bg-[#0e1a48] rounded-lg flex flex-col justify-between p-1 mr-3 relative overflow-hidden">
+                <div className="flex justify-between items-center">
+                  <div className="text-white text-[8px] font-bold ml-1">VISA</div>
+                </div>
+                <div className="text-white text-[10px] font-medium self-center mb-0.5">•3303</div>
+              </div>
+              <div>
+                <div className="flex justify-between">
+                  <span className="text-gray-700">0.27 AZN</span>
+                </div>
+                <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
+              </div>
+            </div>
+            <ChevronDown size={20} className="text-gray-400" />
+          </div>
+        </div>
       </div>
       
       {/* Card Number Input */}
@@ -155,6 +159,7 @@ const BankCardTransfer = () => {
               onChange={handleCardNumberChange}
               className="w-full outline-none text-gray-700 text-lg font-medium"
               maxLength={19}
+              placeholder="Kart nömrəsi"
               ref={inputRef}
             />
           </div>
@@ -179,7 +184,7 @@ const BankCardTransfer = () => {
                 min="0.01"
                 max="0.27"
                 step="0.01"
-                placeholder="0.01"
+                placeholder="Məbləğ"
               />
             </div>
           </div>
@@ -222,22 +227,15 @@ const BankCardTransfer = () => {
         </div>
       </div>
       
-      {/* Bank Info and Bottom Button - Move to bottom of screen */}
+      {/* Bottom Button - Move to bottom of screen */}
       <div className="mt-auto">
-        <div className="mx-6 mb-4 bg-white rounded-2xl p-4 flex items-center shadow-sm">
-          <div className="flex items-center">
-            <span className="mr-2">🇦🇿</span>
-            <span className="text-gray-700 font-medium">AZERBAIJAN, KapitalBank</span>
-          </div>
-        </div>
-        
         {/* Bottom Button */}
         <div className="px-6 pb-6">
           <button 
             className={`w-full py-4 rounded-2xl font-medium ${
               cardNumber.length === 19 && (!amount || parseFloat(amount) >= 0.01) && parseFloat(amount || '0') <= 0.27
-                ? 'bg-red-500 text-white'
-                : 'bg-red-200 text-red-500'
+                ? 'bg-red-300 text-white'
+                : 'bg-red-300 text-white opacity-75'
             }`}
           >
             Davam etmək
