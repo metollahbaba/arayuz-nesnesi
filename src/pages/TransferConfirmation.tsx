@@ -1,31 +1,13 @@
 
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ChevronLeft, Info } from 'lucide-react';
+import { ChevronLeft, Info, QrCode, Copy } from 'lucide-react';
 import BankCard from '../components/BankCard';
-
-// Helper function to format name with first name and first letter of last name followed by asterisks
-const formatName = (input: string) => {
-  if (!input || input.trim() === '') return '';
-  
-  const formattedInput = input.trim().toUpperCase();
-  const parts = formattedInput.split(' ');
-  
-  if (parts.length === 1) {
-    // Only first name provided
-    return `${parts[0]} ${'*'.repeat(5)}`;
-  } else {
-    // First name and last name provided
-    const firstName = parts[0];
-    const lastName = parts.slice(1).join(' ');
-    const firstLetterOfLastName = lastName.charAt(0);
-    
-    return `${firstName} ${firstLetterOfLastName}${'*'.repeat(5)}`;
-  }
-};
+import MobileStatusBar from '../components/MobileStatusBar';
+import { formatUserName } from '../lib/utils';
 
 // Default name if needed
-const DEFAULT_NAME = 'AYNURA N';
+const DEFAULT_NAME = 'AYNURA N*****';
 
 const TransferConfirmation = () => {
   const navigate = useNavigate();
@@ -35,7 +17,7 @@ const TransferConfirmation = () => {
   const [nameInput, setNameInput] = useState(inputName || '');
   
   // Format the name
-  const formattedName = nameInput ? formatName(nameInput) : '';
+  const formattedName = nameInput ? formatUserName(nameInput) : DEFAULT_NAME;
   
   const goBack = () => {
     navigate('/bank-card-transfer');
@@ -58,43 +40,8 @@ const TransferConfirmation = () => {
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
-      {/* Mobile Status Bar with time */}
-      <div className="bg-gray-50 text-black p-2 flex justify-between items-center text-xs">
-        <div className="flex items-center gap-1">
-          <span className="font-semibold">12:10</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 6v6l4 2" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 2l.001 20" />
-            <path d="M18 6v.002" />
-            <path d="M18 13v.002" />
-            <path d="M18 20v.002" />
-            <path d="M12 20v.002" />
-            <path d="M12 13v.002" />
-            <path d="M12 6v.002" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M8 2v4" />
-            <path d="M16 2v4" />
-            <rect width="18" height="18" x="3" y="4" rx="2" />
-            <path d="M3 10h18" />
-          </svg>
-        </div>
-        <div className="flex items-center gap-1">
-          <span className="text-xs">4G</span>
-          <div className="flex h-3 space-x-0.5">
-            <div className="w-1 h-1 bg-black rounded-sm"></div>
-            <div className="w-1 h-2 bg-black rounded-sm"></div>
-            <div className="w-1 h-3 bg-black rounded-sm"></div>
-            <div className="w-1 h-full bg-black rounded-sm"></div>
-          </div>
-          <div className="flex items-center border border-black rounded-sm px-1 bg-amber-400">
-            <span className="text-[10px]">91</span>
-          </div>
-        </div>
-      </div>
+      {/* Mobile Status Bar */}
+      <MobileStatusBar time="12:10" backgroundColor="bg-gray-50" batteryLevel="91" />
       
       {/* Header */}
       <div className="flex justify-between items-center px-6 py-4">
@@ -140,12 +87,8 @@ const TransferConfirmation = () => {
           <div className="text-xs text-gray-400 mb-1">Kart nömrəsi</div>
           <div className="text-gray-700 text-lg font-medium flex justify-between items-center">
             <span>{cardNumber || '4169 7388 4327 4444'}</span>
-            <button className="p-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 3h6v6" />
-                <path d="M10 14 21 3" />
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              </svg>
+            <button className="p-1 text-gray-500">
+              <Copy size={18} />
             </button>
           </div>
         </div>
@@ -194,7 +137,7 @@ const TransferConfirmation = () => {
       
       {/* Name Section */}
       <div className="px-6 mb-4">
-        <h2 className="text-gray-700 mb-2">Ad Səyad</h2>
+        <h2 className="text-gray-700 mb-2">Ad Soyad</h2>
         <div className="relative">
           <input
             type="text"
@@ -205,7 +148,7 @@ const TransferConfirmation = () => {
           />
           <div className="bg-white rounded-xl border border-gray-200 p-4">
             <div className="text-gray-700 text-lg font-medium">
-              {formattedName || DEFAULT_NAME + '*****'}
+              {formattedName}
             </div>
           </div>
         </div>
