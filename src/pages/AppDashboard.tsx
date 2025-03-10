@@ -288,7 +288,7 @@ const AppDashboard = () => {
               <p className="text-gray-400 text-sm mt-2">Kartları sifariş edin, aktivləşdirin və əlavə edin</p>
             </div>
             <div className="flex items-center">
-              <img src="public/lovable-uploads/5dcef620-b471-48b9-ad95-dcc1bc3efdb6.png" alt="Cards" className="w-16 h-16 object-contain" />
+              <img src="https://birkart.umico.az/images/tild3131-3333-4135-b433-636331303134__2_cards.png" alt="Cards" className="w-20 h-16 object-contain" />
             </div>
           </div>
         </div>
