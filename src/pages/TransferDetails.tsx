@@ -118,7 +118,7 @@ const TransferDetails = () => {
       </div>
       
       <div className="flex flex-col items-end mb-8 px-6">
-        <div className="h-12 self-end animate-fade-in">
+        <div className="h-20 self-end animate-fade-in">
           <img 
             src="/src/assets/Screenshot_2025-03-10-14-16-56-967_az.kapitalbank.mbanking-removebg-preview.png" 
             alt="Kapital Bank" 
