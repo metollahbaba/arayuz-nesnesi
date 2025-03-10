@@ -118,11 +118,14 @@ const TransferDetails = () => {
       </div>
       
       <div className="flex flex-col items-end mb-8 px-6">
-        <img 
-          src="https://i.imgur.com/4fIoshv.png" 
-          alt="Signature" 
-          className="h-12 w-24 opacity-70 self-end animate-fade-in"
-        />
+        <div className="h-12 w-24 opacity-70 self-end animate-fade-in">
+          <svg viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10,30 Q20,5 30,25 T50,15 T70,25 T90,5" 
+                  fill="none" 
+                  stroke="#333" 
+                  strokeWidth="2" />
+          </svg>
+        </div>
       </div>
       
       <div className="px-6 mt-auto mb-4 animate-fade-in">
