@@ -1,34 +1,21 @@
-
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info } from 'lucide-react';
 import BankCard from '../components/BankCard';
 
-// Helper function to mask full name
-const maskFullName = (name: string) => {
-  if (!name) return '';
+// Helper function to format name with 3 characters followed by 5 asterisks
+const formatName = (input: string) => {
+  if (!input || input.trim() === '') return '';
   
-  const parts = name.split(' ');
-  return parts.map(part => {
-    if (part.length <= 1) return part;
-    return part[0] + '*'.repeat(part.length - 1);
-  }).join(' ');
+  const formattedInput = input.trim().toUpperCase();
+  const firstThreeChars = formattedInput.slice(0, 3);
+  
+  return `${firstThreeChars}${'*'.repeat(5)}`;
 };
 
-// Helper function to generate full name based on input
-const generateFullName = (input: string) => {
-  if (!input || input.trim() === '') return 'AYNURA NAMAZOVA';
-  
-  // Default last name if only one part is entered
-  const defaultLastName = 'NAMAZOVA';
-  
-  const parts = input.trim().toUpperCase().split(' ');
-  
-  if (parts.length === 1) {
-    return `${parts[0]} ${defaultLastName}`;
-  } else {
-    return parts.join(' ');
-  }
+// Helper function to generate default name if needed
+const generateDefaultName = () => {
+  return 'AYNURA NAMAZOVA';
 };
 
 const TransferConfirmation = () => {
@@ -38,9 +25,8 @@ const TransferConfirmation = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [nameInput, setNameInput] = useState(inputName || '');
   
-  // Generate and mask the full name
-  const generatedFullName = generateFullName(nameInput);
-  const maskedFullName = maskFullName(generatedFullName);
+  // Format the name with 3 characters and 5 asterisks
+  const formattedName = nameInput ? formatName(nameInput) : '';
   
   const goBack = () => {
     navigate('/bank-card-transfer');
@@ -137,18 +123,20 @@ const TransferConfirmation = () => {
       <div className="px-6 space-y-4">
         {/* Name Section */}
         <div>
-          <h2 className="text-gray-700 mb-2">Ad Səyad</h2>
+          <h2 className="text-gray-700 mb-2">Ad Soyad</h2>
           <div className="bg-white rounded-2xl p-4 shadow-sm relative">
-            <div className="text-xs text-gray-400 mb-1">Ad Səyad daxil edin</div>
+            <div className="text-xs text-gray-400 mb-1">Ad Soyad daxil edin</div>
             <input 
               type="text"
               value={nameInput}
               onChange={handleNameChange}
               className="opacity-0 absolute inset-0 w-full h-full cursor-text z-10"
-              placeholder="Ad Səyad"
+              placeholder="Ad Soyad"
               autoFocus
             />
-            <div className="text-gray-700 text-lg font-medium">{maskedFullName}</div>
+            <div className="text-gray-700 text-lg font-medium">
+              {formattedName || 'Ad Soyad daxil edin'}
+            </div>
           </div>
         </div>
         
