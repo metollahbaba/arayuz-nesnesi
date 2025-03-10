@@ -226,8 +226,8 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">{masterCardBalance}</span>
-              <span className="text-gray-400 text-xs">₼</span>
+              <span className="font-bold">{masterCardBalance}₼</span>
+              <span className="text-gray-400 text-xs"></span>
             </div>
             <span className="text-gray-400 text-sm">Mastercard Salary</span>
           </div>
@@ -255,8 +255,8 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">{visaCard1Balance}</span>
-              <span className="text-gray-400 text-xs">₼</span>
+              <span className="font-bold">{visaCard1Balance}₼</span>
+              <span className="text-gray-400 text-xs"></span>
             </div>
             <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
           </div>
@@ -274,8 +274,8 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">{visaCard2Balance}</span>
-              <span className="text-gray-400 text-xs">₼</span>
+              <span className="font-bold">{visaCard2Balance}₼</span>
+              <span className="text-gray-400 text-xs"></span>
             </div>
             <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
           </div>
