@@ -94,12 +94,12 @@ const TransferDetails = () => {
         
         <div className="flex justify-between py-3 border-b border-gray-200">
           <div className="text-gray-700">Məbləğ</div>
-          <div className="text-gray-900 font-medium">{amount} ₼</div>
+          <div className="text-gray-900 font-medium">{parsedAmount} ₼</div>
         </div>
         
         <div className="flex justify-between py-3 border-b border-gray-200">
           <div className="text-gray-700">Ödəniş Məbləği</div>
-          <div className="text-gray-900 font-medium">{amount} ₼</div>
+          <div className="text-gray-900 font-medium">{parsedAmount} ₼</div>
         </div>
         
         <div className="flex justify-between py-3 border-b border-gray-200">
@@ -123,12 +123,22 @@ const TransferDetails = () => {
         </div>
       </div>
       
-      {/* Bottom logo with animation */}
-      <div className="flex justify-center mb-8 animate-pulse">
+      {/* Bottom logo and signature */}
+      <div className="flex flex-col items-end mb-8 px-6">
+        <div className="flex justify-center mb-3 animate-pulse">
+          <img 
+            src="/lovable-uploads/58f0fb8d-526b-4126-b6f7-0d668ae55548.png" 
+            alt="Bank logo" 
+            className="h-16 w-16 opacity-30"
+          />
+        </div>
         <img 
-          src="/lovable-uploads/58f0fb8d-526b-4126-b6f7-0d668ae55548.png" 
-          alt="Bank logo" 
-          className="h-16 w-16 opacity-30"
+          src="https://imgur.com/a/4fIoshv" 
+          alt="Signature" 
+          className="h-12 w-24 opacity-70 self-end animate-fade-in"
+          onError={(e) => {
+            e.currentTarget.src = "https://i.imgur.com/9yQzXKD.png";
+          }}
         />
       </div>
       
