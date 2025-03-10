@@ -6,8 +6,8 @@ import { X } from 'lucide-react';
 interface CardSelectionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectCard: (cardInfo: { bankName: string; cardNumber: string; balance: string }) => void;
-  cards: Array<{ bankName: string; cardNumber: string; balance: string }>;
+  onSelectCard: (cardInfo: { bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number }) => void;
+  cards: Array<{ bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number }>;
   selectedCardNumber?: string;
 }
 

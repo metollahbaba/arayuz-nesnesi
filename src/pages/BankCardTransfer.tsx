@@ -13,31 +13,37 @@ const BankCardTransfer = () => {
   const [cardType, setCardType] = useState('');
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const [isCardSelectionOpen, setIsCardSelectionOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState({
-    bankName: 'Kapital Bank ASC',
-    cardNumber: '3303',
-    balance: '0.27 AZN'
-  });
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [fullName, setFullName] = useState('');
   
   // Updated card data to match AppDashboard cards - all from Kapital Bank
   const cards = [
     {
       bankName: 'Kapital Bank ASC',
       cardNumber: '5113',
-      balance: '85 ₼'
+      balance: '85 ₼',
+      minAmount: 0.01,
+      maxAmount: 85
     },
     {
       bankName: 'Kapital Bank ASC',
       cardNumber: '4444',
-      balance: '34.59 ₼'
+      balance: '34.59 ₼',
+      minAmount: 0.01,
+      maxAmount: 34.59
     },
     {
       bankName: 'Kapital Bank ASC',
       cardNumber: '3303',
-      balance: '173 ₼'
+      balance: '173 ₼',
+      minAmount: 0.01,
+      maxAmount: 173
     }
   ];
+  
+  // Set the default selected card to the one with 173 ₼
+  const [selectedCard, setSelectedCard] = useState(cards.find(card => card.balance.includes('173')) || cards[0]);
+  
+  const inputRef = useRef<HTMLInputElement>(null);
   
   useEffect(() => {
     if (cardNumber) {
@@ -77,7 +83,7 @@ const BankCardTransfer = () => {
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     // Ensure amount doesn't exceed max value
-    if (!value || parseFloat(value) <= 0.27) {
+    if (!value || parseFloat(value) <= selectedCard.maxAmount) {
       setAmount(value);
     }
   };
@@ -89,7 +95,7 @@ const BankCardTransfer = () => {
   
   const handlePresetAmount = (value: string) => {
     // Ensure preset amount doesn't exceed max value
-    if (parseFloat(value) <= 0.27) {
+    if (parseFloat(value) <= selectedCard.maxAmount) {
       setAmount(value);
     }
   };
@@ -98,9 +104,22 @@ const BankCardTransfer = () => {
     setIsCardSelectionOpen(true);
   };
 
-  const handleSelectCard = (card: { bankName: string; cardNumber: string; balance: string }) => {
+  const handleSelectCard = (card: { bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number }) => {
     setSelectedCard(card);
     setIsCardSelectionOpen(false);
+  };
+  
+  const handleContinue = () => {
+    if (cardNumber.length === 19 && amount && parseFloat(amount) >= selectedCard.minAmount && parseFloat(amount) <= selectedCard.maxAmount) {
+      navigate('/transfer-confirmation', { 
+        state: { 
+          selectedCard, 
+          cardNumber, 
+          amount, 
+          fullName 
+        } 
+      });
+    }
   };
   
   return (
@@ -204,6 +223,17 @@ const BankCardTransfer = () => {
         </div>
       </div>
       
+      {/* Full Name Input (Hidden) */}
+      <div className="px-6 mb-4 hidden">
+        <input
+          type="text"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          className="w-full outline-none"
+          placeholder="Ad Soyad"
+        />
+      </div>
+      
       {/* Transfer Details */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Köçürmənin detalları</h2>
@@ -216,8 +246,8 @@ const BankCardTransfer = () => {
                 value={amount}
                 onChange={handleAmountChange}
                 className="w-full outline-none text-gray-700 text-lg font-medium"
-                min="0.01"
-                max="0.27"
+                min={selectedCard.minAmount}
+                max={selectedCard.maxAmount}
                 step="0.01"
                 placeholder="Məbləğ"
               />
@@ -233,7 +263,7 @@ const BankCardTransfer = () => {
         
         <div className="flex items-center mt-2 mb-4 text-gray-500 text-xs">
           <span className="mr-1">ⓘ</span>
-          <span>Min: 0.01AZN, Maks: 0.27AZN</span>
+          <span>Min: {selectedCard.minAmount}AZN, Maks: {selectedCard.maxAmount}AZN</span>
         </div>
         
         {/* Quick Amount Buttons */}
@@ -267,9 +297,10 @@ const BankCardTransfer = () => {
         {/* Bottom Button */}
         <div className="px-6 pb-6">
           <button 
+            onClick={handleContinue}
             className={`w-full py-4 rounded-2xl font-medium ${
-              cardNumber.length === 19 && (!amount || parseFloat(amount) >= 0.01) && parseFloat(amount || '0') <= 0.27
-                ? 'bg-red-300 text-white'
+              cardNumber.length === 19 && amount && parseFloat(amount) >= selectedCard.minAmount && parseFloat(amount) <= selectedCard.maxAmount
+                ? 'bg-red-500 text-white'
                 : 'bg-red-300 text-white opacity-75'
             }`}
           >
