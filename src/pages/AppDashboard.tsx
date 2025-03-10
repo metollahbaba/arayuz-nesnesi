@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, Wifi, Battery } from 'lucide-react';
@@ -226,7 +227,7 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">{masterCardBalance}₼</span>
+              <span className="font-bold">{masterCardBalance} ₼</span>
               <span className="text-gray-400 text-xs"></span>
             </div>
             <span className="text-gray-400 text-sm">Mastercard Salary</span>
@@ -255,7 +256,7 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">{visaCard1Balance}₼</span>
+              <span className="font-bold">{visaCard1Balance} ₼</span>
               <span className="text-gray-400 text-xs"></span>
             </div>
             <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
@@ -274,7 +275,7 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">{visaCard2Balance}₼</span>
+              <span className="font-bold">{visaCard2Balance} ₼</span>
               <span className="text-gray-400 text-xs"></span>
             </div>
             <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
