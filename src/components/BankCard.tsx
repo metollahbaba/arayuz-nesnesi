@@ -18,11 +18,13 @@ const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance, show
     <div className="bg-white rounded-2xl p-4 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <div className="w-14 h-10 bg-[#0e1a48] rounded-lg flex flex-col justify-between p-1 mr-3 relative overflow-hidden">
+          <div className="w-14 h-10 bg-gradient-to-br from-[#0e1a48] to-[#1e3a88] rounded-lg flex flex-col justify-between p-1 mr-3 relative overflow-hidden">
             <div className="flex justify-between items-center">
               <div className="text-white text-[8px] font-bold ml-1">VISA</div>
             </div>
             <div className="text-white text-[10px] font-medium self-center mb-0.5">•{cardNumber}</div>
+            {/* Add shine effect to the card */}
+            <div className="absolute top-0 left-0 w-full h-full bg-white opacity-10 transform -skew-x-45" />
           </div>
           <div>
             <div className="flex justify-between">

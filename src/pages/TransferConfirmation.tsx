@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, QrCode } from 'lucide-react';
@@ -71,7 +72,7 @@ const TransferConfirmation = () => {
     setIsCardSelectionOpen(true);
   };
 
-  const handleSelectCard = (card: { bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number }) => {
+  const handleSelectCard = (card: { bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number; hidden: boolean }) => {
     setSelectedCard(card);
     setIsCardSelectionOpen(false);
   };
