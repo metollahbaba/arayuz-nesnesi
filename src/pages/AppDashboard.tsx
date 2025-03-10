@@ -1,18 +1,19 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, Wifi, Battery } from 'lucide-react';
 import visaCardLogo from '../assets/card-visa.jpeg';
 import NewProductModal from '@/components/NewProductModal';
+import BankCard from '@/components/BankCard';
+import MobileStatusBar from '@/components/MobileStatusBar';
 
 const AppDashboard = () => {
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Generate random balance values
-  const masterCardBalance = 85;
-  const visaCard1Balance = 34.59;
-  const visaCard2Balance = 173;
+  // Define balance variables with currency symbol
+  const masterCardBalance = "85 ₼";
+  const visaCard1Balance = "34.59 ₼";
+  const visaCard2Balance = "173 ₼";
 
   const navigateToPayments = () => {
     navigate('/payments');
@@ -20,35 +21,8 @@ const AppDashboard = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col overflow-hidden">
-      {/* Mobile Status Bar with time 11:00 */}
-      <div className="bg-white text-black p-2 flex justify-between items-center text-xs">
-        <div className="flex items-center gap-1">
-          <span className="font-semibold">11:00</span>
-          <Clock size={14} className="text-black" />
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" y1="8" x2="12" y2="12" />
-            <line x1="12" y1="16" x2="12.01" y2="16" />
-          </svg>
-        </div>
-        <div className="flex items-center gap-1">
-          <span className="text-xs">4G</span>
-          <div className="flex h-3 space-x-0.5">
-            <div className="w-1 h-1 bg-black rounded-sm"></div>
-            <div className="w-1 h-2 bg-black rounded-sm"></div>
-            <div className="w-1 h-3 bg-black rounded-sm"></div>
-            <div className="w-1 h-full bg-black rounded-sm"></div>
-          </div>
-          <Wifi size={14} />
-          <div className="flex items-center border border-black rounded-sm px-1">
-            <div className="w-2 h-2 bg-yellow-500 rounded-sm mr-0.5"></div>
-            <span>31</span>
-          </div>
-        </div>
-      </div>
+      {/* Mobile Status Bar */}
+      <MobileStatusBar time="11:00" batteryLevel="31" />
       
       {/* Header with logo and search */}
       <div className="flex items-center justify-between px-4 py-2">
@@ -227,7 +201,7 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">{masterCardBalance} ₼</span>
+              <span className="font-bold">{masterCardBalance}</span>
               <span className="text-gray-400 text-xs"></span>
             </div>
             <span className="text-gray-400 text-sm">Mastercard Salary</span>
@@ -244,43 +218,17 @@ const AppDashboard = () => {
           </button>
         </div>
         
-        <div className="flex items-center mb-3">
-          <div className="w-20 h-12 bg-[#0e1a48] rounded-lg flex flex-col justify-between p-1 mr-3 relative overflow-hidden">
-            <div className="flex justify-between items-center">
-              <div className="text-white text-[9px] font-bold ml-1">VISA</div>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-              </svg>
-            </div>
-            <div className="text-white text-xs font-bold self-center mb-0.5">4444</div>
-          </div>
-          <div className="flex-1">
-            <div className="flex justify-between">
-              <span className="font-bold">{visaCard1Balance} ₼</span>
-              <span className="text-gray-400 text-xs"></span>
-            </div>
-            <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
-          </div>
-        </div>
+        <BankCard 
+          bankName="Kapital Bank ASC" 
+          cardNumber="4444" 
+          balance={visaCard1Balance} 
+        />
         
-        <div className="flex items-center mb-3">
-          <div className="w-20 h-12 bg-[#0e1a48] rounded-lg flex flex-col justify-between p-1 mr-3 relative overflow-hidden">
-            <div className="flex justify-between items-center">
-              <div className="text-white text-[9px] font-bold ml-1">VISA</div>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-              </svg>
-            </div>
-            <div className="text-white text-xs font-bold self-center mb-0.5">3303</div>
-          </div>
-          <div className="flex-1">
-            <div className="flex justify-between">
-              <span className="font-bold">{visaCard2Balance} ₼</span>
-              <span className="text-gray-400 text-xs"></span>
-            </div>
-            <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
-          </div>
-        </div>
+        <BankCard 
+          bankName="Kapital Bank ASC" 
+          cardNumber="3303" 
+          balance={visaCard2Balance} 
+        />
       </div>
       
       {/* Bank products */}

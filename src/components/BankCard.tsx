@@ -10,7 +10,7 @@ interface BankCardProps {
 
 const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance }) => {
   return (
-    <div className="bg-white rounded-2xl p-4 shadow-sm">
+    <div className="bg-white rounded-2xl p-4 shadow-sm mb-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className="w-14 h-10 bg-[#0e1a48] rounded-lg flex flex-col justify-between p-1 mr-3 relative overflow-hidden">
@@ -21,7 +21,7 @@ const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance }) =>
           </div>
           <div>
             <div className="flex justify-between">
-              <span className="text-gray-700">{balance}</span>
+              <span className="text-gray-700 font-bold">{balance}</span>
             </div>
             <span className="text-gray-400 text-sm">{bankName}</span>
           </div>
