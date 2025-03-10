@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Search, BellRing, Plus, ArrowDown, Home, Scan, QrCode, CreditCard, MoreHorizontal, Clock } from 'lucide-react';
 import MobileStatusBar from '../components/MobileStatusBar';
@@ -215,13 +216,14 @@ const AppDashboard = () => {
           </div>
         </div>
         
-        {/* Visa card - Fixed with inline SVG */}
+        {/* Visa card - Using the uploaded image */}
         <div className="flex items-center mb-3">
           <div className="w-14 h-12 bg-blue-400 rounded flex flex-col items-center justify-center mr-3">
-            <svg width="30" height="10" viewBox="0 0 1000 324" xmlns="http://www.w3.org/2000/svg" className="mb-1">
-              <path d="M651.3,0.2h-118c-19.9,0.2-36.6,6.1-45.9,22.6l-131,301.2h91.9c0,0,15.2-40.2,18.6-49h113.1c2.6,11.3,10.6,49,10.6,49h81.2L651.3,0.2z M487.7,204.3c7.3-18.7,35.2-90.7,35.2-90.7c-0.5,0.8,7.2-18.7,11.7-30.8l6,27.1c0,0,16.8,77.7,20.3,94.4H487.7z M323.8,217.6L323.8,217.6c0.4-16.5,32.5-80.8,32.5-80.8l-0.2-105h91l-0.2,323.8l-90.3-0.1l-0.1-131.1L295,323.6h-30.7L201.8,224l-0.2,99.6h-90.1L111.2,0.3h93.2c0,0,54.7,126,66.6,154.1h0.1C271.1,154.4,323.4,234.1,323.8,217.6z M943.1,323.6h-84.6L801.9,49.3l-59.9,274.2H668L595.7,0.4h92.9l43.8,214.9h1.3l57.3-214.9h77.3l55.6,215.5h1.6l47.3-215.5h86.7L943.1,323.6z" fill="white"/>
-            </svg>
-            <span className="text-white text-xs font-medium">3516</span>
+            <img 
+              src="public/lovable-uploads/e6bc68d6-d5d3-4d17-873d-5b38caa1f5e9.png" 
+              alt="VISA" 
+              className="w-12 h-8 object-contain" 
+            />
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
