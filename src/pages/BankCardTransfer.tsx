@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, Info, ChevronDown, Scan } from 'lucide-react';
+import { ChevronLeft, Info, ChevronDown, Scan, CreditCard } from 'lucide-react';
 
 const BankCardTransfer = () => {
   const navigate = useNavigate();
@@ -96,13 +96,14 @@ const BankCardTransfer = () => {
         <div className="border border-gray-200 rounded-xl p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <div className="bg-navy-blue w-12 h-8 rounded flex items-center justify-center mr-3">
-                <div className="text-white text-xs">VISA</div>
-                <div className="text-white text-[8px] ml-1">•3303</div>
+              <div className="bg-navy-blue w-12 h-8 rounded flex items-center justify-center mr-3 relative">
+                <CreditCard size={16} className="text-white absolute top-1 left-1" />
+                <div className="text-white text-xs ml-2">VISA</div>
               </div>
               <div>
                 <div className="text-gray-600">Kapital Bank ASC</div>
-                <div className="font-medium">0.27 AZN</div>
+                <div className="text-[10px] text-gray-500 mb-1">•••• 4444</div>
+                <div className="font-medium">0.27 ₼</div>
               </div>
             </div>
             <ChevronDown size={20} className="text-gray-400" />
