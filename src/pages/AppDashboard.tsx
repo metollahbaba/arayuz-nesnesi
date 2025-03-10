@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, Wifi, Battery } from 'lucide-react';
 
@@ -38,12 +37,10 @@ const AppDashboard = () => {
       {/* Header with logo and search */}
       <div className="flex items-center justify-between px-4 py-2">
         <div className="flex items-center space-x-4">
-          {/* Red logo */}
           <div className="w-8 h-8">
             <div className="bg-red-500 w-3 h-8"></div>
           </div>
           
-          {/* Eye icon */}
           <div className="w-8 h-8 flex items-center justify-center text-gray-600">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
@@ -81,8 +78,12 @@ const AppDashboard = () => {
           </div>
           
           <div className="flex flex-col items-center min-w-[70px]">
-            <div className="w-16 h-16 rounded-full bg-pink-100 border-2 border-pink-200 flex items-center justify-center">
-              <img src="public/lovable-uploads/de1cdfcc-6687-4842-a102-85c6fa294a4c.png" alt="Gift" className="w-10 h-10 object-cover" />
+            <div className="w-16 h-16 rounded-full bg-pink-100 border-2 border-pink-200 flex items-center justify-center overflow-hidden">
+              <img 
+                src="https://birbank.az/_next/image?url=https%3A%2F%2Fstrapi-aws-s3-images-bucket-kb.s3.eu-central-1.amazonaws.com%2FIMG_7725_c353e152f5.JPG&w=640&q=75" 
+                alt="Women's Day Special" 
+                className="w-full h-full object-cover" 
+              />
             </div>
             <span className="text-xs mt-1">Qadınlar</span>
             <span className="text-xs">gününə özəl</span>
@@ -189,7 +190,6 @@ const AppDashboard = () => {
           </button>
         </div>
         
-        {/* Mastercard */}
         <div className="flex items-center mb-3">
           <div className="w-16 h-12 bg-red-500 rounded flex items-center justify-center mr-3 relative pl-2">
             <div className="w-5 h-3">
@@ -219,7 +219,6 @@ const AppDashboard = () => {
           </button>
         </div>
         
-        {/* Visa card 4444 */}
         <div className="flex items-center mb-3">
           <div className="w-16 h-12 bg-blue-900 rounded flex flex-col items-center justify-between py-1 mr-3 relative">
             <div className="w-10 h-3 self-start ml-2">
@@ -240,7 +239,6 @@ const AppDashboard = () => {
           </div>
         </div>
         
-        {/* Visa card 3303 */}
         <div className="flex items-center mb-3">
           <div className="w-16 h-12 bg-blue-900 rounded flex flex-col items-center justify-between py-1 mr-3 relative">
             <div className="w-10 h-3 self-start ml-2">
@@ -266,7 +264,6 @@ const AppDashboard = () => {
       <div className="px-4 mt-8">
         <h2 className="text-lg font-medium mb-4">Bank məhsulları sifariş edin</h2>
         
-        {/* Tabs */}
         <div className="flex space-x-2 overflow-x-auto pb-2">
           <button className="px-4 py-2 bg-white rounded-full border border-gray-300 font-medium">Kartlar</button>
           <button className="px-4 py-2 bg-transparent rounded-full text-gray-400">Kreditlər</button>
@@ -275,7 +272,6 @@ const AppDashboard = () => {
           <button className="px-4 py-2 bg-transparent rounded-full text-gray-400">Mobil hesablar</button>
         </div>
         
-        {/* Add new card */}
         <div className="mt-4 bg-gray-100 rounded-xl p-4">
           <div className="flex justify-between">
             <div>
@@ -288,17 +284,14 @@ const AppDashboard = () => {
           </div>
         </div>
         
-        {/* Add new product button */}
         <button className="mt-6 w-full bg-red-500 text-white rounded-xl py-4 flex items-center justify-center">
           <Plus size={18} className="mr-2" />
           <span>Yeni məhsul əlavə et</span>
         </button>
       </div>
       
-      {/* Fixed height spacer to push navigation to bottom */}
       <div className="flex-grow"></div>
       
-      {/* Navigation */}
       <div className="flex justify-between items-center px-4 py-4 border-t">
         <div className="flex flex-col items-center">
           <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
@@ -339,7 +332,6 @@ const AppDashboard = () => {
         </div>
       </div>
       
-      {/* Bottom navigation bar (for Android) */}
       <div className="bg-black h-14 flex items-center justify-center space-x-16">
         <div className="w-5 h-5 bg-gray-400 rounded"></div>
         <div className="w-12 h-12 border-2 border-gray-400 rounded-full"></div>
