@@ -2,7 +2,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.83af6119414a4168b57ad4828e2fffc3',
+  appId: 'com.lovable.araynesnesi',
   appName: 'arayuz-nesnesi',
   webDir: 'dist',
   server: {
