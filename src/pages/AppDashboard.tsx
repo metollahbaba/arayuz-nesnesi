@@ -230,7 +230,7 @@ const AppDashboard = () => {
           <div className="w-16 h-12 bg-blue-900 rounded flex flex-col items-center justify-between py-1 mr-3 relative">
             <div className="w-10 h-3 self-start ml-2">
               <img 
-                src="public/lovable-uploads/e6bc68d6-d5d3-4d17-873d-5b38caa1f5e9.png" 
+                src="https://i.imgur.com/TaF1V5C.jpeg" 
                 alt="VISA" 
                 className="w-full h-full object-contain" 
               />
@@ -299,6 +299,7 @@ const AppDashboard = () => {
       
       <div className="flex-grow"></div>
       
+      {/* Bottom navigation and footer */}
       <div className="flex justify-between items-center px-4 py-4 border-t">
         <div className="flex flex-col items-center">
           <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
