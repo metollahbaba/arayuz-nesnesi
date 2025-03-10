@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChevronRight, X, CreditCard, Banknote, Smartphone, Shield, Plus, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -9,7 +10,14 @@ interface NewProductModalProps {
 }
 
 const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
+  
   if (!isOpen) return null;
+
+  const handleProductSelect = (productId: string) => {
+    navigate(`/product/${productId}`);
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center">
@@ -55,6 +63,7 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
                   <CreditCard size={28} className="text-red-500" />
                 </div>
               }
+              onClick={() => handleProductSelect('card-order')}
             />
             
             <CategoryItem 
@@ -72,6 +81,7 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
                   </div>
                 </div>
               }
+              onClick={() => handleProductSelect('card-activate')}
             />
             
             <CategoryItem 
@@ -89,6 +99,7 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
                   </div>
                 </div>
               }
+              onClick={() => handleProductSelect('card-add')}
             />
           </div>
           
@@ -104,6 +115,7 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
                   <Banknote size={28} className="text-red-500" />
                 </div>
               }
+              onClick={() => handleProductSelect('credit')}
             />
           </div>
           
@@ -119,6 +131,7 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
                   <Smartphone size={28} className="text-red-500" />
                 </div>
               }
+              onClick={() => handleProductSelect('mobile')}
             />
           </div>
           
@@ -134,6 +147,7 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
                   <Shield size={28} className="text-red-500" />
                 </div>
               }
+              onClick={() => handleProductSelect('insurance')}
             />
             
             <CategoryItem 
@@ -148,6 +162,7 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
                   </svg>
                 </div>
               }
+              onClick={() => handleProductSelect('travel-insurance')}
             />
             
             <CategoryItem 
@@ -163,6 +178,7 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
                   </svg>
                 </div>
               }
+              onClick={() => handleProductSelect('car-insurance')}
             />
           </div>
         </div>
@@ -176,11 +192,15 @@ interface CategoryItemProps {
   title: string;
   description: string;
   icon: React.ReactNode;
+  onClick?: () => void;
 }
 
-const CategoryItem: React.FC<CategoryItemProps> = ({ title, description, icon }) => {
+const CategoryItem: React.FC<CategoryItemProps> = ({ title, description, icon, onClick }) => {
   return (
-    <div className="flex items-center space-x-4 p-4 bg-gray-100 rounded-xl">
+    <div 
+      className="flex items-center space-x-4 p-4 bg-gray-100 rounded-xl cursor-pointer hover:bg-gray-200 transition-colors"
+      onClick={onClick}
+    >
       <div className="flex-shrink-0">
         {icon}
       </div>
