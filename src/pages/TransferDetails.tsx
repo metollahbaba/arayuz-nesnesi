@@ -117,14 +117,12 @@ const TransferDetails = () => {
         </div>
       </div>
       
-      <div className="flex flex-col items-end mb-8 px-6">
-        <div className="h-20 self-end animate-fade-in">
-          <img 
-            src="/src/assets/Screenshot_2025-03-10-14-16-56-967_az.kapitalbank.mbanking-removebg-preview.png" 
-            alt="Kapital Bank" 
-            className="h-full object-contain"
-          />
-        </div>
+      <div className="flex justify-center mb-8 px-6">
+        <img 
+          src="/src/assets/Screenshot_2025-03-10-14-16-56-967_az.kapitalbank.mbanking-removebg-preview.png" 
+          alt="Kapital Bank" 
+          className="h-20 object-contain animate-fade-in"
+        />
       </div>
       
       <div className="px-6 mt-auto mb-4 animate-fade-in">
