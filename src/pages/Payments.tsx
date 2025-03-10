@@ -151,7 +151,7 @@ const Payments = () => {
           />
           
           <PaymentCategory 
-            icon={<img src="/lovable-uploads/b818c04f-6542-4d01-98b2-895f008b9704.png" alt="BakıKart" className="w-6 h-6" />} 
+            icon={<img src="https://qebulol.az/wp-content/uploads/2023/12/bk.jpg" alt="BakıKart" className="w-6 h-6" />} 
             title="BakıKart" 
           />
           
