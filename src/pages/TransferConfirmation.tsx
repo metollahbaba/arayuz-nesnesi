@@ -81,8 +81,12 @@ const TransferConfirmation = () => {
     setIsCardSelectionOpen(false);
   };
   
-  // Quick add amount buttons
-  const quickAddAmounts = [10, 20, 50];
+  // Quick add amount buttons - adjust based on card balance
+  const quickAddAmounts = [
+    Math.min(10, selectedCard.maxAmount),
+    Math.min(20, selectedCard.maxAmount),
+    Math.min(50, selectedCard.maxAmount)
+  ].filter(amount => amount > 0);
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
@@ -146,7 +150,9 @@ const TransferConfirmation = () => {
         <div className="flex gap-3 mb-3">
           <div className="bg-white rounded-xl border border-gray-200 p-4 flex-grow">
             <div className="text-xs text-gray-400 mb-1">Məbləğ</div>
-            <div className="text-gray-700 text-lg font-medium">{amount || '0.01'}</div>
+            <div className="text-gray-700 text-lg font-medium">
+              {amount && parseFloat(amount) <= selectedCard.maxAmount ? amount : selectedCard.minAmount.toFixed(2)}
+            </div>
           </div>
           <div className="bg-white rounded-xl border border-gray-200 p-4 w-1/3">
             <div className="text-xs text-gray-400 mb-1">Valyuta</div>
@@ -164,21 +170,23 @@ const TransferConfirmation = () => {
             <path d="M12 16v-4" />
             <path d="M12 8h.01" />
           </svg>
-          <span>Min: {selectedCard.minAmount}AZN, Maks: {selectedCard.maxAmount}AZN</span>
+          <span>Min: {selectedCard.minAmount.toFixed(2)}AZN, Maks: {selectedCard.maxAmount.toFixed(2)}AZN</span>
         </div>
         
-        {/* Quick Amount Buttons */}
-        <div className="flex gap-3 mb-6">
-          {quickAddAmounts.map(value => (
-            <button 
-              key={value} 
-              className="flex-1 p-3 bg-white rounded-xl border border-gray-200 flex items-center justify-center"
-            >
-              <span className="text-gray-400 mr-1">+</span>
-              <span>{value}</span>
-            </button>
-          ))}
-        </div>
+        {/* Quick Amount Buttons - Only show buttons that are less than or equal to max amount */}
+        {quickAddAmounts.length > 0 && (
+          <div className="flex gap-3 mb-6">
+            {quickAddAmounts.map(value => (
+              <button 
+                key={value} 
+                className="flex-1 p-3 bg-white rounded-xl border border-gray-200 flex items-center justify-center"
+              >
+                <span className="text-gray-400 mr-1">+</span>
+                <span>{value}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       
       {/* Name Section - Now shown as text with a bottom border */}
@@ -207,7 +215,9 @@ const TransferConfirmation = () => {
       {/* Amount Display */}
       <div className="px-6 mb-2">
         <h2 className="text-gray-500 text-base mb-2">Məbləğ</h2>
-        <div className="text-xl font-semibold text-gray-900">{amount || '0,01'} AZN</div>
+        <div className="text-xl font-semibold text-gray-900">
+          {amount && parseFloat(amount) <= selectedCard.maxAmount ? amount : selectedCard.minAmount.toFixed(2)} AZN
+        </div>
       </div>
       
       {/* Commission Section */}

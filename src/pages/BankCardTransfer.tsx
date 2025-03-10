@@ -15,7 +15,7 @@ const BankCardTransfer = () => {
   const [isCardSelectionOpen, setIsCardSelectionOpen] = useState(false);
   const [fullName, setFullName] = useState('');
   
-  // Updated card data to match AppDashboard cards - all from Kapital Bank
+  // Updated card data with proper min/max amounts
   const cards = [
     {
       bankName: 'Kapital Bank ASC',
@@ -41,7 +41,7 @@ const BankCardTransfer = () => {
   ];
   
   // Set the default selected card to the one with 173 ₼
-  const [selectedCard, setSelectedCard] = useState(cards.find(card => card.balance.includes('173')) || cards[0]);
+  const [selectedCard, setSelectedCard] = useState(cards.find(card => card.cardNumber === '3303') || cards[0]);
   
   const inputRef = useRef<HTMLInputElement>(null);
   
@@ -95,7 +95,8 @@ const BankCardTransfer = () => {
   
   const handlePresetAmount = (value: string) => {
     // Ensure preset amount doesn't exceed max value
-    if (parseFloat(value) <= selectedCard.maxAmount) {
+    const numValue = parseFloat(value);
+    if (numValue <= selectedCard.maxAmount) {
       setAmount(value);
     }
   };
@@ -107,6 +108,11 @@ const BankCardTransfer = () => {
   const handleSelectCard = (card: { bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number }) => {
     setSelectedCard(card);
     setIsCardSelectionOpen(false);
+    
+    // If current amount exceeds new card's max, adjust it
+    if (amount && parseFloat(amount) > card.maxAmount) {
+      setAmount(card.maxAmount.toString());
+    }
   };
   
   const handleContinue = () => {
@@ -121,6 +127,13 @@ const BankCardTransfer = () => {
       });
     }
   };
+  
+  // Calculate quick add amounts based on card balance
+  const quickAddAmounts = [
+    Math.min(10, selectedCard.maxAmount),
+    Math.min(20, selectedCard.maxAmount),
+    Math.min(50, selectedCard.maxAmount)
+  ].filter(amount => amount > 0);
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
@@ -263,33 +276,24 @@ const BankCardTransfer = () => {
         
         <div className="flex items-center mt-2 mb-4 text-gray-500 text-xs">
           <span className="mr-1">ⓘ</span>
-          <span>Min: {selectedCard.minAmount}AZN, Maks: {selectedCard.maxAmount}AZN</span>
+          <span>Min: {selectedCard.minAmount.toFixed(2)}AZN, Maks: {selectedCard.maxAmount.toFixed(2)}AZN</span>
         </div>
         
-        {/* Quick Amount Buttons */}
-        <div className="grid grid-cols-3 gap-4">
-          <button 
-            onClick={() => handlePresetAmount('10')}
-            className="bg-white rounded-2xl py-3 flex items-center justify-center shadow-sm"
-          >
-            <span className="text-gray-500 mr-1">+</span>
-            <span className="text-gray-700 font-medium">10</span>
-          </button>
-          <button 
-            onClick={() => handlePresetAmount('20')}
-            className="bg-white rounded-2xl py-3 flex items-center justify-center shadow-sm"
-          >
-            <span className="text-gray-500 mr-1">+</span>
-            <span className="text-gray-700 font-medium">20</span>
-          </button>
-          <button 
-            onClick={() => handlePresetAmount('50')}
-            className="bg-white rounded-2xl py-3 flex items-center justify-center shadow-sm"
-          >
-            <span className="text-gray-500 mr-1">+</span>
-            <span className="text-gray-700 font-medium">50</span>
-          </button>
-        </div>
+        {/* Quick Amount Buttons - Only show amounts that are possible with current card */}
+        {quickAddAmounts.length > 0 && (
+          <div className="grid grid-cols-3 gap-4">
+            {quickAddAmounts.map(value => (
+              <button 
+                key={value}
+                onClick={() => handlePresetAmount(value.toString())}
+                className="bg-white rounded-2xl py-3 flex items-center justify-center shadow-sm"
+              >
+                <span className="text-gray-500 mr-1">+</span>
+                <span className="text-gray-700 font-medium">{value}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       
       {/* Bottom Button - Move to bottom of screen */}
