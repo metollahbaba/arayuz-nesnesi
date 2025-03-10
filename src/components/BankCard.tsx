@@ -1,7 +1,6 @@
 
 import React from 'react';
-import { ChevronDown } from 'lucide-react';
-import visaCardImage from '../assets/card-visa.jpeg';
+import { ChevronDown, CreditCard } from 'lucide-react';
 
 interface BankCardProps {
   bankName: string;
@@ -14,12 +13,9 @@ const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance }) =>
     <div className="border border-gray-200 rounded-xl p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <div className="w-12 h-8 rounded overflow-hidden mr-3">
-            <img 
-              src={visaCardImage} 
-              alt="VISA Card" 
-              className="w-full h-full object-cover"
-            />
+          <div className="bg-blue-900 w-12 h-8 rounded flex items-center justify-center mr-3 relative overflow-hidden">
+            <CreditCard size={16} className="text-white absolute top-1 left-1" />
+            <div className="text-white text-xs font-bold">VISA</div>
           </div>
           <div>
             <div className="text-gray-600">{bankName}</div>
