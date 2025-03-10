@@ -92,7 +92,7 @@ const BankCardTransfer = () => {
     }
   };
   
-  const handleContinue = () => {
+  const handleConfirm = () => {
     if (cardNumber.length === 19 && amount && parseFloat(amount) >= selectedCard.minAmount && parseFloat(amount) <= selectedCard.maxAmount) {
       navigate('/transfer-confirmation', { 
         state: { 
@@ -113,44 +113,7 @@ const BankCardTransfer = () => {
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
-      <div className="bg-gray-50 text-black p-2 flex justify-between items-center text-xs">
-        <div className="flex items-center gap-1">
-          <span className="font-semibold">12:05</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 6v6l4 2" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 2l.001 20" />
-            <path d="M18 6v.002" />
-            <path d="M18 13v.002" />
-            <path d="M18 20v.002" />
-            <path d="M12 20v.002" />
-            <path d="M12 13v.002" />
-            <path d="M12 6v.002" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M8 2v4" />
-            <path d="M16 2v4" />
-            <rect width="18" height="18" x="3" y="4" rx="2" />
-            <path d="M3 10h18" />
-          </svg>
-        </div>
-        <div className="flex items-center gap-1">
-          <span className="text-xs">4G</span>
-          <div className="flex h-3 space-x-0.5">
-            <div className="w-1 h-1 bg-black rounded-sm"></div>
-            <div className="w-1 h-2 bg-black rounded-sm"></div>
-            <div className="w-1 h-3 bg-black rounded-sm"></div>
-            <div className="w-1 h-full bg-black rounded-sm"></div>
-          </div>
-          <div className="flex items-center border border-black rounded-sm px-1 bg-amber-400">
-            <span className="text-[10px]">92</span>
-          </div>
-        </div>
-      </div>
-      
-      <div className={`flex justify-between items-center px-6 py-4 ${isKeyboardOpen ? 'mb-0' : ''}`}>
+      <div className="flex justify-between items-center px-6 py-4">
         <button onClick={goBack} className="text-black">
           <ChevronLeft size={24} />
         </button>
@@ -159,10 +122,12 @@ const BankCardTransfer = () => {
         </button>
       </div>
       
-      <div className={`px-6 mb-6 ${isKeyboardOpen ? 'hidden' : ''}`}>
+      {/* Page Title */}
+      <div className="px-6 mb-8">
         <h1 className="text-3xl font-semibold text-gray-900">İstənilən bank kartına</h1>
       </div>
       
+      {/* From Card - Now clickable to open card selection */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Ödəmək</h2>
         <div className="bg-white rounded-2xl p-4 shadow-sm" onClick={openCardSelection}>
@@ -186,6 +151,7 @@ const BankCardTransfer = () => {
         </div>
       </div>
       
+      {/* To Card */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Mədaxil etmək</h2>
         <div className="bg-white rounded-2xl p-4 flex items-center shadow-sm">
@@ -207,16 +173,7 @@ const BankCardTransfer = () => {
         </div>
       </div>
       
-      <div className="px-6 mb-4 hidden">
-        <input
-          type="text"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-          className="w-full outline-none"
-          placeholder="Ad Soyad"
-        />
-      </div>
-      
+      {/* Transfer Details */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Köçürmənin detalları</h2>
         <div className="grid grid-cols-3 gap-4">
@@ -264,25 +221,21 @@ const BankCardTransfer = () => {
         )}
       </div>
       
-      <div className="mt-auto">
-        <div className="px-6 pb-6">
-          <button 
-            onClick={handleContinue}
-            className={`w-full py-4 rounded-2xl font-medium ${
-              cardNumber.length === 19 && amount && parseFloat(amount) >= selectedCard.minAmount && parseFloat(amount) <= selectedCard.maxAmount
-                ? 'bg-red-500 text-white'
-                : 'bg-red-300 text-white opacity-75'
-            }`}
-          >
-            Davam etmək
-          </button>
-        </div>
+      {/* Bottom Button */}
+      <div className="mt-auto px-6 pb-6">
+        <button 
+          onClick={handleConfirm}
+          className={`w-full py-4 rounded-2xl font-medium ${
+            cardNumber.length === 19 && amount && parseFloat(amount) >= selectedCard.minAmount && parseFloat(amount) <= selectedCard.maxAmount
+              ? 'bg-red-500 text-white'
+              : 'bg-red-300 text-white opacity-75'
+          }`}
+        >
+          Davam etmək
+        </button>
       </div>
       
-      <div className="bg-black h-10 flex items-center justify-center">
-        <div className="w-1/3 h-1 bg-gray-500 rounded-full"></div>
-      </div>
-
+      {/* Card Selection Modal */}
       <CardSelectionModal 
         isOpen={isCardSelectionOpen}
         onClose={() => setIsCardSelectionOpen(false)}
