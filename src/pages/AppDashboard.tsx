@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, RefreshCw, Eye, EyeOff } from 'lucide-react';
@@ -150,14 +149,14 @@ const AppDashboard = () => {
       
       <div className="flex px-4 space-x-3 mt-2">
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
-          <span className="text-sm font-medium">ƏDV geri al</span>
-          <div className="w-5 h-5 flex items-center justify-center ml-1">
+          <div className="w-5 h-5 flex items-center justify-center mr-1">
             <img 
-              src="https://i.ibb.co/BV6rt3VK/indir-1-1.png" 
+              src="https://i.ibb.co/zWRBRQJS/indir-1-1-removebg-preview.png" 
               alt="EDV Gerial" 
               className="w-full h-full object-contain"
             />
           </div>
+          <span className="text-sm font-medium">ƏDV geri al</span>
         </div>
         
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center relative">
