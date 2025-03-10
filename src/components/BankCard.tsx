@@ -8,7 +8,7 @@ interface BankCardProps {
   balance: string;
 }
 
-const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance }) => {
+const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance = "173 ₼" }) => {
   return (
     <div className="border border-gray-200 rounded-xl p-4">
       <div className="flex items-center justify-between">
@@ -24,7 +24,7 @@ const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance }) =>
           </div>
           <div>
             <div className="flex justify-between">
-              <span className="font-bold">{balance}</span>
+              <span className="font-bold">173 ₼</span>
             </div>
             <span className="text-gray-400 text-sm">{bankName}</span>
           </div>
