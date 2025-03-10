@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, RefreshCw, Eye, EyeOff } from 'lucide-react';
@@ -166,7 +165,10 @@ const AppDashboard = () => {
           <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
         </div>
         
-        <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
+        <div 
+          className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center cursor-pointer"
+          onClick={() => navigate('/umico')}
+        >
           <div className="w-5 h-5 flex items-center justify-center mr-1">
             <img 
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnqJyzRb0sJsYxzBgDbAP6IlO5Yn7olNQGeg&s" 

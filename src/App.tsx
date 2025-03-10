@@ -16,6 +16,7 @@ import BankCardTransfer from './pages/BankCardTransfer';
 import TransferConfirmation from './pages/TransferConfirmation';
 import TransferSuccess from './pages/TransferSuccess';
 import TransferDetails from './pages/TransferDetails';
+import UmicoPage from './pages/UmicoPage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/transfer-confirmation" element={<TransferConfirmation />} />
         <Route path="/transfer-success" element={<TransferSuccess />} />
         <Route path="/transfer-details" element={<TransferDetails />} />
+        <Route path="/umico" element={<UmicoPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
