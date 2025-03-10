@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Fingerprint, X, Loader2 } from 'lucide-react';
@@ -41,7 +40,7 @@ const PinEntry = () => {
           setLoading(true);
           setTimeout(() => {
             navigate('/app');
-          }, 1500); // Navigate after 1.5 second loading animation
+          }, 1000); // Navigate after 1 second loading animation
         } else {
           // Wrong PIN - show error animation
           setErrorAnimation(true);
@@ -105,11 +104,8 @@ const PinEntry = () => {
     if (!loading) return null;
     
     return (
-      <div className="absolute inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-10">
-        <div className="relative">
-          <Loader2 size={50} className="text-red-500 animate-spin" />
-        </div>
-        <p className="mt-4 text-gray-700 font-medium">Yükleniyor...</p>
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <Loader2 size={50} className="text-red-500 animate-spin" />
       </div>
     );
   };
