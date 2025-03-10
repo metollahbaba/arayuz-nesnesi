@@ -1,43 +1,35 @@
 
 import React from 'react';
-import { Search, BellRing, Plus, ArrowDown, Home, Scan, QrCode, CreditCard, MoreHorizontal, Clock } from 'lucide-react';
-import MobileStatusBar from '../components/MobileStatusBar';
+import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, Wifi, Battery } from 'lucide-react';
 
 const AppDashboard = () => {
   return (
-    <div className="max-w-md mx-auto bg-white h-screen flex flex-col overflow-hidden">
-      {/* Mobile Status Bar with time 3:10 */}
+    <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col overflow-hidden">
+      {/* Mobile Status Bar with time 11:00 */}
       <div className="bg-white text-black p-2 flex justify-between items-center text-xs">
-        <div className="flex items-center gap-2">
-          <span>3:10</span>
+        <div className="flex items-center gap-1">
+          <span className="font-semibold">11:00</span>
           <Clock size={14} className="text-black" />
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
           </svg>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M7 10v4h3v-4h4v4h3v-4" />
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
           </svg>
         </div>
         <div className="flex items-center gap-1">
-          <div className="flex h-3">
+          <span className="text-xs">4G</span>
+          <div className="flex h-3 space-x-0.5">
+            <div className="w-1 h-1 bg-black rounded-sm"></div>
+            <div className="w-1 h-2 bg-black rounded-sm"></div>
+            <div className="w-1 h-3 bg-black rounded-sm"></div>
             <div className="w-1 h-full bg-black rounded-sm"></div>
-            <div className="w-1 h-full bg-black rounded-sm ml-0.5"></div>
-            <div className="w-1 h-full bg-black rounded-sm ml-0.5"></div>
-            <div className="w-1 h-full bg-black rounded-sm ml-0.5"></div>
           </div>
-          <div className="flex h-3 ml-1">
-            <div className="w-1 h-full bg-black rounded-sm"></div>
-            <div className="w-1 h-full bg-black rounded-sm ml-0.5"></div>
-            <div className="w-1 h-full bg-black rounded-sm ml-0.5"></div>
-            <div className="w-1 h-full bg-black rounded-sm ml-0.5"></div>
-          </div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6.81 10.13a4 4 0 0 0 0 5.74" />
-            <path d="M3.52 7.52a8 8 0 0 0 0 10.96" />
-            <path d="M10.09 5.23a11.92 11.92 0 0 1 0 15.54" />
-            <path d="M13.38 2.52c4.42 4.42 4.42 11.54 0 15.96" />
-          </svg>
-          <div className="ml-1 flex items-center justify-center rounded-sm px-1 border border-black">
+          <Wifi size={14} />
+          <div className="flex items-center border border-black rounded-sm px-1">
+            <div className="w-2 h-2 bg-yellow-500 rounded-sm mr-0.5"></div>
             <span>31</span>
           </div>
         </div>
@@ -45,20 +37,17 @@ const AppDashboard = () => {
       
       {/* Header with logo and search */}
       <div className="flex items-center justify-between px-4 py-2">
-        <div className="flex items-center">
-          <div className="w-8 h-8 mr-2">
-            <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
-              <rect width="6" height="16" x="4" y="4" fill="#FF3869" />
-            </svg>
+        <div className="flex items-center space-x-4">
+          {/* Red logo */}
+          <div className="w-8 h-8">
+            <div className="bg-red-500 w-3 h-8"></div>
           </div>
+          
+          {/* Eye icon */}
           <div className="w-8 h-8 flex items-center justify-center text-gray-600">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <circle cx="12" cy="12" r="4" />
-              <line x1="12" y1="2" x2="12" y2="4" />
-              <line x1="12" y1="20" x2="12" y2="22" />
-              <line x1="4" y1="12" x2="2" y2="12" />
-              <line x1="22" y1="12" x2="20" y2="12" />
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+              <circle cx="12" cy="12" r="3" />
             </svg>
           </div>
         </div>
@@ -71,10 +60,10 @@ const AppDashboard = () => {
         </div>
         
         <div className="relative">
-          <div className="bg-red-500 text-white w-6 h-6 rounded-md flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
+          <div className="bg-red-500 text-white w-8 h-8 rounded-md flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 8a8.55 8.55 0 0 1-1.67 5.23c-2.6 3.56-6.33 5.77-10.33 5.77-4 0-7.73-2.21-10.33-5.77A8.55 8.55 0 0 1 2 8c0-4.42 3.58-8 8-8h4c4.42 0 8 3.58 8 8Z" />
+              <circle cx="12" cy="8" r="5" />
             </svg>
           </div>
         </div>
@@ -112,54 +101,56 @@ const AppDashboard = () => {
           </div>
           
           <div className="flex flex-col items-center min-w-[70px]">
+            <div className="w-16 h-16 rounded-full bg-gray-100 border-2 border-gray-200 flex items-center justify-center">
+              <img src="public/lovable-uploads/81e0fbca-3bc9-49f3-a751-56991cdde231.png" alt="Insurance" className="w-12 h-12 object-contain" />
+            </div>
+            <span className="text-xs mt-1">İcbari sığorta</span>
+          </div>
+          
+          <div className="flex flex-col items-center min-w-[70px]">
             <div className="w-16 h-16 rounded-full bg-green-100 border-2 border-green-200 flex items-center justify-center">
               <div className="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center">
-                <div className="w-6 h-6 bg-white rounded-full"></div>
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                  <div className="w-6 h-6 bg-green-400 rounded-full"></div>
+                </div>
               </div>
             </div>
             <span className="text-xs mt-1">Səyahət</span>
             <span className="text-xs">sığortası</span>
           </div>
-          
-          <div className="flex flex-col items-center min-w-[70px]">
-            <div className="w-16 h-16 rounded-full bg-pink-100 border-2 border-pink-200 flex items-center justify-center">
-              <div className="w-12 h-12 bg-gray-200 rounded-md flex items-center justify-center relative">
-                <span className="text-gray-500 font-bold text-xl">6</span>
-              </div>
-            </div>
-            <span className="text-xs mt-1">Trendyol-da 6</span>
-            <span className="text-xs">taksit imkanı</span>
-          </div>
         </div>
       </div>
       
-      {/* Currency rates */}
+      {/* Quick services buttons */}
       <div className="flex px-4 space-x-3 mt-2">
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
-          <span className="text-blue-500 font-bold mr-1">₼</span>
-          <span className="text-sm font-medium">0,03</span>
+          <div className="text-blue-500 font-bold mr-1">
+            <ArrowUpRight size={16} className="rotate-180" />
+          </div>
+          <span className="text-sm font-medium">ƏDV geri al</span>
+        </div>
+        
+        <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center relative">
+          <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center mr-1">
+            <span className="text-white text-xs">i</span>
+          </div>
+          <span className="text-sm font-medium">0</span>
+          <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
         </div>
         
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
-          <div className="w-4 h-4 bg-black rounded-full flex items-center justify-center mr-1">
-            <span className="text-white text-xs">!</span>
+          <div className="w-5 h-5 bg-pink-500 rounded-sm flex items-center justify-center mr-1">
+            <span className="text-white text-xs">U</span>
           </div>
-          <span className="text-sm font-medium">0,09</span>
-        </div>
-        
-        <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
-          <div className="w-4 h-4 bg-red-500 rounded-sm flex items-center justify-center mr-1">
-            <span className="text-white text-xs">≡</span>
-          </div>
-          <span className="text-sm font-medium">0,19</span>
+          <span className="text-sm font-medium">Umico</span>
         </div>
       </div>
       
       {/* Quick actions */}
       <div className="grid grid-cols-3 gap-3 px-4 mt-4">
-        <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center">
-          <div className="w-8 h-8 flex items-center justify-center mb-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF3869" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center shadow-sm">
+          <div className="w-8 h-8 flex items-center justify-center mb-2 text-red-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="6" width="20" height="12" rx="2" />
               <circle cx="12" cy="12" r="2" />
               <path d="M6 12h.01M18 12h.01" />
@@ -168,9 +159,9 @@ const AppDashboard = () => {
           <span className="text-sm">Köçürmələr</span>
         </div>
         
-        <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center">
-          <div className="w-8 h-8 flex items-center justify-center mb-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF3869" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center shadow-sm">
+          <div className="w-8 h-8 flex items-center justify-center mb-2 text-red-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="5" width="20" height="14" rx="2" />
               <line x1="2" y1="10" x2="22" y2="10" />
             </svg>
@@ -178,12 +169,11 @@ const AppDashboard = () => {
           <span className="text-sm">Ödənişlər</span>
         </div>
         
-        <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center">
-          <div className="w-8 h-8 flex items-center justify-center mb-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF3869" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="1 4 1 10 7 10" />
-              <polyline points="23 20 23 14 17 14" />
-              <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" />
+        <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center shadow-sm">
+          <div className="w-8 h-8 flex items-center justify-center mb-2 text-red-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
             </svg>
           </div>
           <span className="text-sm">Tarixçə</span>
@@ -199,132 +189,75 @@ const AppDashboard = () => {
           </button>
         </div>
         
-        {/* Card entry */}
+        {/* Mastercard */}
         <div className="flex items-center mb-3">
-          <div className="w-14 h-12 bg-gray-100 rounded flex items-center justify-center mr-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF3869" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
+          <div className="w-16 h-12 bg-red-500 rounded flex items-center justify-center mr-3 relative pl-2">
+            <div className="w-5 h-3">
+              <div className="flex">
+                <div className="w-2.5 h-2.5 bg-white rounded-full opacity-80"></div>
+                <div className="w-2.5 h-2.5 bg-white rounded-full opacity-80 -ml-1"></div>
+              </div>
+            </div>
+            <div className="absolute bottom-1 left-2 text-white text-xs">5113</div>
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
               <span className="font-bold">0</span>
               <span className="text-gray-400 text-xs">₼</span>
             </div>
-            <span className="text-gray-400 text-sm">Cari hesab</span>
+            <span className="text-gray-400 text-sm">Mastercard Salary</span>
           </div>
         </div>
+      </div>
+      
+      {/* Added cards section */}
+      <div className="px-4 mt-4">
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="text-gray-500 font-medium">Əlavə edilmiş kartlar</h2>
+          <button className="text-red-500">
+            <Plus size={20} />
+          </button>
+        </div>
         
-        {/* Visa card - Using the uploaded image */}
+        {/* Visa card 4444 */}
         <div className="flex items-center mb-3">
-          <div className="w-14 h-12 bg-blue-400 rounded flex flex-col items-center justify-center mr-3">
-            <img 
-              src="public/lovable-uploads/e6bc68d6-d5d3-4d17-873d-5b38caa1f5e9.png" 
-              alt="VISA" 
-              className="w-12 h-8 object-contain" 
-            />
+          <div className="w-16 h-12 bg-blue-900 rounded flex flex-col items-center justify-between py-1 mr-3 relative">
+            <div className="w-10 h-3 self-start ml-2">
+              <img 
+                src="public/lovable-uploads/e6bc68d6-d5d3-4d17-873d-5b38caa1f5e9.png" 
+                alt="VISA" 
+                className="w-full h-full object-contain" 
+              />
+            </div>
+            <div className="text-white text-xs self-start ml-2">4444</div>
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
               <span className="font-bold">0</span>
               <span className="text-gray-400 text-xs">₼</span>
             </div>
-            <span className="text-gray-400 text-sm">Visa Electron Salary</span>
+            <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
           </div>
         </div>
         
-        {/* Card account */}
-        <div className="flex items-center mb-1">
-          <div className="w-14 h-12 bg-gray-100 rounded flex items-center justify-center mr-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF3869" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-          </div>
-          <div className="flex-1">
-            <div className="flex justify-between">
-              <span className="font-bold text-red-500">-441,09</span>
-              <span className="text-gray-400 text-xs">₼</span>
-            </div>
-            <span className="text-gray-400 text-sm">Kart hesabı</span>
-          </div>
-        </div>
-        
-        {/* Show more button */}
-        <button className="flex items-center justify-center w-full mt-2 text-gray-500 text-sm">
-          <ArrowDown size={16} className="mr-1" />
-          <span>Daha çox göstər</span>
-        </button>
-      </div>
-      
-      {/* Credits section */}
-      <div className="px-4 mt-4">
-        <div className="flex justify-between items-center mb-2">
-          <h2 className="text-gray-500 font-medium">Kreditlər və kredit xəttləri</h2>
-          <button className="text-red-500">
-            <Plus size={20} />
-          </button>
-        </div>
-        
-        {/* Credit card */}
+        {/* Visa card 3303 */}
         <div className="flex items-center mb-3">
-          <div className="w-14 h-12 bg-gray-100 rounded flex items-center justify-center mr-3">
-            <div className="w-6 h-4 border border-red-500 rounded-sm"></div>
+          <div className="w-16 h-12 bg-blue-900 rounded flex flex-col items-center justify-between py-1 mr-3 relative">
+            <div className="w-10 h-3 self-start ml-2">
+              <img 
+                src="public/lovable-uploads/e6bc68d6-d5d3-4d17-873d-5b38caa1f5e9.png" 
+                alt="VISA" 
+                className="w-full h-full object-contain" 
+              />
+            </div>
+            <div className="text-white text-xs self-start ml-2">3303</div>
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">452,80</span>
+              <span className="font-bold">0,27</span>
               <span className="text-gray-400 text-xs">₼</span>
             </div>
-            <div className="flex items-center">
-              <span className="text-gray-400 text-sm">BirKart Taksit</span>
-              <span className="text-gray-400 mx-1">•</span>
-              <span className="text-gray-400 text-sm">0</span>
-              <span className="text-gray-400 text-xs ml-1">₼</span>
-            </div>
-          </div>
-        </div>
-        
-        {/* Daily credit */}
-        <div className="flex items-center">
-          <div className="w-14 h-12 bg-gray-100 rounded flex items-center justify-center mr-3">
-            <div className="text-red-500 text-lg font-bold">%</div>
-          </div>
-          <div className="flex-1">
-            <div className="flex justify-between">
-              <span className="font-bold">229,52</span>
-              <span className="text-gray-400 text-xs">₼</span>
-            </div>
-            <div className="flex items-center">
-              <span className="text-gray-400 text-sm">Gündəlik tələbat krediti</span>
-              <span className="text-gray-400 mx-1">•</span>
-              <span className="text-gray-400 text-sm">2 060</span>
-              <span className="text-gray-400 text-xs ml-1">₼</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Mobile numbers */}
-      <div className="px-4 mt-4">
-        <div className="flex justify-between items-center mb-2">
-          <h2 className="text-gray-500 font-medium">Mobil nömrələr</h2>
-          <button className="text-red-500">
-            <Plus size={20} />
-          </button>
-        </div>
-        
-        {/* Nar number */}
-        <div className="flex items-center">
-          <div className="w-14 h-12 bg-gray-100 rounded flex items-center justify-center mr-3">
-            <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-xs font-bold">nar</span>
-            </div>
-          </div>
-          <div className="flex-1">
-            <span className="font-medium">Nar</span>
-            <span className="block text-gray-400 text-sm">+994 77 314 81 51</span>
+            <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
           </div>
         </div>
       </div>
@@ -376,7 +309,10 @@ const AppDashboard = () => {
         
         <div className="flex flex-col items-center">
           <div className="w-8 h-8 flex items-center justify-center">
-            <Scan size={20} className="text-gray-400" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
+              <path d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7z" />
+              <path d="M15 5l4 4" />
+            </svg>
           </div>
           <span className="text-xs text-gray-400 mt-1">Bizdən sizə</span>
         </div>
