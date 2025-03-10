@@ -21,7 +21,9 @@ const TransferDetails = () => {
   const receiverCardLast4 = cardNumber?.slice(-4) || '0730';
   
   // Calculate remaining balance after transaction
-  const remainingBalance = parseFloat(selectedCard?.balance) || 20;
+  const parsedAmount = parseFloat(amount) || 15;
+  const initialBalance = parseFloat(selectedCard?.balance) || 173;
+  const remainingBalance = (initialBalance - parsedAmount).toFixed(2);
   
   const goBack = () => {
     navigate(-1);
@@ -50,16 +52,16 @@ const TransferDetails = () => {
       </div>
       
       {/* Success Icon */}
-      <div className="flex justify-center mb-6 mt-4">
-        <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center">
+      <div className="flex justify-center mb-6 mt-4 animate-scale-in">
+        <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center shadow-lg">
           <Check size={24} className="text-white" />
         </div>
       </div>
       
-      <h2 className="text-2xl font-semibold px-6 mb-6">Detallar</h2>
+      <h2 className="text-2xl font-semibold px-6 mb-6 animate-fade-in">Detallar</h2>
       
       {/* Transaction Details */}
-      <div className="px-6 mb-6">
+      <div className="px-6 mb-6 animate-fade-in">
         <div className="flex justify-between py-3 border-b border-gray-200">
           <div className="text-gray-700">Qəbz nömrəsi</div>
           <div className="text-gray-900 font-medium">{receiptNumber || "15005060187"}</div>
@@ -107,7 +109,7 @@ const TransferDetails = () => {
         
         <div className="flex justify-between py-3 border-b border-gray-200">
           <div className="text-gray-700">Balans</div>
-          <div className="text-gray-900 font-medium text-blue-500">{remainingBalance} ₼</div>
+          <div className="text-blue-500 font-medium">{remainingBalance} ₼</div>
         </div>
         
         <div className="flex justify-between py-3 border-b border-gray-200">
@@ -117,12 +119,12 @@ const TransferDetails = () => {
         
         <div className="flex justify-between py-3 border-b border-gray-200">
           <div className="text-gray-700">Status</div>
-          <div className="text-gray-900 font-medium">Uğurlu</div>
+          <div className="text-green-500 font-medium">Uğurlu</div>
         </div>
       </div>
       
-      {/* Bottom logo */}
-      <div className="flex justify-center mb-8">
+      {/* Bottom logo with animation */}
+      <div className="flex justify-center mb-8 animate-pulse">
         <img 
           src="/lovable-uploads/58f0fb8d-526b-4126-b6f7-0d668ae55548.png" 
           alt="Bank logo" 
@@ -131,10 +133,10 @@ const TransferDetails = () => {
       </div>
       
       {/* Close Button */}
-      <div className="px-6 mt-auto mb-4">
+      <div className="px-6 mt-auto mb-4 animate-fade-in">
         <button 
           onClick={goToHome}
-          className="w-full py-4 rounded-xl font-medium bg-red-500 text-white"
+          className="w-full py-4 rounded-xl font-medium bg-red-500 text-white hover:bg-red-600 transition-colors"
         >
           Bağla
         </button>

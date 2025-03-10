@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Check, Info, ChevronLeft } from 'lucide-react';
 import MobileStatusBar from '../components/MobileStatusBar';
@@ -51,30 +51,30 @@ const TransferSuccess = () => {
       
       {/* Success Animation & Message */}
       <div className="flex-1 flex flex-col items-center justify-center">
-        <div className="w-32 h-32 rounded-full bg-green-50 flex items-center justify-center mb-6">
+        <div className="w-32 h-32 rounded-full bg-green-50 flex items-center justify-center mb-6 animate-scale-in">
           <div className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center">
-            <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center shadow-md">
               <Check size={40} className="text-white" />
             </div>
           </div>
         </div>
         
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">Uğurlu əməliyyat!</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-4 animate-fade-in">Uğurlu əməliyyat!</h2>
         
-        <div className="text-4xl font-bold mb-4">
+        <div className="text-4xl font-bold mb-4 animate-scale-in">
           {amount} ₼
         </div>
         
-        <div className="text-gray-400 mb-10">
+        <div className="text-gray-400 mb-10 animate-fade-in">
           Köçürmələr
         </div>
       </div>
       
       {/* Details Button */}
-      <div className="px-6 mt-auto">
+      <div className="px-6 mt-auto animate-fade-in">
         <button 
           onClick={goToDetails}
-          className="w-full flex items-center justify-center gap-2 py-4 rounded-full"
+          className="w-full flex items-center justify-center gap-2 py-4 rounded-full hover:bg-gray-100 transition-colors"
         >
           <Info size={20} className="text-gray-700" />
           <span className="text-gray-700">Detallar</span>
@@ -82,7 +82,7 @@ const TransferSuccess = () => {
         
         <button 
           onClick={goToHome}
-          className="w-full py-4 rounded-xl font-medium bg-red-500 text-white mb-4 mt-2"
+          className="w-full py-4 rounded-xl font-medium bg-red-500 text-white mb-4 mt-2 hover:bg-red-600 transition-colors"
         >
           Bağla
         </button>
