@@ -153,6 +153,13 @@ const AppDashboard = () => {
             <ArrowUpRight size={16} className="rotate-180" />
           </div>
           <span className="text-sm font-medium">ƏDV geri al</span>
+          <div className="w-5 h-5 flex items-center justify-center ml-1">
+            <img 
+              src="https://edvgerial.az/img/Logo.svg" 
+              alt="EDV Gerial" 
+              className="w-full h-full object-contain"
+            />
+          </div>
         </div>
         
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center relative">
@@ -177,17 +184,6 @@ const AppDashboard = () => {
             />
           </div>
           <span className="text-sm font-medium">Umico</span>
-        </div>
-        
-        <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
-          <div className="w-5 h-5 flex items-center justify-center mr-1">
-            <img 
-              src="https://edvgerial.az/img/Logo.svg" 
-              alt="EDV Gerial" 
-              className="w-full h-full object-cover rounded-sm"
-            />
-          </div>
-          <span className="text-sm font-medium">EDV Gerial</span>
         </div>
       </div>
       
