@@ -118,14 +118,11 @@ const TransferDetails = () => {
       </div>
       
       <div className="flex flex-col items-end mb-8 px-6">
-        <div className="h-12 w-24 opacity-70 self-end animate-fade-in">
-          <svg viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10,30 Q20,5 30,25 T50,15 T70,25 T90,5" 
-                  fill="none" 
-                  stroke="#333" 
-                  strokeWidth="2" />
-          </svg>
-        </div>
+        <img 
+          src="https://raw.githubusercontent.com/metollahbaba/arayuz-nesnesi/refs/heads/main/src/assets/Screenshot_2025-03-10-14-16-56-967_az.kapitalbank.mbanking.jpg?token=GHSAT0AAAAAADAIB3EP63LGAW7XDX56IFDGZ6OYPUA" 
+          alt="Kapital Bank" 
+          className="h-12 self-end animate-fade-in"
+        />
       </div>
       
       <div className="px-6 mt-auto mb-4 animate-fade-in">
