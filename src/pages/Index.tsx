@@ -44,7 +44,7 @@ const Index = () => {
         <div className="flex items-center space-x-3 animate-scale-in">
           <div className="w-24 h-24 rounded-full flex items-center justify-center border border-white bg-white p-2">
             <img 
-              src="https://i.imgur.com/eqBuyi5.png" 
+              src="/src/assets/Screenshot_2025-03-10-14-16-56-967_az.kapitalbank.mbanking-removebg-preview.png" 
               alt="Logo" 
               className="w-full h-full object-contain"
             />
