@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, ChevronDown, Scan } from 'lucide-react';
 import BankCard from '../components/BankCard';
 import CardSelectionModal from '../components/CardSelectionModal';
 import { formatCardNumber, getCardType } from '../lib/utils';
+import { getCardsWithBalances } from '../lib/balanceManager';
 
 const BankCardTransfer = () => {
   const navigate = useNavigate();
@@ -15,33 +15,15 @@ const BankCardTransfer = () => {
   const [isCardSelectionOpen, setIsCardSelectionOpen] = useState(false);
   const [fullName, setFullName] = useState('');
   
-  // Updated card data with proper min/max amounts
-  const cards = [
-    {
-      bankName: 'Kapital Bank ASC',
-      cardNumber: '5113',
-      balance: '85 ₼',
-      minAmount: 0.01,
-      maxAmount: 85
-    },
-    {
-      bankName: 'Kapital Bank ASC',
-      cardNumber: '4444',
-      balance: '34.59 ₼',
-      minAmount: 0.01,
-      maxAmount: 34.59
-    },
-    {
-      bankName: 'Kapital Bank ASC',
-      cardNumber: '3303',
-      balance: '173 ₼',
-      minAmount: 0.01,
-      maxAmount: 173
-    }
-  ];
+  // Load cards with current balances from the balance manager
+  const [cards, setCards] = useState(getCardsWithBalances());
   
-  // Set the default selected card to the one with 173 ₼
-  const [selectedCard, setSelectedCard] = useState(cards.find(card => card.cardNumber === '3303') || cards[0]);
+  // Set the default selected card to the one with the highest balance
+  const [selectedCard, setSelectedCard] = useState(
+    cards.reduce((prev, current) => 
+      (prev.maxAmount > current.maxAmount) ? prev : current
+    )
+  );
   
   const inputRef = useRef<HTMLInputElement>(null);
   

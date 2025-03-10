@@ -1,30 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, Wifi, Battery } from 'lucide-react';
+import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, RefreshCw } from 'lucide-react';
 import visaCardLogo from '../assets/card-visa.jpeg';
 import NewProductModal from '@/components/NewProductModal';
 import BankCard from '@/components/BankCard';
 import MobileStatusBar from '@/components/MobileStatusBar';
+import { getCardsWithBalances, resetBalances } from '@/lib/balanceManager';
+import { useToast } from '@/hooks/use-toast';
 
 const AppDashboard = () => {
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
+  
+  const [cards, setCards] = useState(getCardsWithBalances());
+  
+  useEffect(() => {
+    setCards(getCardsWithBalances());
+  }, []);
 
-  // Define balance variables with currency symbol
-  const masterCardBalance = "85 ₼";
-  const visaCard1Balance = "34.59 ₼";
-  const visaCard2Balance = "173 ₼";
+  const masterCardBalance = cards.find(card => card.cardNumber === '5113')?.balance || "0 ₼";
+  const visaCard1Balance = cards.find(card => card.cardNumber === '4444')?.balance || "0 ₼";
+  const visaCard2Balance = cards.find(card => card.cardNumber === '3303')?.balance || "0 ₼";
 
   const navigateToPayments = () => {
     navigate('/payments');
   };
+  
+  const handleRefreshBalances = () => {
+    resetBalances();
+    setCards(getCardsWithBalances());
+    
+    toast({
+      title: "Balances refreshed",
+      description: "Card balances have been reset to their original values.",
+    });
+  };
 
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col overflow-hidden">
-      {/* Mobile Status Bar */}
       <MobileStatusBar time="11:00" batteryLevel="31" />
       
-      {/* Header with logo and search */}
       <div className="flex items-center justify-between px-4 py-2">
         <div className="flex items-center space-x-4">
           <div className="w-8 h-8">
@@ -56,7 +72,6 @@ const AppDashboard = () => {
         </div>
       </div>
       
-      {/* Promotions */}
       <div className="px-4 pt-3">
         <div className="flex space-x-4 overflow-x-auto pb-2">
           <div className="flex flex-col items-center min-w-[70px]">
@@ -119,7 +134,6 @@ const AppDashboard = () => {
         </div>
       </div>
       
-      {/* Quick services buttons */}
       <div className="flex px-4 space-x-3 mt-2">
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
           <div className="text-blue-500 font-bold mr-1">
@@ -146,7 +160,6 @@ const AppDashboard = () => {
         </div>
       </div>
       
-      {/* Quick actions */}
       <div className="grid grid-cols-3 gap-3 px-4 mt-4">
         <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center shadow-sm">
           <div className="w-8 h-8 flex items-center justify-center mb-2 text-red-500">
@@ -180,13 +193,21 @@ const AppDashboard = () => {
         </div>
       </div>
       
-      {/* Cards and accounts */}
       <div className="px-4 mt-6">
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-gray-500 font-medium">Kartlar və hesablar</h2>
-          <button className="text-red-500">
-            <Plus size={20} />
-          </button>
+          <div className="flex items-center">
+            <button 
+              className="text-green-500 mr-2"
+              onClick={handleRefreshBalances}
+              aria-label="Refresh balances"
+            >
+              <RefreshCw size={20} />
+            </button>
+            <button className="text-red-500">
+              <Plus size={20} />
+            </button>
+          </div>
         </div>
         
         <div className="flex items-center mb-3">
@@ -209,7 +230,6 @@ const AppDashboard = () => {
         </div>
       </div>
       
-      {/* Added cards section */}
       <div className="px-4 mt-4">
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-gray-500 font-medium">Əlavə edilmiş kartlar</h2>
@@ -218,20 +238,17 @@ const AppDashboard = () => {
           </button>
         </div>
         
-        <BankCard 
-          bankName="Kapital Bank ASC" 
-          cardNumber="4444" 
-          balance={visaCard1Balance} 
-        />
-        
-        <BankCard 
-          bankName="Kapital Bank ASC" 
-          cardNumber="3303" 
-          balance={visaCard2Balance} 
-        />
+        {cards.filter(card => card.cardNumber !== '5113').map(card => (
+          <div className="mb-3" key={card.cardNumber}>
+            <BankCard 
+              bankName={card.bankName}
+              cardNumber={card.cardNumber}
+              balance={card.balance}
+            />
+          </div>
+        ))}
       </div>
       
-      {/* Bank products */}
       <div className="px-4 mt-8">
         <h2 className="text-lg font-medium mb-4">Bank məhsulları sifariş edin</h2>
         
@@ -266,7 +283,6 @@ const AppDashboard = () => {
       
       <div className="flex-grow"></div>
       
-      {/* Bottom navigation and footer */}
       <div className="flex justify-between items-center px-4 py-4 border-t">
         <div className="flex flex-col items-center">
           <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
@@ -313,7 +329,6 @@ const AppDashboard = () => {
         <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-gray-400"></div>
       </div>
       
-      {/* New Product Modal */}
       <NewProductModal 
         isOpen={isProductModalOpen} 
         onClose={() => setIsProductModalOpen(false)} 
@@ -323,3 +338,4 @@ const AppDashboard = () => {
 };
 
 export default AppDashboard;
+

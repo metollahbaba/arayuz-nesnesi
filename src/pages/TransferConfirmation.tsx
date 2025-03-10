@@ -1,10 +1,11 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, QrCode } from 'lucide-react';
 import MobileStatusBar from '../components/MobileStatusBar';
 import { formatUserName } from '../lib/utils';
 import CardSelectionModal from '../components/CardSelectionModal';
+import { getCardsWithBalances, updateCardBalance } from '../lib/balanceManager';
+import { useToast } from '@/hooks/use-toast';
 
 const TransferConfirmation = () => {
   const navigate = useNavigate();
@@ -14,31 +15,10 @@ const TransferConfirmation = () => {
   const [nameInput, setNameInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const [isCardSelectionOpen, setIsCardSelectionOpen] = useState(false);
+  const { toast } = useToast();
   
-  // Define all available cards
-  const cards = [
-    {
-      bankName: 'Kapital Bank ASC',
-      cardNumber: '5113',
-      balance: '85 ₼',
-      minAmount: 0.01,
-      maxAmount: 85
-    },
-    {
-      bankName: 'Kapital Bank ASC',
-      cardNumber: '4444',
-      balance: '34.59 ₼',
-      minAmount: 0.01,
-      maxAmount: 34.59
-    },
-    {
-      bankName: 'Kapital Bank ASC',
-      cardNumber: '3303',
-      balance: '173 ₼',
-      minAmount: 0.01,
-      maxAmount: 173
-    }
-  ];
+  // Define all available cards from the balance manager
+  const [cards, setCards] = useState(getCardsWithBalances());
   
   // Set selected card state
   const [selectedCard, setSelectedCard] = useState(initialCard || cards.find(card => card.cardNumber === '3303') || cards[0]);
@@ -59,7 +39,22 @@ const TransferConfirmation = () => {
   
   const handleConfirm = () => {
     setIsProcessing(true);
-    // Simulate processing and then go back to dashboard
+    
+    // Get the final amount to transfer (as a number)
+    const transferAmount = amount && parseFloat(amount) <= selectedCard.maxAmount 
+      ? parseFloat(amount) 
+      : selectedCard.minAmount;
+    
+    // Update the card balance
+    updateCardBalance(selectedCard.cardNumber, transferAmount);
+    
+    // Show success toast
+    toast({
+      title: "Transfer successful",
+      description: `${transferAmount} ₼ has been sent to ${cardNumber}`,
+    });
+    
+    // Simulate processing and then go to dashboard
     setTimeout(() => {
       navigate('/app');
     }, 2000);
