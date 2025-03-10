@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, QrCode, Copy } from 'lucide-react';
-import BankCard from '../components/BankCard';
 import MobileStatusBar from '../components/MobileStatusBar';
 import { formatUserName } from '../lib/utils';
 
@@ -48,19 +47,19 @@ const TransferConfirmation = () => {
         <button onClick={goBack} className="text-black">
           <ChevronLeft size={24} />
         </button>
-        <button className="text-black">
+        <button className="text-black float-right">
           <Info size={24} />
         </button>
       </div>
       
       {/* Page Title */}
-      <div className="px-6 mb-6">
+      <div className="px-6 mb-8">
         <h1 className="text-3xl font-semibold text-gray-900">İstənilən bank kartına</h1>
       </div>
       
       {/* From Card */}
-      <div className="px-6 mb-4">
-        <h2 className="text-gray-700 mb-2">Ödəmək</h2>
+      <div className="px-6 mb-6">
+        <h2 className="text-gray-600 text-base mb-2">Ödəmək</h2>
         <div className="bg-white rounded-xl p-4 shadow-sm flex items-center">
           <div className="flex-shrink-0 mr-4">
             <div className="bg-navy-700 w-14 h-10 rounded-md flex items-center justify-center">
@@ -68,7 +67,7 @@ const TransferConfirmation = () => {
             </div>
           </div>
           <div className="flex-grow">
-            <div className="text-gray-600">Kapital Bank ASC</div>
+            <div className="text-gray-500">Kapital Bank ASC</div>
             <div className="flex justify-between">
               <div className="font-medium">{selectedCard?.balance || '0.27'} AZN</div>
               <div className="text-gray-500 text-sm">•{selectedCard?.cardNumber || '3303'}</div>
@@ -81,22 +80,22 @@ const TransferConfirmation = () => {
       </div>
       
       {/* To Card */}
-      <div className="px-6 mb-4">
-        <h2 className="text-gray-700 mb-2">Mədaxil etmək</h2>
+      <div className="px-6 mb-6">
+        <h2 className="text-gray-600 text-base mb-2">Mədaxil etmək</h2>
         <div className="bg-white rounded-xl border border-gray-200 p-4">
           <div className="text-xs text-gray-400 mb-1">Kart nömrəsi</div>
           <div className="text-gray-700 text-lg font-medium flex justify-between items-center">
             <span>{cardNumber || '4169 7388 4327 4444'}</span>
             <button className="p-1 text-gray-500">
-              <Copy size={18} />
+              <QrCode size={18} />
             </button>
           </div>
         </div>
       </div>
       
       {/* Transfer Details */}
-      <div className="px-6 mb-4">
-        <h2 className="text-gray-700 mb-2">Köçürmənin detalları</h2>
+      <div className="px-6 mb-5">
+        <h2 className="text-gray-600 text-base mb-2">Köçürmənin detalları</h2>
         <div className="flex gap-3 mb-3">
           <div className="bg-white rounded-xl border border-gray-200 p-4 flex-grow">
             <div className="text-xs text-gray-400 mb-1">Məbləğ</div>
@@ -112,7 +111,7 @@ const TransferConfirmation = () => {
         </div>
         
         {/* Min-Max info */}
-        <div className="flex items-center mb-3 text-xs text-gray-500">
+        <div className="flex items-center mb-4 text-xs text-gray-500">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
             <circle cx="12" cy="12" r="10" />
             <path d="M12 16v-4" />
@@ -135,39 +134,41 @@ const TransferConfirmation = () => {
         </div>
       </div>
       
-      {/* Name Section */}
+      {/* Name Section - Now shown as text with a bottom border */}
       <div className="px-6 mb-4">
-        <h2 className="text-gray-700 mb-2">Ad Soyad</h2>
-        <div className="relative">
+        <h2 className="text-gray-500 text-base mb-2">Ad Soyad</h2>
+        <div>
+          {/* Hidden input for mobile keyboard functionality */}
           <input
             type="text"
             value={nameInput}
             onChange={handleNameChange}
-            className="opacity-0 absolute inset-0 w-full h-full cursor-text z-10"
-            autoFocus
+            className="opacity-0 absolute -left-[9999px]"
           />
-          <div className="bg-white rounded-xl border border-gray-200 p-4">
-            <div className="text-gray-700 text-lg font-medium">
-              {formattedName}
-            </div>
+          {/* Display as text with border bottom */}
+          <div 
+            className="text-gray-900 text-lg font-medium pb-1 border-b border-gray-200"
+            onClick={() => document.querySelector('input[type="text"]')?.focus()}
+          >
+            {formattedName}
           </div>
         </div>
       </div>
       
       {/* Amount Display */}
       <div className="px-6 mb-2">
-        <h2 className="text-gray-700 mb-2">Məbləğ</h2>
+        <h2 className="text-gray-500 text-base mb-2">Məbləğ</h2>
         <div className="text-xl font-semibold text-gray-900">{amount || '0,01'} AZN</div>
       </div>
       
       {/* Commission Section */}
-      <div className="px-6 flex items-center text-gray-600 mb-4">
+      <div className="px-6 flex items-center text-gray-500 mb-6 border-b border-gray-200 pb-6">
         <span className="mr-2">Komissiya yoxdur</span>
         <span className="text-yellow-500">👍</span>
       </div>
       
       {/* Country and Bank */}
-      <div className="px-6 mb-4">
+      <div className="px-6 mb-6">
         <div className="bg-gray-100 rounded-xl p-4 flex items-center">
           <div className="mr-2">
             <span className="text-[16px]">🇦🇿</span>
