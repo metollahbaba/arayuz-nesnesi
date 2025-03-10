@@ -7,9 +7,13 @@ interface BankCardProps {
   cardNumber: string;
   balance: string;
   showArrow?: boolean;
+  hidden?: boolean;
 }
 
-const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance, showArrow = true }) => {
+const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance, showArrow = true, hidden = false }) => {
+  // Display masked balance when hidden
+  const displayBalance = hidden ? '••• ₼' : balance;
+  
   return (
     <div className="bg-white rounded-2xl p-4 shadow-sm">
       <div className="flex items-center justify-between">
@@ -22,7 +26,7 @@ const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance, show
           </div>
           <div>
             <div className="flex justify-between">
-              <span className="text-gray-700 font-bold">{balance}</span>
+              <span className="text-gray-700 font-bold">{displayBalance}</span>
             </div>
             <span className="text-gray-400 text-sm">{bankName}</span>
           </div>

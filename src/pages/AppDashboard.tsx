@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, RefreshCw } from 'lucide-react';
+import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, RefreshCw, Eye, EyeOff } from 'lucide-react';
 import visaCardLogo from '../assets/card-visa.jpeg';
 import NewProductModal from '@/components/NewProductModal';
 import BankCard from '@/components/BankCard';
 import MobileStatusBar from '@/components/MobileStatusBar';
-import { getCardsWithBalances, resetBalances } from '@/lib/balanceManager';
+import { getCardsWithBalances, resetBalances, toggleBalanceVisibility, loadBalanceVisibility } from '@/lib/balanceManager';
 import { useToast } from '@/hooks/use-toast';
 
 const AppDashboard = () => {
@@ -14,6 +14,7 @@ const AppDashboard = () => {
   const { toast } = useToast();
   
   const [cards, setCards] = useState(getCardsWithBalances());
+  const [areBalancesHidden, setAreBalancesHidden] = useState(loadBalanceVisibility());
   
   useEffect(() => {
     setCards(getCardsWithBalances());
@@ -36,6 +37,17 @@ const AppDashboard = () => {
       description: "Card balances have been reset to their original values.",
     });
   };
+  
+  const handleToggleBalanceVisibility = () => {
+    const isHidden = toggleBalanceVisibility();
+    setAreBalancesHidden(isHidden);
+    setCards(getCardsWithBalances());
+    
+    toast({
+      title: isHidden ? "Balances hidden" : "Balances visible",
+      description: isHidden ? "Your card balances are now hidden." : "Your card balances are now visible.",
+    });
+  };
 
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col overflow-hidden">
@@ -43,15 +55,20 @@ const AppDashboard = () => {
       
       <div className="flex items-center justify-between px-4 py-2">
         <div className="flex items-center space-x-4">
-          <div className="w-8 h-8">
-            <div className="bg-red-500 w-3 h-8"></div>
+          <div className="w-12 h-12 rounded-full flex items-center justify-center border border-gray-200 bg-white p-1">
+            <img 
+              src="https://i.imgur.com/eqBuyi5.png" 
+              alt="Logo" 
+              className="w-full h-full object-contain"
+            />
           </div>
           
-          <div className="w-8 h-8 flex items-center justify-center text-gray-600">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
+          <div className="w-8 h-8 flex items-center justify-center text-gray-600 cursor-pointer" onClick={handleToggleBalanceVisibility}>
+            {areBalancesHidden ? (
+              <EyeOff size={24} />
+            ) : (
+              <Eye size={24} />
+            )}
           </div>
         </div>
         
@@ -222,7 +239,7 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">{masterCardBalance}</span>
+              <span className="font-bold">{areBalancesHidden ? '••• ₼' : masterCardBalance}</span>
               <span className="text-gray-400 text-xs"></span>
             </div>
             <span className="text-gray-400 text-sm">Mastercard Salary</span>
@@ -244,6 +261,7 @@ const AppDashboard = () => {
               bankName={card.bankName}
               cardNumber={card.cardNumber}
               balance={card.balance}
+              hidden={areBalancesHidden}
             />
           </div>
         ))}
@@ -338,4 +356,3 @@ const AppDashboard = () => {
 };
 
 export default AppDashboard;
-

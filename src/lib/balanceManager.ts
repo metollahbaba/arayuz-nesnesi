@@ -14,9 +14,17 @@ const originalBalances = {
 // Current balances (starts same as original)
 let currentBalances = { ...originalBalances };
 
+// Track if balances should be hidden
+let areBalancesHidden = false;
+
 // Save current balances to localStorage (browser's storage)
 const saveBalances = () => {
   localStorage.setItem('cardBalances', JSON.stringify(currentBalances));
+};
+
+// Save balance visibility state to localStorage
+const saveBalanceVisibility = () => {
+  localStorage.setItem('balancesHidden', JSON.stringify(areBalancesHidden));
 };
 
 // Load balances from localStorage
@@ -28,11 +36,27 @@ const loadBalances = () => {
   return currentBalances;
 };
 
+// Load balance visibility from localStorage
+const loadBalanceVisibility = () => {
+  const saved = localStorage.getItem('balancesHidden');
+  if (saved) {
+    areBalancesHidden = JSON.parse(saved);
+  }
+  return areBalancesHidden;
+};
+
 // Reset balances to original values
 const resetBalances = () => {
   currentBalances = { ...originalBalances };
   saveBalances();
   return currentBalances;
+};
+
+// Toggle balance visibility
+const toggleBalanceVisibility = () => {
+  areBalancesHidden = !areBalancesHidden;
+  saveBalanceVisibility();
+  return areBalancesHidden;
 };
 
 // Update a specific card's balance
@@ -56,6 +80,8 @@ const getFormattedBalance = (cardNumber: string): string => {
 const getCardsWithBalances = () => {
   // Load latest balances before returning
   loadBalances();
+  // Also load visibility state
+  loadBalanceVisibility();
   
   return [
     {
@@ -63,21 +89,24 @@ const getCardsWithBalances = () => {
       cardNumber: '5113',
       balance: getFormattedBalance('5113'),
       minAmount: 0.01,
-      maxAmount: currentBalances['5113']
+      maxAmount: currentBalances['5113'],
+      hidden: areBalancesHidden
     },
     {
       bankName: 'Kapital Bank ASC',
       cardNumber: '4444',
       balance: getFormattedBalance('4444'),
       minAmount: 0.01,
-      maxAmount: currentBalances['4444']
+      maxAmount: currentBalances['4444'],
+      hidden: areBalancesHidden
     },
     {
       bankName: 'Kapital Bank ASC',
       cardNumber: '3303',
       balance: getFormattedBalance('3303'),
       minAmount: 0.01,
-      maxAmount: currentBalances['3303']
+      maxAmount: currentBalances['3303'],
+      hidden: areBalancesHidden
     }
   ];
 };
@@ -87,5 +116,7 @@ export {
   resetBalances,
   updateCardBalance,
   getFormattedBalance,
-  getCardsWithBalances
+  getCardsWithBalances,
+  toggleBalanceVisibility,
+  loadBalanceVisibility
 };
