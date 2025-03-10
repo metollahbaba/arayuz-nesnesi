@@ -15,10 +15,8 @@ const BankCardTransfer = () => {
   const [isCardSelectionOpen, setIsCardSelectionOpen] = useState(false);
   const [fullName, setFullName] = useState('');
   
-  // Load cards with current balances from the balance manager
   const [cards, setCards] = useState(getCardsWithBalances());
   
-  // Set the default selected card to the one with the highest balance
   const [selectedCard, setSelectedCard] = useState(
     cards.reduce((prev, current) => 
       (prev.maxAmount > current.maxAmount) ? prev : current
@@ -64,7 +62,6 @@ const BankCardTransfer = () => {
   
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // Ensure amount doesn't exceed max value
     if (!value || parseFloat(value) <= selectedCard.maxAmount) {
       setAmount(value);
     }
@@ -76,7 +73,6 @@ const BankCardTransfer = () => {
   };
   
   const handlePresetAmount = (value: string) => {
-    // Ensure preset amount doesn't exceed max value
     const numValue = parseFloat(value);
     if (numValue <= selectedCard.maxAmount) {
       setAmount(value);
@@ -87,11 +83,10 @@ const BankCardTransfer = () => {
     setIsCardSelectionOpen(true);
   };
 
-  const handleSelectCard = (card: { bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number }) => {
+  const handleSelectCard = (card: { bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number; hidden: boolean }) => {
     setSelectedCard(card);
     setIsCardSelectionOpen(false);
     
-    // If current amount exceeds new card's max, adjust it
     if (amount && parseFloat(amount) > card.maxAmount) {
       setAmount(card.maxAmount.toString());
     }
@@ -110,7 +105,6 @@ const BankCardTransfer = () => {
     }
   };
   
-  // Calculate quick add amounts based on card balance
   const quickAddAmounts = [
     Math.min(10, selectedCard.maxAmount),
     Math.min(20, selectedCard.maxAmount),
@@ -119,7 +113,6 @@ const BankCardTransfer = () => {
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
-      {/* Mobile Status Bar with time */}
       <div className="bg-gray-50 text-black p-2 flex justify-between items-center text-xs">
         <div className="flex items-center gap-1">
           <span className="font-semibold">12:05</span>
@@ -157,7 +150,6 @@ const BankCardTransfer = () => {
         </div>
       </div>
       
-      {/* Header - Adjusts position based on keyboard state */}
       <div className={`flex justify-between items-center px-6 py-4 ${isKeyboardOpen ? 'mb-0' : ''}`}>
         <button onClick={goBack} className="text-black">
           <ChevronLeft size={24} />
@@ -167,12 +159,10 @@ const BankCardTransfer = () => {
         </button>
       </div>
       
-      {/* Page Title - Adjusts position based on keyboard state */}
       <div className={`px-6 mb-6 ${isKeyboardOpen ? 'hidden' : ''}`}>
         <h1 className="text-3xl font-semibold text-gray-900">İstənilən bank kartına</h1>
       </div>
       
-      {/* Card Selection */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Ödəmək</h2>
         <div className="bg-white rounded-2xl p-4 shadow-sm" onClick={openCardSelection}>
@@ -196,7 +186,6 @@ const BankCardTransfer = () => {
         </div>
       </div>
       
-      {/* Card Number Input */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Mədaxil etmək</h2>
         <div className="bg-white rounded-2xl p-4 flex items-center shadow-sm">
@@ -218,7 +207,6 @@ const BankCardTransfer = () => {
         </div>
       </div>
       
-      {/* Full Name Input (Hidden) */}
       <div className="px-6 mb-4 hidden">
         <input
           type="text"
@@ -229,7 +217,6 @@ const BankCardTransfer = () => {
         />
       </div>
       
-      {/* Transfer Details */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Köçürmənin detalları</h2>
         <div className="grid grid-cols-3 gap-4">
@@ -261,7 +248,6 @@ const BankCardTransfer = () => {
           <span>Min: {selectedCard.minAmount.toFixed(2)}AZN, Maks: {selectedCard.maxAmount.toFixed(2)}AZN</span>
         </div>
         
-        {/* Quick Amount Buttons - Only show amounts that are possible with current card */}
         {quickAddAmounts.length > 0 && (
           <div className="grid grid-cols-3 gap-4">
             {quickAddAmounts.map(value => (
@@ -278,9 +264,7 @@ const BankCardTransfer = () => {
         )}
       </div>
       
-      {/* Bottom Button - Move to bottom of screen */}
       <div className="mt-auto">
-        {/* Bottom Button */}
         <div className="px-6 pb-6">
           <button 
             onClick={handleContinue}
@@ -295,12 +279,10 @@ const BankCardTransfer = () => {
         </div>
       </div>
       
-      {/* iPhone Home Indicator */}
       <div className="bg-black h-10 flex items-center justify-center">
         <div className="w-1/3 h-1 bg-gray-500 rounded-full"></div>
       </div>
 
-      {/* Card Selection Modal */}
       <CardSelectionModal 
         isOpen={isCardSelectionOpen}
         onClose={() => setIsCardSelectionOpen(false)}

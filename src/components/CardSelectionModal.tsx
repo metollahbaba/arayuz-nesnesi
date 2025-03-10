@@ -6,8 +6,8 @@ import { X } from 'lucide-react';
 interface CardSelectionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectCard: (cardInfo: { bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number }) => void;
-  cards: Array<{ bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number }>;
+  onSelectCard: (cardInfo: { bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number; hidden: boolean }) => void;
+  cards: Array<{ bankName: string; cardNumber: string; balance: string; minAmount: number; maxAmount: number; hidden: boolean }>;
   selectedCardNumber?: string;
 }
 
@@ -40,6 +40,7 @@ const CardSelectionModal: React.FC<CardSelectionModalProps> = ({
                   cardNumber={card.cardNumber}
                   balance={card.balance}
                   showArrow={false}
+                  hidden={card.hidden}
                 />
                 {selectedCardNumber === card.cardNumber && (
                   <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
