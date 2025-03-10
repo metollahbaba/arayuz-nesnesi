@@ -94,13 +94,12 @@ const AppDashboard = () => {
           </div>
           
           <div className="flex flex-col items-center min-w-[70px]">
-            <div className="w-16 h-16 rounded-full bg-purple-100 border-2 border-purple-200 flex items-center justify-center">
-              <div className="relative">
-                <div className="w-12 h-12 bg-purple-400 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">i</span>
-                </div>
-                <div className="absolute bottom-0 right-0 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">i</div>
-              </div>
+            <div className="w-16 h-16 rounded-full bg-purple-100 border-2 border-purple-200 flex items-center justify-center overflow-hidden">
+              <img 
+                src="https://cert.az/t/u/image/2024/03/06/sayt-melumat.png" 
+                alt="Məlumat" 
+                className="w-full h-full object-cover" 
+              />
             </div>
             <span className="text-xs mt-1">Məlumat</span>
           </div>
