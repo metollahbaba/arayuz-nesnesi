@@ -161,7 +161,7 @@ const AppDashboard = () => {
         
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center relative">
           <img 
-            src="https://cards.birbank.az/assets/images/birbank-cashback-debet.png" 
+            src="https://i.ibb.co/DHw6HGHm/Screenshot-2025-03-10-23-52-53-796-az-kapitalbank-mbanking-removebg-preview.png" 
             alt="Cashback card" 
             className="w-5 h-5 object-contain mr-1" 
           />
