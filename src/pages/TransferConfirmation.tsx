@@ -84,6 +84,16 @@ const TransferConfirmation = () => {
     Math.min(50, selectedCard.maxAmount)
   ].filter(amount => amount > 0);
   
+  // Determine card type based on the card number
+  const getCardType = (cardNumber: string) => {
+    // Get the first digit of the card number
+    const firstDigit = cardNumber.replace(/\D/g, '').charAt(0);
+    
+    if (firstDigit === '4') return 'visa';
+    if (firstDigit === '5') return 'mastercard';
+    return 'visa'; // Default to visa
+  };
+  
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
       {/* Mobile Status Bar */}
@@ -109,16 +119,20 @@ const TransferConfirmation = () => {
         <h2 className="text-gray-600 text-base mb-2">Ödəmək</h2>
         <div className="bg-white rounded-xl p-4 shadow-sm flex items-center" onClick={openCardSelection}>
           <div className="flex-shrink-0 mr-4">
-            <div className="bg-navy-700 w-14 h-10 rounded-md flex items-center justify-center">
-              <div className="text-white text-xs">VISA</div>
+            <div className={`${getCardType(selectedCard.cardNumber) === 'visa' ? 'bg-gradient-to-br from-[#0e1a48] to-[#1e3a88]' : 'bg-gradient-to-br from-[#1f1f1f] to-[#383838]'} w-14 h-10 rounded-md flex items-center justify-center relative overflow-hidden`}>
+              <div className="text-white text-[8px] font-bold">
+                {getCardType(selectedCard.cardNumber) === 'visa' ? 'VISA' : 'MC'}
+              </div>
+              <div className="text-white text-[10px] font-medium absolute bottom-1 self-center">
+                •{selectedCard.cardNumber}
+              </div>
+              {/* Add shine effect to the card */}
+              <div className="absolute top-0 left-0 w-full h-full bg-white opacity-10 transform -skew-x-45" />
             </div>
           </div>
           <div className="flex-grow">
             <div className="text-gray-500">{selectedCard.bankName}</div>
-            <div className="flex justify-between">
-              <div className="font-medium">{selectedCard.balance}</div>
-              <div className="text-gray-500 text-sm">•{selectedCard.cardNumber}</div>
-            </div>
+            <div className="font-medium">{selectedCard.hidden ? '••• ₼' : selectedCard.balance}</div>
           </div>
           <div className="flex-shrink-0 ml-2">
             <ChevronLeft size={20} className="transform rotate-180 text-gray-400" />
