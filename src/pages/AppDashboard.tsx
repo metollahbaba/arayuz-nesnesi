@@ -216,10 +216,14 @@ const AppDashboard = () => {
           </div>
         </div>
         
-        {/* Visa card */}
+        {/* Visa card - Updated with the new image */}
         <div className="flex items-center mb-3">
           <div className="w-14 h-12 bg-blue-400 rounded flex flex-col items-center justify-center mr-3">
-            <span className="text-white text-xs font-bold">VISA</span>
+            <img 
+              src="https://i.imgur.com/FGy9N40.png" 
+              alt="VISA" 
+              className="h-4 object-contain" 
+            />
             <span className="text-white text-xs font-medium">3516</span>
           </div>
           <div className="flex-1">
