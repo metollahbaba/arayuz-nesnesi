@@ -1,9 +1,11 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, Wifi, Battery } from 'lucide-react';
 import visaCardLogo from '../assets/card-visa.jpeg';
+import NewProductModal from '@/components/NewProductModal';
 
 const AppDashboard = () => {
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col overflow-hidden">
       {/* Mobile Status Bar with time 11:00 */}
@@ -293,7 +295,10 @@ const AppDashboard = () => {
           </div>
         </div>
         
-        <button className="mt-6 w-full bg-red-500 text-white rounded-xl py-4 flex items-center justify-center">
+        <button 
+          className="mt-6 w-full bg-red-500 text-white rounded-xl py-4 flex items-center justify-center"
+          onClick={() => setIsProductModalOpen(true)}
+        >
           <Plus size={18} className="mr-2" />
           <span>Yeni məhsul əlavə et</span>
         </button>
@@ -347,6 +352,12 @@ const AppDashboard = () => {
         <div className="w-12 h-12 border-2 border-gray-400 rounded-full"></div>
         <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-gray-400"></div>
       </div>
+      
+      {/* New Product Modal */}
+      <NewProductModal 
+        isOpen={isProductModalOpen} 
+        onClose={() => setIsProductModalOpen(false)} 
+      />
     </div>
   );
 };

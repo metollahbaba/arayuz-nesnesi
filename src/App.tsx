@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import PinEntry from "./pages/PinEntry";
 import PinVerified from "./pages/PinVerified";
 import AppDashboard from "./pages/AppDashboard";
+import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/pin" element={<PinEntry />} />
           <Route path="/pin-verified" element={<PinVerified />} />
           <Route path="/app" element={<AppDashboard />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
