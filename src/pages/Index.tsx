@@ -42,7 +42,13 @@ const Index = () => {
       {/* Logo and Text with Animation */}
       <div className="flex-1 flex flex-col items-center justify-center">
         <div className="flex items-center space-x-3 animate-scale-in">
-          <div className="w-10 h-12 bg-white" style={{ clipPath: 'polygon(0 0, 100% 15%, 100% 85%, 0 100%)' }}></div>
+          <div className="w-24 h-24 rounded-full flex items-center justify-center border border-white bg-white p-2">
+            <img 
+              src="https://i.imgur.com/eqBuyi5.png" 
+              alt="Logo" 
+              className="w-full h-full object-contain"
+            />
+          </div>
           <h1 className="text-4xl font-bold text-white">birbank</h1>
         </div>
       </div>
