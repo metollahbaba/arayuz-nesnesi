@@ -90,8 +90,8 @@ const AppDashboard = () => {
           <div className="flex flex-col items-center min-w-[70px]">
             <div className="w-16 h-16 rounded-full bg-pink-100 border-2 border-pink-200 flex items-center justify-center overflow-hidden">
               <img 
-                src="https://birbank.az/_next/image?url=https%3A%2F%2Fstrapi-aws-s3-images-bucket-kb.s3.eu-central-1.amazonaws.com%2F1x1_07d1ccf918.png&w=640&q=75" 
-                alt="70% discount" 
+                src="https://i.ibb.co/BV6rt3VK/indir-1-1.png" 
+                alt="New Logo" 
                 className="w-full h-full object-cover" 
               />
             </div>
@@ -148,20 +148,6 @@ const AppDashboard = () => {
       </div>
       
       <div className="flex px-4 space-x-3 mt-2">
-        <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
-          <div className="text-blue-500 font-bold mr-1">
-            <ArrowUpRight size={16} className="rotate-180" />
-          </div>
-          <span className="text-sm font-medium">ƏDV geri al</span>
-          <div className="w-5 h-5 flex items-center justify-center ml-1">
-            <img 
-              src="https://edvgerial.az/img/Logo.svg" 
-              alt="EDV Gerial" 
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </div>
-        
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center relative">
           <img 
             src="https://cards.birbank.az/assets/images/birbank-cashback-debet.png" 
