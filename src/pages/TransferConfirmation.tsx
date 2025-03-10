@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info, QrCode } from 'lucide-react';
 import MobileStatusBar from '../components/MobileStatusBar';
@@ -12,6 +12,13 @@ const TransferConfirmation = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [nameInput, setNameInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  
+  // Check if card ends with 0730 and set default name
+  useEffect(() => {
+    if (cardNumber && cardNumber.trim().endsWith('0730')) {
+      setNameInput('PƏS');
+    }
+  }, [cardNumber]);
   
   // Format the name
   const formattedName = nameInput ? formatUserName(nameInput) : '';
