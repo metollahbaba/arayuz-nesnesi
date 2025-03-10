@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Check } from 'lucide-react';
 import MobileStatusBar from '../components/MobileStatusBar';
+import signatureImage from '../assets/signature.png';
 
 const TransferDetails = () => {
   const navigate = useNavigate();
@@ -133,12 +133,9 @@ const TransferDetails = () => {
           />
         </div>
         <img 
-          src="https://imgur.com/a/4fIoshv" 
+          src={signatureImage} 
           alt="Signature" 
           className="h-12 w-24 opacity-70 self-end animate-fade-in"
-          onError={(e) => {
-            e.currentTarget.src = "https://i.imgur.com/9yQzXKD.png";
-          }}
         />
       </div>
       
