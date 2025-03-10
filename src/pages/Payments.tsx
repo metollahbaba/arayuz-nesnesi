@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Search, ChevronRight, Plus, History, ArrowRight, Phone, Tv, Globe, Home, 
@@ -11,6 +10,10 @@ const Payments = () => {
   
   const goBack = () => {
     navigate(-1);
+  };
+  
+  const goToHome = () => {
+    navigate('/app');
   };
   
   return (
@@ -204,7 +207,12 @@ const Payments = () => {
       
       {/* Bottom Navigation */}
       <div className="flex justify-between items-center px-4 py-4 border-t mt-8">
-        <NavItem icon={<Home size={20} />} label="Əsas" />
+        <div className="flex flex-col items-center cursor-pointer" onClick={goToHome}>
+          <div className={`w-8 h-8 flex items-center justify-center text-gray-400`}>
+            <Home size={20} />
+          </div>
+          <span className={`text-xs text-gray-400 mt-1`}>Əsas</span>
+        </div>
         <NavItem icon={<ArrowRight size={20} />} label="Bizdən sizə" />
         <NavItem icon={
           <div className="w-8 h-8 flex items-center justify-center rounded-full">

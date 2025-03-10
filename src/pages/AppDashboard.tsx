@@ -8,6 +8,11 @@ const AppDashboard = () => {
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  // Generate random balance values
+  const masterCardBalance = 85;
+  const visaCard1Balance = 34.59;
+  const visaCard2Balance = 173;
+
   const navigateToPayments = () => {
     navigate('/payments');
   };
@@ -221,7 +226,7 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">0</span>
+              <span className="font-bold">{masterCardBalance}</span>
               <span className="text-gray-400 text-xs">₼</span>
             </div>
             <span className="text-gray-400 text-sm">Mastercard Salary</span>
@@ -250,7 +255,7 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">0</span>
+              <span className="font-bold">{visaCard1Balance}</span>
               <span className="text-gray-400 text-xs">₼</span>
             </div>
             <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
@@ -269,7 +274,7 @@ const AppDashboard = () => {
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
-              <span className="font-bold">0,27</span>
+              <span className="font-bold">{visaCard2Balance}</span>
               <span className="text-gray-400 text-xs">₼</span>
             </div>
             <span className="text-gray-400 text-sm">Kapital Bank ASC</span>
