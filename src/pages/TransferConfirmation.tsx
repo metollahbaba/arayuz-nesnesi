@@ -16,20 +16,15 @@ const TransferConfirmation = () => {
   const [isCardSelectionOpen, setIsCardSelectionOpen] = useState(false);
   const { toast } = useToast();
   
-  // Define all available cards from the balance manager
   const [cards, setCards] = useState(getCardsWithBalances());
-  
-  // Set selected card state
   const [selectedCard, setSelectedCard] = useState(initialCard || cards.find(card => card.cardNumber === '3303') || cards[0]);
   
-  // Check if card ends with 0730 and set default name
   useEffect(() => {
     if (cardNumber && cardNumber.trim().endsWith('0730')) {
       setNameInput('PƏS');
     }
   }, [cardNumber]);
   
-  // Format the name
   const formattedName = nameInput ? formatUserName(nameInput) : '';
   
   const goBack = () => {
@@ -39,28 +34,22 @@ const TransferConfirmation = () => {
   const handleConfirm = () => {
     setIsProcessing(true);
     
-    // Get the final amount to transfer (as a number)
     const transferAmount = amount && parseFloat(amount) <= selectedCard.maxAmount 
       ? parseFloat(amount) 
       : selectedCard.minAmount;
     
-    // Update the card balance
     updateCardBalance(selectedCard.cardNumber, transferAmount);
     
-    // Generate receipt number (11 random digits)
     const receiptNumber = Array.from({ length: 11 }, () => Math.floor(Math.random() * 10)).join('');
     
-    // Get current date and time
     const now = new Date();
     const formattedDate = `${String(now.getDate()).padStart(2, '0')}.${String(now.getMonth() + 1).padStart(2, '0')}.${now.getFullYear()}, ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
     
-    // Show success toast
     toast({
       title: "Transfer successful",
       description: `${transferAmount} ₼ has been sent to ${cardNumber}`,
     });
     
-    // Navigate to success page
     setTimeout(() => {
       navigate('/transfer-success', {
         state: {
@@ -76,7 +65,6 @@ const TransferConfirmation = () => {
   };
   
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Limit input to maximum 3 characters
     if (e.target.value.length <= 3) {
       setNameInput(e.target.value);
     }
@@ -91,29 +79,24 @@ const TransferConfirmation = () => {
     setIsCardSelectionOpen(false);
   };
   
-  // Quick add amount buttons - adjust based on card balance
   const quickAddAmounts = [
     Math.min(10, selectedCard.maxAmount),
     Math.min(20, selectedCard.maxAmount),
     Math.min(50, selectedCard.maxAmount)
   ].filter(amount => amount > 0);
   
-  // Determine card type based on the card number
   const getCardType = (cardNumber: string) => {
-    // Get the first digit of the card number
     const firstDigit = cardNumber.replace(/\D/g, '').charAt(0);
     
     if (firstDigit === '4') return 'visa';
     if (firstDigit === '5') return 'mastercard';
-    return 'visa'; // Default to visa
+    return 'visa';
   };
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
-      {/* Mobile Status Bar */}
       <MobileStatusBar time="12:10" backgroundColor="bg-gray-50" batteryLevel="91" />
       
-      {/* Header */}
       <div className="flex justify-between items-center px-6 py-4">
         <button onClick={goBack} className="text-black">
           <ChevronLeft size={24} />
@@ -123,12 +106,10 @@ const TransferConfirmation = () => {
         </button>
       </div>
       
-      {/* Page Title */}
       <div className="px-6 mb-8">
         <h1 className="text-3xl font-semibold text-gray-900">İstənilən bank kartına</h1>
       </div>
       
-      {/* From Card - Now clickable to open card selection */}
       <div className="px-6 mb-6">
         <h2 className="text-gray-600 text-base mb-2">Ödəmək</h2>
         <div className="bg-white rounded-xl p-4 shadow-sm flex items-center" onClick={openCardSelection}>
@@ -140,7 +121,6 @@ const TransferConfirmation = () => {
               <div className="text-white text-[10px] font-medium absolute bottom-1 self-center">
                 •{selectedCard.cardNumber}
               </div>
-              {/* Add shine effect to the card */}
               <div className="absolute top-0 left-0 w-full h-full bg-white opacity-10 transform -skew-x-45" />
             </div>
           </div>
@@ -154,7 +134,6 @@ const TransferConfirmation = () => {
         </div>
       </div>
       
-      {/* To Card */}
       <div className="px-6 mb-6">
         <h2 className="text-gray-600 text-base mb-2">Mədaxil etmək</h2>
         <div className="bg-white rounded-xl border border-gray-200 p-4">
@@ -168,7 +147,6 @@ const TransferConfirmation = () => {
         </div>
       </div>
       
-      {/* Transfer Details */}
       <div className="px-6 mb-5">
         <h2 className="text-gray-600 text-base mb-2">Köçürmənin detalları</h2>
         <div className="flex gap-3 mb-3">
@@ -187,7 +165,6 @@ const TransferConfirmation = () => {
           </div>
         </div>
         
-        {/* Min-Max info */}
         <div className="flex items-center mb-4 text-xs text-gray-500">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
             <circle cx="12" cy="12" r="10" />
@@ -197,7 +174,6 @@ const TransferConfirmation = () => {
           <span>Min: {selectedCard.minAmount.toFixed(2)}AZN, Maks: {selectedCard.maxAmount.toFixed(2)}AZN</span>
         </div>
         
-        {/* Quick Amount Buttons - Only show buttons that are less than or equal to max amount */}
         {quickAddAmounts.length > 0 && (
           <div className="flex gap-3 mb-6">
             {quickAddAmounts.map(value => (
@@ -213,11 +189,9 @@ const TransferConfirmation = () => {
         )}
       </div>
       
-      {/* Name Section - Now shown as text with a bottom border */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-500 text-base mb-2">Ad Soyad</h2>
         <div>
-          {/* Hidden input for mobile keyboard functionality */}
           <input
             type="text"
             value={nameInput}
@@ -226,7 +200,6 @@ const TransferConfirmation = () => {
             maxLength={3}
             ref={inputRef}
           />
-          {/* Display as text with border bottom */}
           <div 
             className="text-gray-900 text-lg font-medium pb-1 border-b border-gray-200 min-h-[1.75rem]"
             onClick={() => inputRef.current?.focus()}
@@ -236,7 +209,6 @@ const TransferConfirmation = () => {
         </div>
       </div>
       
-      {/* Amount Display */}
       <div className="px-6 mb-2">
         <h2 className="text-gray-500 text-base mb-2">Məbləğ</h2>
         <div className="text-xl font-semibold text-gray-900">
@@ -244,13 +216,11 @@ const TransferConfirmation = () => {
         </div>
       </div>
       
-      {/* Commission Section */}
       <div className="px-6 flex items-center text-gray-500 mb-6 border-b border-gray-200 pb-6">
         <span className="mr-2">Komissiya yoxdur</span>
         <span className="text-yellow-500">👍</span>
       </div>
       
-      {/* Country and Bank */}
       <div className="px-6 mb-6">
         <div className="bg-gray-100 rounded-xl p-4 flex items-center">
           <div className="mr-2">
@@ -260,7 +230,6 @@ const TransferConfirmation = () => {
         </div>
       </div>
       
-      {/* Bottom Button */}
       <div className="mt-auto px-6 pb-6">
         <button 
           onClick={handleConfirm}
@@ -273,12 +242,10 @@ const TransferConfirmation = () => {
         </button>
       </div>
       
-      {/* iPhone Home Indicator */}
       <div className="bg-black h-10 flex items-center justify-center">
         <div className="w-1/3 h-1 bg-gray-500 rounded-full"></div>
       </div>
       
-      {/* Card Selection Modal */}
       <CardSelectionModal 
         isOpen={isCardSelectionOpen}
         onClose={() => setIsCardSelectionOpen(false)}
