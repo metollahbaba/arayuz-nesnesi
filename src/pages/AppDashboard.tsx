@@ -202,14 +202,14 @@ const AppDashboard = () => {
         </div>
         
         <div className="flex items-center mb-3">
-          <div className="w-16 h-12 bg-red-500 rounded flex items-center justify-center mr-3 relative pl-2">
-            <div className="w-5 h-3">
-              <div className="flex">
-                <div className="w-2.5 h-2.5 bg-white rounded-full opacity-80"></div>
-                <div className="w-2.5 h-2.5 bg-white rounded-full opacity-80 -ml-1"></div>
+          <div className="w-20 h-12 bg-red-500 rounded-lg flex items-center justify-between px-2 py-1 mr-3 relative overflow-hidden">
+            <div className="flex flex-col items-start">
+              <div className="flex space-x-0.5">
+                <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
               </div>
             </div>
-            <div className="absolute bottom-1 left-2 text-white text-xs">5113</div>
+            <div className="absolute bottom-1 right-2 text-white text-xs font-bold">5113</div>
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
@@ -231,13 +231,14 @@ const AppDashboard = () => {
         </div>
         
         <div className="flex items-center mb-3">
-          <div className="w-16 h-12 bg-blue-900 rounded flex flex-col items-center justify-between py-1 mr-3 relative">
-            <div className="w-10 h-3 self-start ml-2">
-              <div className="bg-white text-blue-900 font-bold text-[10px] px-1 rounded">
-                VISA
-              </div>
+          <div className="w-20 h-12 bg-[#0e1a48] rounded-lg flex flex-col justify-between p-1 mr-3 relative overflow-hidden">
+            <div className="flex justify-between items-center">
+              <div className="text-white text-[9px] font-bold ml-1">VISA</div>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+              </svg>
             </div>
-            <div className="text-white text-xs self-start ml-2 font-bold">4444</div>
+            <div className="text-white text-xs font-bold self-center mb-0.5">4444</div>
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
@@ -249,13 +250,14 @@ const AppDashboard = () => {
         </div>
         
         <div className="flex items-center mb-3">
-          <div className="w-16 h-12 bg-blue-900 rounded flex flex-col items-center justify-between py-1 mr-3 relative">
-            <div className="w-10 h-3 self-start ml-2">
-              <div className="bg-white text-blue-900 font-bold text-[10px] px-1 rounded">
-                VISA
-              </div>
+          <div className="w-20 h-12 bg-[#0e1a48] rounded-lg flex flex-col justify-between p-1 mr-3 relative overflow-hidden">
+            <div className="flex justify-between items-center">
+              <div className="text-white text-[9px] font-bold ml-1">VISA</div>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+              </svg>
             </div>
-            <div className="text-white text-xs self-start ml-2 font-bold">3303</div>
+            <div className="text-white text-xs font-bold self-center mb-0.5">3303</div>
           </div>
           <div className="flex-1">
             <div className="flex justify-between">
