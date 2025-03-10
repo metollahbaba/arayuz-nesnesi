@@ -1,11 +1,13 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, Fingerprint, X } from 'lucide-react';
+import { Lock, Fingerprint, X, Loader2 } from 'lucide-react';
 import MobileStatusBar from '../components/MobileStatusBar';
 
 const PinEntry = () => {
   const [pin, setPin] = useState<string>('');
   const [errorAnimation, setErrorAnimation] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   
   const MAX_PIN_LENGTH = 4;
@@ -28,17 +30,18 @@ const PinEntry = () => {
 
   // Handle number click
   const handleNumberClick = (num: number | string) => {
-    if (pin.length < MAX_PIN_LENGTH) {
+    if (pin.length < MAX_PIN_LENGTH && !loading) {
       const newPin = pin + num;
       setPin(newPin);
       
       // Check if PIN is complete and correct
       if (newPin.length === MAX_PIN_LENGTH) {
         if (newPin === CORRECT_PIN) {
-          // Correct PIN
+          // Correct PIN - show loading animation
+          setLoading(true);
           setTimeout(() => {
-            navigate('/pin-verified');
-          }, 300);
+            navigate('/app');
+          }, 1500); // Navigate after 1.5 second loading animation
         } else {
           // Wrong PIN - show error animation
           setErrorAnimation(true);
@@ -53,7 +56,7 @@ const PinEntry = () => {
 
   // Handle delete button click
   const handleDelete = () => {
-    if (pin.length > 0) {
+    if (pin.length > 0 && !loading) {
       setPin(pin.slice(0, -1));
     }
   };
@@ -72,7 +75,9 @@ const PinEntry = () => {
               <button
                 key={index}
                 onClick={handleDelete}
-                className="h-16 flex items-center justify-center text-lg bg-gray-100 rounded-lg"
+                disabled={loading}
+                className={`h-16 flex items-center justify-center text-lg bg-gray-100 rounded-lg 
+                  ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <X size={24} className="text-gray-500" />
               </button>
@@ -83,7 +88,9 @@ const PinEntry = () => {
             <button
               key={index}
               onClick={() => handleNumberClick(num)}
-              className="h-16 flex items-center justify-center text-2xl font-medium bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              disabled={loading}
+              className={`h-16 flex items-center justify-center text-2xl font-medium bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors
+                ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {num}
             </button>
@@ -93,9 +100,24 @@ const PinEntry = () => {
     );
   };
 
+  // Loading overlay
+  const renderLoadingOverlay = () => {
+    if (!loading) return null;
+    
+    return (
+      <div className="absolute inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-10">
+        <div className="relative">
+          <Loader2 size={50} className="text-red-500 animate-spin" />
+        </div>
+        <p className="mt-4 text-gray-700 font-medium">Yükleniyor...</p>
+      </div>
+    );
+  };
+
   return (
-    <div className={`max-w-md mx-auto bg-white h-screen flex flex-col overflow-hidden
+    <div className={`max-w-md mx-auto bg-white h-screen flex flex-col overflow-hidden relative
       ${errorAnimation ? 'animate-[wiggle_0.3s_ease-in-out]' : ''}`}>
+      {renderLoadingOverlay()}
       <MobileStatusBar />
       
       <div className="flex-1 flex flex-col items-center pt-16">
@@ -108,7 +130,7 @@ const PinEntry = () => {
           />
         </div>
         
-        {/* Name - updated from Aynura Nəhmədova to Xəlil Rəhimov */}
+        {/* Name */}
         <h2 className="mt-6 text-xl font-medium">Xəlil Rəhimov</h2>
         
         {/* PIN indicators */}
