@@ -34,17 +34,10 @@ const BankCard: React.FC<BankCardProps> = ({ bankName, cardNumber, balance, show
           textColor: 'text-white',
           logoClass: 'text-[8px] font-bold ml-1'
         };
-      case '3': // Amex
+      default: // Default to Visa for other card numbers
         return {
-          background: 'bg-gradient-to-br from-[#108168] to-[#119f7e]',
-          logo: 'AMEX',
-          textColor: 'text-white',
-          logoClass: 'text-[8px] font-bold ml-1'
-        };
-      default: // Default card
-        return {
-          background: 'bg-gradient-to-br from-[#444444] to-[#666666]',
-          logo: 'CARD',
+          background: 'bg-gradient-to-br from-[#0e1a48] to-[#1e3a88]',
+          logo: 'VISA',
           textColor: 'text-white',
           logoClass: 'text-[8px] font-bold ml-1'
         };
