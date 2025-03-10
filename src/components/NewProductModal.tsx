@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight, X, CreditCard, Banknote, Smartphone, Shield, Plus, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface NewProductModalProps {
@@ -50,18 +50,23 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
             <CategoryItem 
               title="Kartı sifariş edin"
               description="Birbank kartlarının üstünlüklərindən yararlanlın və ödənişlərinizdən bonuslar qazanın"
-              icon={<img src="public/lovable-uploads/57890aa5-22ed-40b2-aaae-6ea8f40638ab.png" alt="Card order" className="w-14 h-14 object-contain" />}
+              icon={
+                <div className="w-14 h-14 flex items-center justify-center bg-red-100 rounded-xl">
+                  <CreditCard size={28} className="text-red-500" />
+                </div>
+              }
             />
             
             <CategoryItem 
               title="Kartı aktivləşdirin"
               description="Stend və marketlərdən əldə etdiyiniz kartlar üçün"
               icon={
-                <div className="w-14 h-14 flex items-center justify-center">
-                  <div className="w-10 h-14 bg-gray-800 rounded relative">
+                <div className="w-14 h-14 flex items-center justify-center bg-gray-100 rounded-xl">
+                  <div className="relative">
+                    <CreditCard size={28} className="text-gray-700" />
                     <div className="absolute -right-2 -top-2">
                       <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                        <div className="w-4 h-4 bg-white rounded-full"></div>
+                        <ExternalLink size={12} className="text-white" />
                       </div>
                     </div>
                   </div>
@@ -73,11 +78,12 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
               title="Kartı əlavə et"
               description="İstənilən yerli bankın kartlarını əlavə edin, balanslarını daha rahat artırın, ödəniş və köçürmələr edin"
               icon={
-                <div className="w-14 h-14 flex items-center justify-center bg-gray-100 rounded">
-                  <div className="w-10 h-10 bg-white border border-gray-300 rounded relative">
+                <div className="w-14 h-14 flex items-center justify-center bg-gray-100 rounded-xl">
+                  <div className="relative">
+                    <CreditCard size={28} className="text-gray-700" />
                     <div className="absolute -right-2 -top-2">
                       <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                        <span className="text-white text-xs">+</span>
+                        <Plus size={12} className="text-white" />
                       </div>
                     </div>
                   </div>
@@ -94,12 +100,8 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
               title="Nağd pul krediti"
               description="30 000 ₼-dək, komissiyasız, tamamılə onlayn"
               icon={
-                <div className="w-14 h-14 flex items-center justify-center">
-                  <div className="w-12 h-10 bg-red-100 rounded-md flex items-center justify-center">
-                    <div className="w-8 h-6 bg-red-500 rounded-md relative">
-                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-4 h-1 bg-white rounded"></div>
-                    </div>
-                  </div>
+                <div className="w-14 h-14 flex items-center justify-center bg-red-100 rounded-xl">
+                  <Banknote size={28} className="text-red-500" />
                 </div>
               }
             />
@@ -113,10 +115,8 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
               title="Nar və Bakcell nömrələrini əlavə edin"
               description="Nömrənizi Birbank-a əlavə edin, balansınızı izləyin və artırın"
               icon={
-                <div className="w-14 h-14 flex items-center justify-center">
-                  <div className="w-12 h-12 bg-red-500 rounded-md flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">SIM</span>
-                  </div>
+                <div className="w-14 h-14 flex items-center justify-center bg-red-100 rounded-xl">
+                  <Smartphone size={28} className="text-red-500" />
                 </div>
               }
             />
@@ -130,12 +130,8 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
               title="Həyatın yaşam sığortası"
               description="Əməkhaqqınızdan əlavə gəlir qazanın"
               icon={
-                <div className="w-14 h-14 flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-full border-2 border-red-500 flex items-center justify-center">
-                    <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs">👤</span>
-                    </div>
-                  </div>
+                <div className="w-14 h-14 flex items-center justify-center bg-red-100 rounded-xl">
+                  <Shield size={28} className="text-red-500" />
                 </div>
               }
             />
@@ -144,15 +140,12 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
               title="Səyahət sığortası"
               description="Səyahətinizi onlayn sığortalayın"
               icon={
-                <div className="w-14 h-14 flex items-center justify-center">
-                  <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center relative">
-                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                      <span>🌐</span>
-                    </div>
-                    <div className="absolute -right-2 -bottom-2">
-                      <div className="w-6 h-6 bg-red-500 rounded-full"></div>
-                    </div>
-                  </div>
+                <div className="w-14 h-14 flex items-center justify-center bg-blue-100 rounded-xl">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-500">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                  </svg>
                 </div>
               }
             />
@@ -161,10 +154,13 @@ const NewProductModal: React.FC<NewProductModalProps> = ({ isOpen, onClose }) =>
               title="Kasko"
               description="Avtomobilinizi hal-hazırda olduğunuz yerdən sığortalayın"
               icon={
-                <div className="w-14 h-14 flex items-center justify-center">
-                  <div className="w-12 h-8 bg-gray-200 rounded-md flex items-center justify-center">
-                    <span>🚗</span>
-                  </div>
+                <div className="w-14 h-14 flex items-center justify-center bg-green-100 rounded-xl">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-500">
+                    <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.6-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C1.4 11.3 1 12.1 1 13v3c0 .6.4 1 1 1h2" />
+                    <circle cx="7" cy="17" r="2" />
+                    <path d="M9 17h6" />
+                    <circle cx="17" cy="17" r="2" />
+                  </svg>
                 </div>
               }
             />
