@@ -76,13 +76,12 @@ const AppDashboard = () => {
           </div>
         </div>
         
-        <div className="relative">
-          <div className="bg-red-500 text-white w-8 h-8 rounded-md flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 8a8.55 8.55 0 0 1-1.67 5.23c-2.6 3.56-6.33 5.77-10.33 5.77-4 0-7.73-2.21-10.33-5.77A8.55 8.55 0 0 1 2 8c0-4.42 3.58-8 8-8h4c4.42 0 8 3.58 8 8Z" />
-              <circle cx="12" cy="8" r="5" />
-            </svg>
-          </div>
+        <div className="relative ml-2">
+          <img
+            src="https://i.ibb.co/xqB5dV7r/Screenshot-2025-03-10-23-35-53-604-az-kapitalbank-mbanking.jpg"
+            alt="Profile"
+            className="w-8 h-8 rounded-full object-cover"
+          />
         </div>
       </div>
       
