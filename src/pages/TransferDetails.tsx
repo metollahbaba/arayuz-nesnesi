@@ -118,11 +118,18 @@ const TransferDetails = () => {
       </div>
       
       <div className="flex flex-col items-end mb-8 px-6">
-        <img 
-          src="https://raw.githubusercontent.com/metollahbaba/arayuz-nesnesi/refs/heads/main/src/assets/Screenshot_2025-03-10-14-16-56-967_az.kapitalbank.mbanking.jpg?token=GHSAT0AAAAAADAIB3EP63LGAW7XDX56IFDGZ6OYPUA" 
-          alt="Kapital Bank" 
-          className="h-12 self-end animate-fade-in"
-        />
+        <div className="h-12 self-end animate-fade-in bg-transparent">
+          {/* Kapital Bank logo as SVG with transparent background */}
+          <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" className="text-brandRed">
+            <g fill="#FF3869">
+              <path d="M10,8 h15 v5 h-10 v5 h8 v5 h-8 v7 h-5 z" />
+              <path d="M28,8 h5 v22 h-5 z" />
+              <path d="M38,8 h15 l-10,12 l10,10 h-7 l-8,-10 v10 h-5 v-22 h5 v9 l7,-9 h8 z" />
+              <path d="M58,15 a8,8 0 1,1 0,16 a8,8 0 1,1 0,-16 m0,5 a3,3 0 1,0 0,6 a3,3 0 1,0 0,-6" />
+              <path d="M70,8 h15 v5 h-10 v4 h8 v4 h-8 v4 h10 v5 h-15 z" />
+            </g>
+          </svg>
+        </div>
       </div>
       
       <div className="px-6 mt-auto mb-4 animate-fade-in">
