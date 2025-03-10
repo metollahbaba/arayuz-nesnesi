@@ -35,3 +35,25 @@ export function getCardType(cardNumber: string): string {
     return 'Card';
   }
 }
+
+/**
+ * Format name with first name and first letter of last name followed by asterisks
+ */
+export function formatUserName(input: string): string {
+  if (!input || input.trim() === '') return '';
+  
+  const formattedInput = input.trim().toUpperCase();
+  const parts = formattedInput.split(' ');
+  
+  if (parts.length === 1) {
+    // Only first name provided
+    return `${parts[0]} ${'*'.repeat(5)}`;
+  } else {
+    // First name and last name provided
+    const firstName = parts[0];
+    const lastName = parts.slice(1).join(' ');
+    const firstLetterOfLastName = lastName.charAt(0);
+    
+    return `${firstName} ${firstLetterOfLastName}${'*'.repeat(5)}`;
+  }
+}

@@ -1,22 +1,31 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info } from 'lucide-react';
 import BankCard from '../components/BankCard';
 
-// Helper function to format name with 3 characters followed by 5 asterisks
+// Helper function to format name with first name and first letter of last name followed by asterisks
 const formatName = (input: string) => {
   if (!input || input.trim() === '') return '';
   
   const formattedInput = input.trim().toUpperCase();
-  const firstThreeChars = formattedInput.slice(0, 3);
+  const parts = formattedInput.split(' ');
   
-  return `${firstThreeChars}${'*'.repeat(5)}`;
+  if (parts.length === 1) {
+    // Only first name provided
+    return `${parts[0]} ${'*'.repeat(5)}`;
+  } else {
+    // First name and last name provided
+    const firstName = parts[0];
+    const lastName = parts.slice(1).join(' ');
+    const firstLetterOfLastName = lastName.charAt(0);
+    
+    return `${firstName} ${firstLetterOfLastName}${'*'.repeat(5)}`;
+  }
 };
 
-// Helper function to generate default name if needed
-const generateDefaultName = () => {
-  return 'AYNURA NAMAZOVA';
-};
+// Default name if needed
+const DEFAULT_NAME = 'AYNURA N';
 
 const TransferConfirmation = () => {
   const navigate = useNavigate();
@@ -25,7 +34,7 @@ const TransferConfirmation = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [nameInput, setNameInput] = useState(inputName || '');
   
-  // Format the name with 3 characters and 5 asterisks
+  // Format the name
   const formattedName = nameInput ? formatName(nameInput) : '';
   
   const goBack = () => {
@@ -43,6 +52,9 @@ const TransferConfirmation = () => {
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNameInput(e.target.value);
   };
+  
+  // Quick add amount buttons
+  const quickAddAmounts = [10, 20, 50];
   
   return (
     <div className="max-w-md mx-auto bg-gray-50 min-h-screen flex flex-col">
@@ -102,80 +114,136 @@ const TransferConfirmation = () => {
       {/* From Card */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Ödəmək</h2>
-        <BankCard 
-          bankName={selectedCard?.bankName || 'Kapital Bank ASC'}
-          cardNumber={selectedCard?.cardNumber || '3303'}
-          balance={selectedCard?.balance || '173 ₼'}
-          showArrow={false}
-        />
+        <div className="bg-white rounded-xl p-4 shadow-sm flex items-center">
+          <div className="flex-shrink-0 mr-4">
+            <div className="bg-navy-700 w-14 h-10 rounded-md flex items-center justify-center">
+              <div className="text-white text-xs">VISA</div>
+            </div>
+          </div>
+          <div className="flex-grow">
+            <div className="text-gray-600">Kapital Bank ASC</div>
+            <div className="flex justify-between">
+              <div className="font-medium">{selectedCard?.balance || '0.27'} AZN</div>
+              <div className="text-gray-500 text-sm">•{selectedCard?.cardNumber || '3303'}</div>
+            </div>
+          </div>
+          <div className="flex-shrink-0 ml-2">
+            <ChevronLeft size={20} className="transform rotate-180 text-gray-400" />
+          </div>
+        </div>
       </div>
       
       {/* To Card */}
       <div className="px-6 mb-4">
         <h2 className="text-gray-700 mb-2">Mədaxil etmək</h2>
-        <div className="bg-white rounded-2xl p-4 shadow-sm">
+        <div className="bg-white rounded-xl border border-gray-200 p-4">
           <div className="text-xs text-gray-400 mb-1">Kart nömrəsi</div>
-          <div className="text-gray-700 text-lg font-medium">{cardNumber || '4169 7388 4327 4444'}</div>
+          <div className="text-gray-700 text-lg font-medium flex justify-between items-center">
+            <span>{cardNumber || '4169 7388 4327 4444'}</span>
+            <button className="p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 3h6v6" />
+                <path d="M10 14 21 3" />
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
       
-      {/* Details */}
-      <div className="px-6 space-y-4">
-        {/* Name Section */}
-        <div>
-          <h2 className="text-gray-700 mb-2">Ad Soyad</h2>
-          <div className="bg-white rounded-2xl p-4 shadow-sm relative">
-            <div className="text-xs text-gray-400 mb-1">Ad Soyad daxil edin</div>
-            <input 
-              type="text"
-              value={nameInput}
-              onChange={handleNameChange}
-              className="opacity-0 absolute inset-0 w-full h-full cursor-text z-10"
-              placeholder="Ad Soyad"
-              autoFocus
-            />
-            <div className="text-gray-700 text-lg font-medium">
-              {formattedName || 'Ad Soyad daxil edin'}
+      {/* Transfer Details */}
+      <div className="px-6 mb-4">
+        <h2 className="text-gray-700 mb-2">Köçürmənin detalları</h2>
+        <div className="flex gap-3 mb-3">
+          <div className="bg-white rounded-xl border border-gray-200 p-4 flex-grow">
+            <div className="text-xs text-gray-400 mb-1">Məbləğ</div>
+            <div className="text-gray-700 text-lg font-medium">{amount || '0.01'}</div>
+          </div>
+          <div className="bg-white rounded-xl border border-gray-200 p-4 w-1/3">
+            <div className="text-xs text-gray-400 mb-1">Valyuta</div>
+            <div className="text-gray-700 text-lg font-medium flex justify-between items-center">
+              <span>AZN</span>
+              <ChevronLeft size={16} className="transform rotate-180 text-gray-400" />
             </div>
           </div>
         </div>
         
-        {/* Amount Section */}
-        <div>
-          <h2 className="text-gray-700 mb-2">Məbləğ</h2>
-          <div className="bg-white rounded-2xl p-4 shadow-sm">
-            <div className="text-gray-700 font-medium">{amount || '0,01'} AZN</div>
+        {/* Min-Max info */}
+        <div className="flex items-center mb-3 text-xs text-gray-500">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4" />
+            <path d="M12 8h.01" />
+          </svg>
+          <span>Min: 0.01AZN, Maks: 0.27AZN</span>
+        </div>
+        
+        {/* Quick Amount Buttons */}
+        <div className="flex gap-3 mb-6">
+          {quickAddAmounts.map(value => (
+            <button 
+              key={value} 
+              className="flex-1 p-3 bg-white rounded-xl border border-gray-200 flex items-center justify-center"
+            >
+              <span className="text-gray-400 mr-1">+</span>
+              <span>{value}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      {/* Name Section */}
+      <div className="px-6 mb-4">
+        <h2 className="text-gray-700 mb-2">Ad Səyad</h2>
+        <div className="relative">
+          <input
+            type="text"
+            value={nameInput}
+            onChange={handleNameChange}
+            className="opacity-0 absolute inset-0 w-full h-full cursor-text z-10"
+            autoFocus
+          />
+          <div className="bg-white rounded-xl border border-gray-200 p-4">
+            <div className="text-gray-700 text-lg font-medium">
+              {formattedName || DEFAULT_NAME + '*****'}
+            </div>
           </div>
         </div>
-        
-        {/* Commission Section */}
-        <div className="flex items-center text-gray-700 mt-4">
-          <span className="mr-2">Komissiya yoxdur</span>
-          <span className="text-yellow-500">👍</span>
-        </div>
-        
-        {/* Country and Bank */}
-        <div className="bg-gray-100 rounded-2xl p-4 mt-6 mb-4 flex items-center">
+      </div>
+      
+      {/* Amount Display */}
+      <div className="px-6 mb-2">
+        <h2 className="text-gray-700 mb-2">Məbləğ</h2>
+        <div className="text-xl font-semibold text-gray-900">{amount || '0,01'} AZN</div>
+      </div>
+      
+      {/* Commission Section */}
+      <div className="px-6 flex items-center text-gray-600 mb-4">
+        <span className="mr-2">Komissiya yoxdur</span>
+        <span className="text-yellow-500">👍</span>
+      </div>
+      
+      {/* Country and Bank */}
+      <div className="px-6 mb-4">
+        <div className="bg-gray-100 rounded-xl p-4 flex items-center">
           <div className="mr-2">
-            <span className="text-[16px] mr-1">🇦🇿</span>
+            <span className="text-[16px]">🇦🇿</span>
           </div>
           <span className="text-gray-700">AZERBAIJAN, KapitalBank</span>
         </div>
       </div>
       
       {/* Bottom Button */}
-      <div className="mt-auto">
-        <div className="px-6 pb-6">
-          <button 
-            onClick={handleConfirm}
-            disabled={isProcessing}
-            className={`w-full py-4 rounded-2xl font-medium ${
-              isProcessing ? 'bg-gray-400 text-white' : 'bg-red-500 text-white'
-            }`}
-          >
-            {isProcessing ? 'Emal edilir...' : 'Təsdiq etmək'}
-          </button>
-        </div>
+      <div className="mt-auto px-6 pb-6">
+        <button 
+          onClick={handleConfirm}
+          disabled={isProcessing}
+          className={`w-full py-4 rounded-xl font-medium ${
+            isProcessing ? 'bg-gray-400 text-white' : 'bg-red-500 text-white'
+          }`}
+        >
+          {isProcessing ? 'Emal edilir...' : 'Təsdiq etmək'}
+        </button>
       </div>
       
       {/* iPhone Home Indicator */}
