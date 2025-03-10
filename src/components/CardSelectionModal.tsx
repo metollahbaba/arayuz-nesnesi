@@ -39,6 +39,7 @@ const CardSelectionModal: React.FC<CardSelectionModalProps> = ({
                   bankName={card.bankName}
                   cardNumber={card.cardNumber}
                   balance={card.balance}
+                  showArrow={false}
                 />
                 {selectedCardNumber === card.cardNumber && (
                   <div className="absolute top-1/2 right-4 transform -translate-y-1/2">

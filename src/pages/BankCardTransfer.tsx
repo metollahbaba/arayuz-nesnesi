@@ -20,22 +20,22 @@ const BankCardTransfer = () => {
   });
   const inputRef = useRef<HTMLInputElement>(null);
   
-  // Card data with last 4 digits and balance
+  // Updated card data to match AppDashboard cards - all from Kapital Bank
   const cards = [
     {
       bankName: 'Kapital Bank ASC',
+      cardNumber: '5113',
+      balance: '85 ₼'
+    },
+    {
+      bankName: 'Kapital Bank ASC',
+      cardNumber: '4444',
+      balance: '34.59 ₼'
+    },
+    {
+      bankName: 'Kapital Bank ASC',
       cardNumber: '3303',
-      balance: '0.27 AZN'
-    },
-    {
-      bankName: 'Azər Türk Bank',
-      cardNumber: '4586',
-      balance: '173.50 AZN'
-    },
-    {
-      bankName: 'Bank Respublika',
-      cardNumber: '7845',
-      balance: '54.20 AZN'
+      balance: '173 ₼'
     }
   ];
   
