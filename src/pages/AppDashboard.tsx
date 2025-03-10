@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, Wifi, Battery } from 'lucide-react';
 import visaCardLogo from '../assets/card-visa.jpeg';
@@ -140,9 +141,11 @@ const AppDashboard = () => {
         </div>
         
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center relative">
-          <div className="w-5 h-5 bg-black rounded-full flex items-center justify-center mr-1">
-            <span className="text-white text-xs">i</span>
-          </div>
+          <img 
+            src="https://cards.birbank.az/assets/images/birbank-cashback-debet.png" 
+            alt="Cashback card" 
+            className="w-5 h-5 object-contain mr-1" 
+          />
           <span className="text-sm font-medium">0</span>
           <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
         </div>
