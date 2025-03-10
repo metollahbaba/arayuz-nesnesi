@@ -70,8 +70,12 @@ const AppDashboard = () => {
       <div className="px-4 pt-3">
         <div className="flex space-x-4 overflow-x-auto pb-2">
           <div className="flex flex-col items-center min-w-[70px]">
-            <div className="w-16 h-16 rounded-full bg-pink-100 border-2 border-pink-200 flex items-center justify-center">
-              <img src="public/lovable-uploads/a9b5730b-173f-4199-8c1d-4f3906c1530d.png" alt="Woman" className="w-10 h-10 object-cover" />
+            <div className="w-16 h-16 rounded-full bg-pink-100 border-2 border-pink-200 flex items-center justify-center overflow-hidden">
+              <img 
+                src="https://birbank.az/_next/image?url=https%3A%2F%2Fstrapi-aws-s3-images-bucket-kb.s3.eu-central-1.amazonaws.com%2F1x1_07d1ccf918.png&w=640&q=75" 
+                alt="70% discount" 
+                className="w-full h-full object-cover" 
+              />
             </div>
             <span className="text-xs mt-1">70%-dək</span>
             <span className="text-xs">endirim</span>
