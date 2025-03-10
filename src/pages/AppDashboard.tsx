@@ -148,20 +148,23 @@ const AppDashboard = () => {
       </div>
       
       <div className="flex px-4 space-x-3 mt-2">
-        <div 
-          className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center cursor-pointer"
-        >
+        <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
+          <div className="w-5 h-5 flex items-center justify-center mr-1">
+            <img 
+              src="https://i.ibb.co/zWRBRQJS/indir-1-1-removebg-preview.png" 
+              alt="EDV Gerial" 
+              className="w-full h-full object-contain"
+            />
+          </div>
           <span className="text-sm font-medium">ƏDV geri al</span>
         </div>
         
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center relative">
-          <div className="w-5 h-5 flex items-center justify-center mr-1">
-            <img 
-              src="https://i.ibb.co/DHw6HGH/Screenshot-2025-03-10-23-52-53-796-az-kapitalbank-mbanking-removebg-preview.png"
-              alt="Cashback card" 
-              className="w-full h-full object-contain" 
-            />
-          </div>
+          <img 
+            src="https://cards.birbank.az/assets/images/birbank-cashback-debet.png" 
+            alt="Cashback card" 
+            className="w-5 h-5 object-contain mr-1" 
+          />
           <span className="text-sm font-medium">0</span>
           <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></div>
         </div>
@@ -172,7 +175,7 @@ const AppDashboard = () => {
         >
           <div className="w-5 h-5 flex items-center justify-center mr-1">
             <img 
-              src="https://i.ibb.co/zWRBRQJS/indir-1-1-removebg-preview.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnqJyzRb0sJsYxzBgDbAP6IlO5Yn7olNQGeg&s" 
               alt="Umico" 
               className="w-full h-full object-cover rounded-sm"
             />
