@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plus, ArrowDown, Home, QrCode, CreditCard, MoreHorizontal, Clock, ArrowUpRight, RefreshCw, Eye, EyeOff } from 'lucide-react';
@@ -166,8 +167,12 @@ const AppDashboard = () => {
         </div>
         
         <div className="bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
-          <div className="w-5 h-5 bg-pink-500 rounded-sm flex items-center justify-center mr-1">
-            <span className="text-white text-xs">U</span>
+          <div className="w-5 h-5 flex items-center justify-center mr-1">
+            <img 
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnqJyzRb0sJsYxzBgDbAP6IlO5Yn7olNQGeg&s" 
+              alt="Umico" 
+              className="w-full h-full object-cover rounded-sm"
+            />
           </div>
           <span className="text-sm font-medium">Umico</span>
         </div>
