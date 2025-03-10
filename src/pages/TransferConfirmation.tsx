@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info } from 'lucide-react';
 import BankCard from '../components/BankCard';
@@ -15,13 +15,32 @@ const maskFullName = (name: string) => {
   }).join(' ');
 };
 
+// Helper function to generate full name based on input
+const generateFullName = (input: string) => {
+  if (!input || input.trim() === '') return 'AYNURA NAMAZOVA';
+  
+  // Default last name if only one part is entered
+  const defaultLastName = 'NAMAZOVA';
+  
+  const parts = input.trim().toUpperCase().split(' ');
+  
+  if (parts.length === 1) {
+    return `${parts[0]} ${defaultLastName}`;
+  } else {
+    return parts.join(' ');
+  }
+};
+
 const TransferConfirmation = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { selectedCard, cardNumber, amount, fullName } = location.state || {};
+  const { selectedCard, cardNumber, amount, fullName: inputName } = location.state || {};
   const [isProcessing, setIsProcessing] = useState(false);
+  const [nameInput, setNameInput] = useState(inputName || '');
   
-  const maskedFullName = fullName ? maskFullName(fullName) : 'AYNURA N*****';
+  // Generate and mask the full name
+  const generatedFullName = generateFullName(nameInput);
+  const maskedFullName = maskFullName(generatedFullName);
   
   const goBack = () => {
     navigate('/bank-card-transfer');
@@ -33,6 +52,10 @@ const TransferConfirmation = () => {
     setTimeout(() => {
       navigate('/app');
     }, 2000);
+  };
+  
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNameInput(e.target.value);
   };
   
   return (
@@ -116,7 +139,15 @@ const TransferConfirmation = () => {
         <div>
           <h2 className="text-gray-700 mb-2">Ad Səyad</h2>
           <div className="bg-white rounded-2xl p-4 shadow-sm">
-            <div className="text-gray-700 font-medium">{maskedFullName}</div>
+            <div className="text-xs text-gray-400 mb-1">Ad Səyad daxil edin</div>
+            <input 
+              type="text"
+              value={nameInput}
+              onChange={handleNameChange}
+              className="w-full outline-none text-gray-700 text-lg font-medium"
+              placeholder="Ad Səyad"
+            />
+            <div className="text-gray-700 font-medium mt-2">{maskedFullName}</div>
           </div>
         </div>
         
