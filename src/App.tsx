@@ -10,6 +10,7 @@ import PinVerified from "./pages/PinVerified";
 import AppDashboard from "./pages/AppDashboard";
 import ProductDetail from "./pages/ProductDetail";
 import Payments from "./pages/Payments";
+import BankCardTransfer from "./pages/BankCardTransfer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/app" element={<AppDashboard />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/payments" element={<Payments />} />
+          <Route path="/bank-card-transfer" element={<BankCardTransfer />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

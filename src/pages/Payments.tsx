@@ -15,6 +15,10 @@ const Payments = () => {
   const goToHome = () => {
     navigate('/app');
   };
+
+  const goToBankCardTransfer = () => {
+    navigate('/bank-card-transfer');
+  };
   
   return (
     <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col">
@@ -110,8 +114,8 @@ const Payments = () => {
         <h2 className="text-gray-500 mb-4">Köçürmələr</h2>
         
         <div className="grid grid-cols-4 gap-4">
-          <div className="flex flex-col items-center">
-            <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center mb-2">
+          <div className="flex flex-col items-center" onClick={goToBankCardTransfer}>
+            <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center mb-2 cursor-pointer">
               <div className="text-red-500">
                 <CreditCard size={24} />
               </div>
