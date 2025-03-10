@@ -138,16 +138,17 @@ const TransferConfirmation = () => {
         {/* Name Section */}
         <div>
           <h2 className="text-gray-700 mb-2">Ad Səyad</h2>
-          <div className="bg-white rounded-2xl p-4 shadow-sm">
+          <div className="bg-white rounded-2xl p-4 shadow-sm relative">
             <div className="text-xs text-gray-400 mb-1">Ad Səyad daxil edin</div>
             <input 
               type="text"
               value={nameInput}
               onChange={handleNameChange}
-              className="w-full outline-none text-gray-700 text-lg font-medium"
+              className="opacity-0 absolute inset-0 w-full h-full cursor-text z-10"
               placeholder="Ad Səyad"
+              autoFocus
             />
-            <div className="text-gray-700 font-medium mt-2">{maskedFullName}</div>
+            <div className="text-gray-700 text-lg font-medium">{maskedFullName}</div>
           </div>
         </div>
         
