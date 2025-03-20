@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -28,12 +29,6 @@ const TransferConfirmation = () => {
           <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
             <CheckCircle className="text-green-500 w-8 h-8" />
           </div>
-        </div>
-
-        <div className="mt-4 text-center">
-          <p className="text-gray-700">
-            Əməliyyatı təsdiqlədiyinizə əminsiniz?
-          </p>
         </div>
 
         <div className="mt-6">
